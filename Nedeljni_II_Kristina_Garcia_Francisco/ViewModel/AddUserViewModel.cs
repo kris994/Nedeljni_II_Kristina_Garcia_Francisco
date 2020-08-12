@@ -14,7 +14,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
     class AddUserViewModel : BaseViewModel
     {
         AddAdminWindow addAdmin;
-        SuperAdminCredentialsChange changeAdminCredentials;
         AdminData adminData = new AdminData();
 
         #region Constructor

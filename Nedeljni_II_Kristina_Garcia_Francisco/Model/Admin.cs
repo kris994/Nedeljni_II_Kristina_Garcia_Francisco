@@ -13,7 +13,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         static readonly string[] ValidatedProperties =
         {
             "IdentificationCard",
-            "Username"
+            "Username",
+            "UserPassword"
         };
 
         /// <summary>
@@ -64,6 +65,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "IdentificationCard":
                         result = this.validation.IdentificationCardChecker(IdentificationCard, UserID);
+                        break;
+
+                    case "UserPassword":
+                        result = this.validation.PasswordValidation(UserPassword);
                         break;
 
                     default:

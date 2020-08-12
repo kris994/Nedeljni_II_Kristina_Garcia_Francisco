@@ -42,7 +42,7 @@ CREATE TABLE tblUser(
 	DateOfBirth DATE     					NOT NULL,
 	Citizenship VARCHAR (40)				NOT NULL,
 	Username VARCHAR (40) UNIQUE			NOT NULL,
-	UserPassword VARCHAR (40)				NOT NULL,
+	UserPassword VARCHAR					NOT NULL,
 );
 
 USE ClinicDB

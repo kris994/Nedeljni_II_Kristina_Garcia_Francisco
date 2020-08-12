@@ -1,6 +1,7 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 {
@@ -52,6 +53,72 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Checks if the Username is exists
+        /// </summary>
+        /// <param name="username">the username we are checking</param>
+        /// <param name="currentUsername">current Username for the specific user</param>
+        /// <returns>true if the username is valid</returns>
+        public bool HasCurrentUsernameUsernameChecker(string username, string currentUsername)
+        {
+            UserData userData = new UserData();
+
+            List<tblUser> AllUsers = userData.GetAllUsers();
+
+            if (username == null)
+            {
+                return false;
+            }
+
+            // Check if the username already exists, but it is not the current user username
+            for (int i = 0; i < AllUsers.Count; i++)
+            {
+                if ((AllUsers[i].Username == username && currentUsername != username))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks if the entered password is valid
+        /// </summary>
+        /// <param name="password">Password we are checking</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string PasswordValidation(string password)
+        {
+            string allowedSpecials = "!@#$%^&*()_+=-[]{}|';:?/\"\\<>,.";
+            bool containsSpecial = false;
+
+            if (password == null || password.Length < 8)
+            {
+                return "Password needs to be at least 8 characters long";
+            }
+
+            char[] characters = password.ToCharArray();
+
+            foreach (char item in characters)
+            {
+                if (allowedSpecials.Contains(item.ToString()))
+                {
+                    containsSpecial = true;
+                    break;
+                }
+            }
+
+            if (password.Any(char.IsUpper) == true && password.Any(char.IsLower) == true 
+                && password.Any(char.IsNumber) == true && containsSpecial == true)
+            {
+                return null;
+            }
+            else
+            {
+                return "Password needs to contain a lower case and upper case character, a symbol and a number";
+            }
         }
 
         /// <summary>

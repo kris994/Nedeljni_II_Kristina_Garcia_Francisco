@@ -6,12 +6,17 @@ using System.Linq;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
-    class AdminData : UserData
+    /// <summary>
+    /// All admin crud operations
+    /// </summary>
+    class AdminData
     {
+        UserData userData = new UserData();
+
         /// <summary>
-        /// Get all data about super admins from the database
+        /// Get all data about admins from the database
         /// </summary>
-        /// <returns>The list of all super admins</returns>
+        /// <returns>The list of all admins</returns>
         public List<vwClinicAdministrator> GetAllAdmins()
         {
             try
@@ -56,7 +61,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             UserPassword = admin.UserPassword
                         };
 
-                        AddUser(newUser);
+                        userData.AddUser(newUser);
 
                         tblClinicAdministrator newAdmin = new tblClinicAdministrator
                         {
@@ -72,7 +77,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     else
                     {
                         tblUser userToEdit = (from ss in context.tblUsers where ss.UserID == admin.UserID select ss).First();
-                        AddUser(userToEdit);
+                        userData.AddUser(userToEdit);
 
                         tblClinicAdministrator adminToEdit = (from ss in context.tblClinicAdministrators where ss.UserID == admin.UserID select ss).First();
                         adminToEdit.UserID = userToEdit.UserID;
@@ -110,7 +115,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         }
                     }
 
-                    DeleteUser(userID);
+                    userData.DeleteUser(userID);
                 }
             }
             catch (Exception ex)

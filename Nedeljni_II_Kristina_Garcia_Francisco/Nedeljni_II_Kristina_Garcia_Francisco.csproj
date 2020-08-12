@@ -70,27 +70,16 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DataAccess\AdminData.cs" />
+    <Compile Include="DataAccess\DoctorData.cs" />
+    <Compile Include="DataAccess\MaintenanceData.cs" />
+    <Compile Include="DataAccess\ManagerData.cs" />
+    <Compile Include="DataAccess\PatientData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
+    <Compile Include="Helper\DateConverter.cs" />
+    <Compile Include="Helper\PasswordHasher.cs" />
+    <Compile Include="Helper\RadioButtonConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
     <Compile Include="Model\Admin.cs" />
-    <Compile Include="ViewModel\AddUserViewModel.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\SuperAdminViewModel.cs" />
-    <Compile Include="View\AddAdminWindow.xaml.cs">
-      <DependentUpon>AddAdminWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuperAdminCredentialsChange.xaml.cs">
-      <DependentUpon>SuperAdminCredentialsChange.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SuperAdminWindow.xaml.cs">
-      <DependentUpon>SuperAdminWindow.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Model\ClinicDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,8 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\FileReadWrite.cs" />
-    <Compile Include="Model\SuperAdmin.cs" />
+    <Compile Include="Model\LoggedInUser.cs" />
     <Compile Include="Model\tblClinic.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
@@ -144,6 +132,29 @@
     <Compile Include="Model\vwClinicPatient.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\SuperAdminViewModel.cs" />
+    <Compile Include="View\AddAdminWindow.xaml.cs">
+      <DependentUpon>AddAdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuperAdminCredentialsChange.xaml.cs">
+      <DependentUpon>SuperAdminCredentialsChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SuperAdminWindow.xaml.cs">
+      <DependentUpon>SuperAdminWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\FileReadWrite.cs" />
+    <Compile Include="Model\SuperAdmin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -173,6 +184,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\password.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -182,8 +194,8 @@
     <Content Include="DDL\DDL.sql" />
     <Content Include="Model\ClinicDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClinicDB.Context.cs</LastGenOutput>
       <DependentUpon>ClinicDB.edmx</DependentUpon>
+      <LastGenOutput>ClinicDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\ClinicDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -197,6 +209,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\AddAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

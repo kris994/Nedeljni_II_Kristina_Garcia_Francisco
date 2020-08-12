@@ -1,4 +1,5 @@
-﻿using Nedeljni_II_Kristina_Garcia_Francisco.Model;
+﻿using Nedeljni_II_Kristina_Garcia_Francisco.Helper;
+using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -69,7 +70,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
         /// </summary>
         /// <param name="user">The user ID we are adding or editing</param>
         /// <returns>The new or edited user</returns>
-        protected tblUser AddUser(tblUser user)
+        public tblUser AddUser(tblUser user)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             DateOfBirth = user.DateOfBirth,
                             Citizenship = user.Citizenship,
                             Username = user.Username,
-                            UserPassword = user.UserPassword
+                            UserPassword = PasswordHasher.Hash(user.UserPassword)
                         };
 
                         context.tblUsers.Add(newUser);
@@ -106,7 +107,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         userToEdit.DateOfBirth = user.DateOfBirth;
                         userToEdit.Citizenship = user.Citizenship;
                         userToEdit.Username = user.Username;
-                        userToEdit.UserPassword = user.UserPassword;
+                        userToEdit.UserPassword = PasswordHasher.Hash(user.UserPassword);
 
                         userToEdit.UserID = user.UserID;
                         context.SaveChanges();
@@ -126,7 +127,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
         /// Deletes a specific user
         /// </summary>
         /// <param name="userID">User that we are deleting</param>
-        protected void DeleteUser(int userID)
+        public void DeleteUser(int userID)
         {
             try
             {
@@ -150,6 +151,28 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+
+        public bool IsCorrectUser(string username, string password)
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    var user = context.tblUsers.FirstOrDefault(x => x.Username == username);
+
+                    if (user != null)
+                    {
+                        var foundPassword = context.tblUsers.First(x => x.Username == username).UserPassword;
+                        return PasswordHasher.Verify(password, foundPassword);
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

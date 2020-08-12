@@ -1,5 +1,6 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.Commands;
 using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
+using Nedeljni_II_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using Nedeljni_II_Kristina_Garcia_Francisco.View;
 using System;
@@ -30,6 +31,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         {
             superAdminView = adminOpen;
             AdminList = adminData.GetAllAdmins().ToList();
+        }
+
+        /// <summary>
+        /// Constructor with credentials change param
+        /// </summary>
+        /// <param name="SuperAdminCredentialsChange">opens the credentials change window</param>
+        public SuperAdminViewModel(SuperAdminCredentialsChange creentialsOpen)
+        {
+            credentialsChange = creentialsOpen;
         }
         #endregion
 
@@ -146,34 +156,41 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <returns>true</returns>
         private bool CanAddNewAdminExecute()
         {
-            return true;
+            if (!AdminList.Any())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// Command that changes the super admin credentials
         /// </summary>
-        private ICommand superAdminCredentials;
-        public ICommand SuperAdminCredentials
+        private ICommand changeCredentials;
+        public ICommand ChangeCredentials
         {
             get
             {
-                if (superAdminCredentials == null)
+                if (changeCredentials == null)
                 {
-                    superAdminCredentials = new RelayCommand(param => SuperAdminCredentialsExecute(), param => CanSuperAdminCredentialsExecute());
+                    changeCredentials = new RelayCommand(param => ChangeCredentialsExecute(), param => CanChangeCredentialsExecute());
                 }
-                return superAdminCredentials;
+                return changeCredentials;
             }
         }
 
         /// <summary>
         /// Executes the super admin credentials change
         /// </summary>
-        private void SuperAdminCredentialsExecute()
+        private void ChangeCredentialsExecute()
         {
             try
             {
-                SuperAdminCredentialsChange credentialsWindow = new SuperAdminCredentialsChange();
-                credentialsWindow.ShowDialog();
+                credentialsChange = new SuperAdminCredentialsChange();
+                credentialsChange.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -185,7 +202,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Checks if its possible to change credentials
         /// </summary>
         /// <returns>true</returns>
-        private bool CanSuperAdminCredentialsExecute()
+        private bool CanChangeCredentialsExecute()
         {
             return true;
         }
@@ -225,11 +242,21 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Checks if its possible to save the manager
+        /// Checks if its possible to save the credentials
         /// </summary>
         protected bool CanSaveCredentialsExecuteExecute()
         {
-            return true;
+            Validations val = new Validations();
+            bool canSave = val.HasCurrentUsernameUsernameChecker(Username, SuperAdmin.SuperAdminUsername);
+
+            if (canSave == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -268,6 +295,48 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <returns>true</returns>
         private bool CanCancelExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Command that logs off the user
+        /// </summary>
+        private ICommand logoff;
+        public ICommand Logoff
+        {
+            get
+            {
+                if (logoff == null)
+                {
+                    logoff = new RelayCommand(param => LogoffExecute(), param => CanLogoffExecute());
+                }
+                return logoff;
+            }
+        }
+
+        /// <summary>
+        /// Executes the logoff command
+        /// </summary>
+        private void LogoffExecute()
+        {
+            try
+            {
+                Login login = new Login();
+                superAdminView.Close();
+                login.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to logoff
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanLogoffExecute()
         {
             return true;
         }

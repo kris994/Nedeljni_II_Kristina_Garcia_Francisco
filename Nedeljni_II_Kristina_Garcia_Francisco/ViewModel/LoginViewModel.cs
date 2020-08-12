@@ -1,4 +1,6 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.Commands;
+using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
+using Nedeljni_II_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using Nedeljni_II_Kristina_Garcia_Francisco.View;
 using System.Collections.Generic;
@@ -11,15 +13,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
     class LoginViewModel : BaseViewModel
     {
         Login view;
-        //Service service = new Service();
-        FileReadWrite frw = new FileReadWrite();
+        UserData userData = new UserData();
+        FileReadWrite frw = new FileReadWrite();   
 
         #region Constructor
         public LoginViewModel(Login loginView)
         {
             view = loginView;
             user = new tblUser();
-            //UserList = service.GetAllUsers().ToList();
+            UserList = userData.GetAllUsers().ToList();
             frw.ReadAdminFile();
         }
         #endregion
@@ -99,7 +101,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <param name="obj"></param>
         private void LoginExecute(object obj)
-        {
+        {           
             string password = (obj as PasswordBox).Password;
             bool found = false;
             if (User.Username == SuperAdmin.SuperAdminUsername && password == SuperAdmin.SuperAdminPassword)
@@ -110,45 +112,42 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 view.Close();
                 superAdminView.Show();
             }
-        //    else if (UserList.Any())
-        //    {
-        //        for (int i = 0; i < UserList.Count; i++)
-        //        {
-        //            if (User.Username == UserList[i].Username && password == UserList[i].UserPassword)
-        //            {
-        //                LoggedUser.CurrentUser = new tblUser
-        //                {
-        //                    UserID = UserList[i].UserID,
-        //                    FirstName = UserList[i].FirstName,
-        //                    LastName = UserList[i].LastName,
-        //                    DateOfBirth = UserList[i].DateOfBirth,
-        //                    Email = UserList[i].Email,
-        //                    Username = UserList[i].Username,
-        //                    UserPassword = UserList[i].UserPassword
-        //                };
-        //                InfoLabel = "Logged in";
-        //                found = true;
-        //                if (service.GetAllManagers().Any(id => id.UserID == UserList[i].UserID) == true)
-        //                {
-        //                    AllUsers users = new AllUsers();
-        //                    view.Close();
-        //                    users.Show();
-        //                }
-        //                else if (service.GetAllEmployees().Any(id => id.UserID == UserList[i].UserID) == true)
-        //                {
-        //                    Employee emp = new Employee();
-        //                    view.Close();
-        //                    emp.Show();
-        //                }
-        //                break;
-        //            }
-        //        }
+            else if (UserList.Any())
+            {
+                for (int i = 0; i < UserList.Count; i++)
+                {
+                    if (userData.IsCorrectUser(User.Username, password) == true)
+                    {
+                        LoggedInUser.CurrentUser = new tblUser
+                        {
+                            UserID = UserList[i].UserID,
+                            FirstName = UserList[i].FirstName,
+                            LastName = UserList[i].LastName,
+                            IdentificationCard = UserList[i].IdentificationCard,
+                            DateOfBirth = UserList[i].DateOfBirth,
+                            Citizenship = UserList[i].Citizenship,
+                            Username = UserList[i].Username,
+                            UserPassword = UserList[i].UserPassword
+                        };
+                        AdminData ad = new AdminData();
+                        InfoLabel = "Logged in";
+                        found = true;
 
-        //        if (found == false)
-        //        {
-        //            InfoLabel = "Wrong Username or Password";
-        //        }
-        //    }
+                        if (ad.GetAllAdmins().Any(id => id.UserID == UserList[i].UserID) == true)
+                        {
+                            AdminWindow adminWindow = new AdminWindow();
+                            view.Close();
+                            adminWindow.Show();
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (found == false)
+            {
+                InfoLabel = "Wrong Username or Password";
+            }
         }
         #endregion
     }
