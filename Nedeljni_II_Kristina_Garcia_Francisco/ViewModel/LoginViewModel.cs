@@ -28,7 +28,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 
         #region Property
         /// <summary>
-        /// Login info label
+        /// Info label
         /// </summary>
         private string infoLabel;
         public string InfoLabel

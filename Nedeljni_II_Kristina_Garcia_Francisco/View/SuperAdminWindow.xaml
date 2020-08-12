@@ -25,7 +25,9 @@
             <Button Width="120" Height="20" Name="btnChangeCredentials" Content="Change Credentials"
                     Command="{Binding ChangeCredentials, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
         </StackPanel>
-        <Grid Grid.Column="1" Grid.Row="2" Height="auto" Width="auto">
+        <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
+        <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+        <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
             <DataGrid Name="DataGridAdmin" ItemsSource="{Binding AdminList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Admin, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"

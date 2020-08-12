@@ -32,6 +32,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         {
             superAdminView = adminOpen;
             AdminList = adminData.GetAllAdmins().ToList();
+            InfoLabelBG = null;
+            InfoLabel = "";
         }
 
         /// <summary>
@@ -41,10 +43,46 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         public SuperAdminViewModel(SuperAdminCredentialsChange creentialsOpen)
         {
             credentialsChange = creentialsOpen;
+            InfoLabelBG = null;
+            InfoLabel = "";
         }
         #endregion
 
         #region Property
+        /// <summary>
+        /// Info label
+        /// </summary>
+        private string infoLabel;
+        public string InfoLabel
+        {
+            get
+            {
+                return infoLabel;
+            }
+            set
+            {
+                infoLabel = value;
+                OnPropertyChanged("InfoLabel");
+            }
+        }
+
+        /// <summary>
+        /// Info label background
+        /// </summary>
+        private string infoLabelBG;
+        public string InfoLabelBG
+        {
+            get
+            {
+                return infoLabelBG;
+            }
+            set
+            {
+                infoLabelBG = value;
+                OnPropertyChanged("InfoLabelBG");
+            }
+        }
+
         /// <summary>
         /// List of users
         /// </summary>
@@ -112,6 +150,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 OnPropertyChanged("Password");
             }
         }
+
+        /// <summary>
+        /// Checks if credentials were updated
+        /// </summary>
+        public static bool isUpdateCredentials = false;
         #endregion
 
         #region Commands
@@ -143,6 +186,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 if ((addAdminView.DataContext as AddUserViewModel).IsUpdateAdmin == true)
                 {
                     AdminList = adminData.GetAllAdmins().ToList();
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully creaded a new Admin";
                 }
             }
             catch (Exception ex)
@@ -192,6 +237,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 credentialsChange = new SuperAdminCredentialsChange();
                 credentialsChange.ShowDialog();
+                if (isUpdateCredentials == true)
+                {
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully updated credentials.";
+                }
             }
             catch (Exception ex)
             {
@@ -229,21 +279,31 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveCredentialsExecute()
         {
-            try
+            var result = MessageBox.Show("Are you sure you want to change the credentials?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
             {
-                frw.WriteAdminFile(Username, Password);
-                SuperAdmin.SuperAdminUsername = Username;
-                SuperAdmin.SuperAdminPassword = Password;
+                try
+                {
+                    frw.WriteAdminFile(Username, Password);
+                    SuperAdmin.SuperAdminUsername = Username;
+                    SuperAdmin.SuperAdminPassword = Password;
 
-                Thread logger = new Thread(() =>
-                    LogManager.Instance.WriteLog($"Updated Super Admin credentials Username: {Username} and Password: {Password}"));
-                logger.Start();
+                    Thread logger = new Thread(() =>
+                        LogManager.Instance.WriteLog($"Updated Super Admin credentials Username: {Username} and Password: {Password}"));
+                    logger.Start();
 
-                credentialsChange.Close();
+                    isUpdateCredentials = true;
+                    credentialsChange.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return;
             }
         }
 

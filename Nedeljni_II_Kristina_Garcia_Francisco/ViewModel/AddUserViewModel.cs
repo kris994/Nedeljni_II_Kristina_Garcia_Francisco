@@ -103,16 +103,25 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveAdminExecute()
         {
-            try
-            {
-                adminData.AddAdmin(Admin);
-                IsUpdateAdmin = true;
+            var result = MessageBox.Show("Are you sure you want to create this admin?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                addAdmin.Close();
-            }
-            catch (Exception ex)
+            if (result == MessageBoxResult.Yes)
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                try
+                {
+                    adminData.AddAdmin(Admin);
+                    IsUpdateAdmin = true;
+
+                    addAdmin.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                }
+            }
+            else
+            {
+                return;
             }
         }
 
