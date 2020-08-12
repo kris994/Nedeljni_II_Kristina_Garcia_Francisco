@@ -13,5 +13,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
             InitializeComponent();
             this.DataContext = new SuperAdminViewModel(this);
         }
+
+        void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+        }
     }
 }

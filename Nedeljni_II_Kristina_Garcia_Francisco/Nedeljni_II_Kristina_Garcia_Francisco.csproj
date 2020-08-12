@@ -96,6 +96,7 @@
       <DependentUpon>ClinicDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\LoggedInUser.cs" />
+    <Compile Include="Model\LogManager.cs" />
     <Compile Include="Model\tblClinic.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
@@ -184,6 +185,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="TextFiles\Application.log" />
     <Resource Include="Resources\password.ttf" />
   </ItemGroup>
   <ItemGroup>

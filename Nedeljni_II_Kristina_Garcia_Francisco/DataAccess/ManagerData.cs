@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
@@ -76,6 +77,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         manager.ManagerID = newManager.ManagerID;
 
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Created Manager {manager.FirstName} {manager.LastName}, Identification Card: {manager.IdentificationCard}, " +
+                            $"Gender: {manager.Gender}, Date of Birth: {manager.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {manager.Citizenship}, Floor Number: {manager.FloorNumber} " +
+                            $", Max Number of Doctors: {manager.MaxNumberOfDoctors}, Min Number of Rooms: {manager.MinNumberOfRooms}, Omission Number: {manager.OmissionNumber}"));
+                        logger.Start();
+
                         return manager;
                     }
                     else
@@ -93,6 +100,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         managerToEdit.ManagerID = manager.ManagerID;
 
                         context.SaveChanges();
+
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Updated Manager {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, Floor Number: {managerToEdit.FloorNumber} " +
+                            $", Max Number of Doctors: {managerToEdit.MaxNumberOfDoctors}, Min Number of Rooms: {managerToEdit.MinNumberOfRooms}, Omission Number: {managerToEdit.OmissionNumber}"));
+                        logger.Start();
+
                         return manager;
                     }
                 }
@@ -100,6 +114,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Manager Client"));
+                logger.Start();
                 return null;
             }
         }       

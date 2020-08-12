@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
@@ -72,6 +73,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         admin.AdminID = newAdmin.AdminID;
 
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Created Admin {admin.FirstName} {admin.LastName}, Identification Card: {admin.IdentificationCard}, " +
+                            $"Gender: {admin.Gender}, Date of Birth: {admin.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {admin.Citizenship}"));
+                        logger.Start();
+
                         return admin;
                     }
                     else
@@ -84,6 +90,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         adminToEdit.AdminID = admin.AdminID;
 
                         context.SaveChanges();
+
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Edited Admin {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}"));
+                        logger.Start();
+
                         return admin;
                     }
                 }
@@ -91,6 +103,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Admin Client"));
+                logger.Start();
                 return null;
             }
         }
@@ -109,8 +123,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     {
                         if (GetAllAdmins()[i].UserID == userID)
                         {
-                            tblClinicAdministrator emp = (from r in context.tblClinicAdministrators where r.UserID == userID select r).First();
-                            context.tblClinicAdministrators.Remove(emp);
+                            tblClinicAdministrator admin = (from r in context.tblClinicAdministrators where r.UserID == userID select r).First();
+
+
+                            Thread logger = new Thread(() =>
+                                LogManager.Instance.WriteLog($"Deleted Admin {GetAllAdmins()[i].FirstName} {GetAllAdmins()[i].LastName}, Identification Card: {GetAllAdmins()[i].IdentificationCard}, " +
+                                $"Gender: {GetAllAdmins()[i].Gender}, Date of Birth: {GetAllAdmins()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllAdmins()[i].Citizenship}"));
+                            logger.Start();
+
+                            context.tblClinicAdministrators.Remove(admin);
                             context.SaveChanges();
                         }
                     }
@@ -121,6 +142,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Admin Client"));
+                logger.Start();
             }
         }
     }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
@@ -83,6 +84,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         maintenance.MaintenanceID = newMaintenance.MaintenanceID;
 
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Created Maintenance {maintenance.FirstName} {maintenance.LastName}, Identification Card: {maintenance.IdentificationCard}, " +
+                            $"Gender: {maintenance.Gender}, Date of Birth: {maintenance.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {maintenance.Citizenship}" +
+                            $", Clinic Extention Allowed: {maintenance.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenance.DisabledAccessabilityResponsibility}"));
+                        logger.Start();
+
                         return maintenance;
                     }
                     else
@@ -96,7 +103,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         maintenanceToEdit.UserID = userToEdit.UserID;
                         maintenanceToEdit.MaintenanceID = maintenance.MaintenanceID;
 
-                        context.SaveChanges();                     
+                        context.SaveChanges();
+
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Updated Maintenance {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}" +
+                            $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}"));
+                        logger.Start();
+
                         return maintenance;
                     }
                 }
@@ -104,6 +118,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Maintenance Client"));
+                logger.Start();
                 return null;
             }
         }

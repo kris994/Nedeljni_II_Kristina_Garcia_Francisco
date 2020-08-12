@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
@@ -78,6 +79,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         doctor.DoctorID = newDoctor.DoctorID;
 
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Created Doctor {doctor.FirstName} {doctor.LastName}, Identification Card: {doctor.IdentificationCard}, " +
+                            $"Gender: {doctor.Gender}, Date of Birth: {doctor.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {doctor.Citizenship}, Unique Number: {doctor.UniqueNumber} " +
+                            $", Bank Account: {doctor.BankAccount}, Department: {doctor.Department}, Working Shift: {doctor.WorkingShift}, Receiving Patient: {doctor.ReceivingPatient}"));
+                        logger.Start();
+
                         return doctor;
                     }
                     else
@@ -97,6 +104,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         doctorToEdit.DoctorID = doctor.DoctorID;
 
                         context.SaveChanges();
+
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Updated Doctor {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, Unique Number: {doctorToEdit.UniqueNumber} " +
+                            $", Bank Account: {doctorToEdit.BankAccount}, Department: {doctorToEdit.Department}, Working Shift: {doctorToEdit.WorkingShift}, Receiving Patient: {doctorToEdit.ReceivingPatient}"));
+                        logger.Start();
                         return doctor;
                     }
                 }
@@ -104,6 +117,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Doctor Client"));
+                logger.Start();
                 return null;
             }
         }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -233,6 +234,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 frw.WriteAdminFile(Username, Password);
                 SuperAdmin.SuperAdminUsername = Username;
                 SuperAdmin.SuperAdminPassword = Password;
+
+                Thread logger = new Thread(() =>
+                    LogManager.Instance.WriteLog($"Updated Super Admin credentials Username: {Username} and Password: {Password}"));
+                logger.Start();
+
                 credentialsChange.Close();
             }
             catch (Exception ex)
@@ -324,7 +330,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 Login login = new Login();
                 superAdminView.Close();
-                login.Show();
             }
             catch (Exception ex)
             {

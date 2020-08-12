@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {   
@@ -75,6 +76,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         patient.PatientID = newPatient.PatientID;
 
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Created Patient {patient.FirstName} {patient.LastName}, Identification Card: {patient.IdentificationCard}, " +
+                            $"Gender: {patient.Gender}, Date of Birth: {patient.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {patient.Citizenship}, HealthCare Number: {patient.HealthCareNumber} " +
+                            $", Experation Date: {patient.ExperationDate}"));
+                        logger.Start();
+
                         return patient;
                     }
                     else
@@ -91,6 +98,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         patientToEdit.PatientID = patient.PatientID;
 
                         context.SaveChanges();
+
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog($"Updated Patient {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, HealthCare Number: {patientToEdit.HealthCareNumber} " +
+                            $", Experation Date: {patientToEdit.ExperationDate}"));
+                        logger.Start();
                         return patient;
                     }
                 }
