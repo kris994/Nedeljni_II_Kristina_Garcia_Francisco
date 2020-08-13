@@ -6,14 +6,14 @@ using System.Windows.Input;
 namespace Nedeljni_II_Kristina_Garcia_Francisco.View
 {
     /// <summary>
-    /// Interaction logic for AddAdmin.xaml
+    /// Interaction logic for AddManagerWindow.xaml
     /// </summary>
-    public partial class AddAdminWindow : Window
+    public partial class AddManagerWindow : Window
     {
-        public AddAdminWindow()
+        public AddManagerWindow()
         {
             InitializeComponent();
-            this.DataContext = new AddAdminViewModel(this);
+            this.DataContext = new AddManagerViewModel(this);
         }
 
         /// <summary>

@@ -217,7 +217,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 AddAdminWindow addAdminView = new AddAdminWindow();
                 addAdminView.ShowDialog();
-                if ((addAdminView.DataContext as AddUserViewModel).IsUpdateAdmin == true)
+                if ((addAdminView.DataContext as AddAdminViewModel).IsUpdateAdmin == true)
                 {
                     AdminList = adminData.GetAllAdmins().ToList();
                     InfoLabelBG = "#28a745";

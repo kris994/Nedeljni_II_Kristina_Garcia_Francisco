@@ -19,6 +19,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         AdminWindow adminWidnow;
         EditClinicWindow editClinic;
         ClinicData clinicData = new ClinicData();
+        ManagerData managerData = new ManagerData();
 
         #region Constructor
         /// <summary>
@@ -40,11 +41,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         {
             adminWidnow = adminWindowOpen;
             ClinicList = clinicData.GetAllClinics().ToList();
+            ManagerList = managerData.GetAllManagers().ToList();
 
             if (isNewClinic == true)
             {
                 InfoLabelBG = "#28a745";
-                InfoLabel = "Successfully creaded a the Clinic";
+                InfoLabel = "Successfully created the Clinic";
                 isNewClinic = false;
             }
         }
@@ -77,6 +79,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 clinicList = value;
                 OnPropertyChanged("ClinicList");
+            }
+        }
+
+        /// <summary>
+        /// List of managers
+        /// </summary>
+        private List<vwClinicManager> managerList;
+        public List<vwClinicManager> ManagerList
+        {
+            get
+            {
+                return managerList;
+            }
+            set
+            {
+                managerList = value;
+                OnPropertyChanged("ManagerList");
             }
         }
 
@@ -342,6 +361,53 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <returns>true</returns>
         private bool CanCancelExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Command that tries to add a new manager
+        /// </summary>
+        private ICommand addNewManager;
+        public ICommand AddNewManager
+        {
+            get
+            {
+                if (addNewManager == null)
+                {
+                    addNewManager = new RelayCommand(param => AddNewManagerExecute(), param => CanAddNewManagerExecute());
+                }
+                return addNewManager;
+            }
+        }
+
+        /// <summary>
+        /// Executes the add Manager command
+        /// </summary>
+        private void AddNewManagerExecute()
+        {
+            try
+            {
+                AddManagerWindow addManager = new AddManagerWindow();
+                addManager.ShowDialog();
+                if ((addManager.DataContext as AddManagerViewModel).IsUpdateManager == true)
+                {
+                    ManagerList = managerData.GetAllManagers().ToList();
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully created a new Manager";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new manager
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanAddNewManagerExecute()
         {
             return true;
         }

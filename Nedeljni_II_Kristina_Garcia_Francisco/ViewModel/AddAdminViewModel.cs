@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
-    class AddUserViewModel : BaseViewModel
+    class AddAdminViewModel : BaseViewModel
     {
         AddAdminWindow addAdmin;
         AdminData adminData = new AdminData();
@@ -21,7 +21,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Constructor with the add admin info window opening
         /// </summary>
         /// <param name="addAdminWindowOpen">opends the add admin window</param>
-        public AddUserViewModel(AddAdminWindow addAdminWindowOpen)
+        public AddAdminViewModel(AddAdminWindow addAdminWindowOpen)
         {
             admin = new vwClinicAdministrator();
             addAdmin = addAdminWindowOpen;

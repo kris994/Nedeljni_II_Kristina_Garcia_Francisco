@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Model\LoggedInUser.cs" />
     <Compile Include="Model\LogManager.cs" />
+    <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\tblClinic.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
@@ -135,7 +136,8 @@
     <Compile Include="Model\vwClinicPatient.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AddUserViewModel.cs" />
+    <Compile Include="ViewModel\AddAdminViewModel.cs" />
+    <Compile Include="ViewModel\AddManagerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -146,6 +148,9 @@
     <Compile Include="View\AddClinicWindow.xaml.cs">
       <DependentUpon>AddClinicWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddManagerWindow.xaml.cs">
+      <DependentUpon>AddManagerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
@@ -154,6 +159,9 @@
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagerWindow.xaml.cs">
+      <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SuperAdminCredentialsChange.xaml.cs">
       <DependentUpon>SuperAdminCredentialsChange.xaml</DependentUpon>
@@ -227,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
