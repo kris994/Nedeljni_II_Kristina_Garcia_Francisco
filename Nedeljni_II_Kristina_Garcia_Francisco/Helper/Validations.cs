@@ -60,8 +60,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// </summary>
         /// <param name="username">the username we are checking</param>
         /// <param name="currentUsername">current Username for the specific user</param>
-        /// <returns>true if the username is valid</returns>
-        public bool HasCurrentUsernameUsernameChecker(string username, string currentUsername)
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string HasCurrentUsernameUsernameChecker(string username, string currentUsername)
         {
             UserData userData = new UserData();
 
@@ -69,7 +69,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             if (username == null)
             {
-                return false;
+                return "Username cannot be empty.";
             }
 
             // Check if the username already exists, but it is not the current user username
@@ -77,11 +77,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             {
                 if ((AllUsers[i].Username == username && currentUsername != username))
                 {
-                    return false;
+                    return "This Username already exists!";
                 }
             }
 
-            return true;
+            return null;
         }
 
         /// <summary>

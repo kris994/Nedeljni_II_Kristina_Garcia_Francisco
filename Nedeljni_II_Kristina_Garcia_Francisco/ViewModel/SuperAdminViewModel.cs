@@ -5,6 +5,7 @@ using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using Nedeljni_II_Kristina_Garcia_Francisco.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -16,7 +17,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
     /// <summary>
     /// Super admin view model
     /// </summary>
-    class SuperAdminViewModel : BaseViewModel
+    class SuperAdminViewModel : BaseViewModel, IDataErrorInfo
     {
         AdminData adminData = new AdminData();
         FileReadWrite frw = new FileReadWrite();
@@ -34,6 +35,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             AdminList = adminData.GetAllAdmins().ToList();
             InfoLabelBG = null;
             InfoLabel = "";
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public SuperAdminViewModel()
+        {
+
         }
 
         /// <summary>
@@ -155,6 +164,31 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Checks if credentials were updated
         /// </summary>
         public static bool isUpdateCredentials = false;
+        #endregion
+
+        #region Validations
+        public string this[string name]
+        {
+            get
+            {
+                Validations val = new Validations();
+                string result = null;
+
+                result = val.HasCurrentUsernameUsernameChecker(Username, SuperAdmin.SuperAdminUsername);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the inputs are incorrect
+        /// </summary>
+        public string Error
+        {
+            get
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Commands
@@ -313,9 +347,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         protected bool CanSaveCredentialsExecuteExecute()
         {
             Validations val = new Validations();
-            bool canSave = val.HasCurrentUsernameUsernameChecker(Username, SuperAdmin.SuperAdminUsername);
+            string canSave = val.HasCurrentUsernameUsernameChecker(Username, SuperAdmin.SuperAdminUsername);
 
-            if (canSave == true)
+            if (canSave == null)
             {
                 return true;
             }
