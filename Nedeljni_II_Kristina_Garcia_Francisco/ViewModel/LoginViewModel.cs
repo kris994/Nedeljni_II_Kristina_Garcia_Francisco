@@ -135,7 +135,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 for (int i = 0; i < UserList.Count; i++)
                 {
-                    if (userData.IsCorrectUser(User.Username, password) == true)
+                    if (User.Username == UserList[i].Username && PasswordHasher.Verify(password, UserList[i].UserPassword) == true)
                     {
                         LoggedInUser.CurrentUser = new tblUser
                         {
@@ -149,12 +149,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                             UserPassword = UserList[i].UserPassword
                         };
                         AdminData ad = new AdminData();
+                        ManagerData md = new ManagerData();
                         InfoLabel = "Logged in";
                         found = true;
 
-                        if (ad.GetAllAdmins().Any(id => id.UserID == UserList[i].UserID) == true)
+                        if (ad.GetAllAdmins().Any(id => id.Username == UserList[i].Username) == true)
                         {
-                            if(ClinicList.Count == 0)
+                            if (ClinicList.Count == 0)
                             {
                                 AddClinicWindow clinicWindow = new AddClinicWindow();
                                 view.Close();
@@ -166,6 +167,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                                 view.Close();
                                 adminWindow.Show();
                             }
+                        }
+                        else if (md.GetAllManagers().Any(id => id.Username == UserList[i].Username) == true)
+                        {
+                            ManagerWindow manWindow = new ManagerWindow();
+                            view.Close();
+                            manWindow.Show();
                         }
                         break;
                     }

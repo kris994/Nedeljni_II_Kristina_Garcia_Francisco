@@ -153,27 +153,5 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
-
-        public bool IsCorrectUser(string username, string password)
-        {
-            try
-            {
-                using (ClinicDBEntities context = new ClinicDBEntities())
-                {
-                    var user = context.tblUsers.FirstOrDefault(x => x.Username == username);
-
-                    if (user != null)
-                    {
-                        var foundPassword = context.tblUsers.First(x => x.Username == username).UserPassword;
-                        return PasswordHasher.Verify(password, foundPassword);
-                    }
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
     }
 }

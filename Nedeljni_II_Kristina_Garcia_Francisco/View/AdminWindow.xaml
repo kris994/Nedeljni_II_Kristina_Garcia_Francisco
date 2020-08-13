@@ -23,8 +23,30 @@
                     Command="{Binding Logoff, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
             <Button Width="100" Height="20" Name="btnEditExistingClinic" Content="Update Clinic"
                     Command="{Binding EditExistingClinic, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            <Button Width="100" Height="20" Name="btnAddNewManager" Content="Add Manager"
+                    Command="{Binding AddNewManager, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
         </StackPanel>
         <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
         <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+        <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
+            <DataGrid Name="DataGridManager" ItemsSource="{Binding ManagerList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Manager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
+                      FontWeight="Bold" Margin="20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.11*"/>
+                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
+                    <DataGridTextColumn Header="Floor" Binding="{Binding FloorNumber}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Max Doctor" Binding="{Binding MaxNumberOfDoctors}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Min Room" Binding="{Binding MinNumberOfRooms}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Omission" Binding="{Binding OmissionNumber}" Width="0.08*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>
