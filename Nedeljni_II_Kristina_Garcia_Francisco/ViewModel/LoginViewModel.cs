@@ -150,6 +150,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         };
                         AdminData ad = new AdminData();
                         ManagerData md = new ManagerData();
+                        MaintenanceData maind = new MaintenanceData();
                         InfoLabel = "Logged in";
                         found = true;
 
@@ -173,6 +174,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                             ManagerWindow manWindow = new ManagerWindow();
                             view.Close();
                             manWindow.Show();
+                        }
+                        else if (maind.GetAllMaintenances().Any(id => id.Username == UserList[i].Username) == true)
+                        {
+                            MaintenanceWindow mainWindow = new MaintenanceWindow();
+                            view.Close();
+                            mainWindow.Show();
                         }
                         break;
                     }

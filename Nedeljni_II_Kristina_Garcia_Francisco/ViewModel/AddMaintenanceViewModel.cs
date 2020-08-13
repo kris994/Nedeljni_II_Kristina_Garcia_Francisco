@@ -118,7 +118,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             try
             {
                 maintenanceData.AddMaintenance(Maintenance);
-                IsUpdateMaintenance = true;
+                IsUpdateMaintenance = true;              
 
                 addMaintenance.Close();
             }

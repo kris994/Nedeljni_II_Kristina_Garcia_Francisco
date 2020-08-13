@@ -139,8 +139,10 @@
         <TextBox Grid.Column="3" Grid.Row="17" Name="txtPassword" Height="20" Width="150" FontFamily="pack://application:,,,/Resources/#password"
                  Text="{Binding Maintenance.UserPassword, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  Style="{StaticResource textBoxInError}"/>
-        <CheckBox Grid.Column="3" Grid.Row="19" IsChecked="{Binding Maintenance.ClinicExtentionAllowed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-        <CheckBox Grid.Column="3" Grid.Row="21" IsChecked="{Binding Maintenance.DisabledAccessabilityResponsibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <RadioButton  GroupName="responsibility" Grid.Column="3" Grid.Row="19" Name="cbCE" IsChecked="{Binding Maintenance.ClinicExtentionAllowed, 
+                UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+        <RadioButton  GroupName="responsibility" Grid.Column="3" Grid.Row="21" Name="cbDA" IsChecked="{Binding Maintenance.DisabledAccessabilityResponsibility, 
+                UpdateSourceTrigger=PropertyChanged}"></RadioButton>
 
         <Button Grid.Column="3" Grid.Row="25" IsDefault="True" Name="btnSave" Content="Save" Height="20" Width="70" HorizontalAlignment="Left"
                 Command="{Binding SaveMaintenance, UpdateSourceTrigger=PropertyChanged}">

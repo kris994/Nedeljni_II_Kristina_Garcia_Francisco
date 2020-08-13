@@ -13,6 +13,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class MaintenanceData
     {
         UserData userData = new UserData();
+        /// <summary>
+        /// Check if data is changed
+        /// </summary>
+        public static bool isChanged = false;
 
         /// <summary>
         /// Get all data about Maintenance from the database
@@ -94,7 +98,18 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     }
                     else
                     {
-                        tblUser userToEdit = (from ss in context.tblUsers where ss.UserID == maintenance.UserID select ss).First();
+                        tblUser userToEdit = new tblUser
+                        {
+                            FirstName = maintenance.FirstName,
+                            LastName = maintenance.LastName,
+                            IdentificationCard = maintenance.IdentificationCard,
+                            Gender = maintenance.Gender,
+                            DateOfBirth = maintenance.DateOfBirth,
+                            Citizenship = maintenance.Citizenship,
+                            Username = maintenance.Username,
+                            UserPassword = maintenance.UserPassword,
+                            UserID = maintenance.UserID
+                        };
                         userData.AddUser(userToEdit);
 
                         tblClinicMaintenance maintenanceToEdit = (from ss in context.tblClinicMaintenances where ss.UserID == maintenance.UserID select ss).First();
@@ -110,6 +125,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}" +
                             $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}"));
                         logger.Start();
+
+                        isChanged = true;
 
                         return maintenance;
                     }
@@ -141,6 +158,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             tblClinicMaintenance main = (from r in context.tblClinicMaintenances where r.UserID == userID select r).First();
                             context.tblClinicMaintenances.Remove(main);
                             context.SaveChanges();
+                            break;
                         }
                     }
 

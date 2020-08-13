@@ -66,6 +66,24 @@
                     <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
                     <DataGridTextColumn Header="Clinic Extention" Binding="{Binding ClinicExtentionAllowed, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.08*"/>
                     <DataGridTextColumn Header="Disabled Responsibility" Binding="{Binding DisabledAccessabilityResponsibility, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.12*"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnDeleteUser" Content="Delete" 
+                                Command="{Binding DataContext.DeleteMaintenance, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnEditUser" Content="Edit"
+                                Command="{Binding DataContext.EditMaintenance, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

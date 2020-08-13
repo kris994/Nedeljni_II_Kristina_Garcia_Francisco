@@ -82,7 +82,19 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     }
                     else
                     {
-                        tblUser userToEdit = (from ss in context.tblUsers where ss.UserID == admin.UserID select ss).First();
+                        tblUser userToEdit = new tblUser
+                        {
+                            FirstName = admin.FirstName,
+                            LastName = admin.LastName,
+                            IdentificationCard = admin.IdentificationCard,
+                            Gender = admin.Gender,
+                            DateOfBirth = admin.DateOfBirth,
+                            Citizenship = admin.Citizenship,
+                            Username = admin.Username,
+                            UserPassword = admin.UserPassword,
+                            UserID = admin.UserID
+                        };
+
                         userData.AddUser(userToEdit);
 
                         tblClinicAdministrator adminToEdit = (from ss in context.tblClinicAdministrators where ss.UserID == admin.UserID select ss).First();

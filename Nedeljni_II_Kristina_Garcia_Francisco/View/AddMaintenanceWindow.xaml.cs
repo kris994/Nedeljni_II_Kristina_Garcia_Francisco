@@ -1,4 +1,5 @@
-﻿using Nedeljni_II_Kristina_Garcia_Francisco.ViewModel;
+﻿using Nedeljni_II_Kristina_Garcia_Francisco.Model;
+using Nedeljni_II_Kristina_Garcia_Francisco.ViewModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -14,6 +15,16 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
         {
             InitializeComponent();
             this.DataContext = new AddMaintenanceViewModel(this);
+        }
+
+        /// <summary>
+        /// Window constructor for editing maintenance
+        /// </summary>
+        /// <param name="maintenanceEdit">maintenance that is bing edited</param>
+        public AddMaintenanceWindow(vwClinicMaintenance maintenanceEdit)
+        {
+            InitializeComponent();
+            this.DataContext = new AddMaintenanceViewModel(this, maintenanceEdit);
         }
 
         /// <summary>

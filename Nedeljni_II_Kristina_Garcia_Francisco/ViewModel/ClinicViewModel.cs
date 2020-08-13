@@ -137,6 +137,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// Specific Maintenence
+        /// </summary>
+        private vwClinicMaintenance maintenance;
+        public vwClinicMaintenance Maintenance
+        {
+            get
+            {
+                return maintenance;
+            }
+            set
+            {
+                maintenance = value;
+                OnPropertyChanged("Maintenance");
+            }
+        }
+
+        /// <summary>
         /// Info label
         /// </summary>
         private string infoLabel;
@@ -417,14 +434,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     if (MaintenanceList.Count < 4)
                     {
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully created a new Maintenance";
+                        InfoLabel = "Successfully created a new Maintenance Client";
                     }
                     else
                     {
                         maintenanceData.QueueSize(MaintenanceList, 3);
                         MaintenanceList.Dequeue();                    
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully created a new Maintenance and deleted old. (Exceeded max number of 3)";
+                        InfoLabel = "Successfully created a new Maintenance Client and deleted old. (Exceeded max number of 3)";
                     }
                 }
             }
@@ -441,6 +458,132 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         private bool CanAddNewMaintenanceExecute()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Command that tries to delete the Maintenance
+        /// </summary>
+        private ICommand deleteMaintenance;
+        public ICommand DeleteMaintenance
+        {
+            get
+            {
+                if (deleteMaintenance == null)
+                {
+                    deleteMaintenance = new RelayCommand(param => DeleteMaintenanceExecute(), param => CanDeleteMaintenanceExecute());
+                }
+                return deleteMaintenance;
+            }
+        }
+
+        /// <summary>
+        /// Executes the delete command
+        /// </summary>
+        public void DeleteMaintenanceExecute()
+        {
+            // Checks if the user really wants to delete the user
+            var result = MessageBox.Show("Are you sure you want to delete the maintenance client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (Maintenance != null)
+                    {
+                        int userID = Maintenance.UserID;
+                        maintenanceData.DeleteMaintenance(userID);
+                        MaintenanceList = maintenanceData.GetAllMaintenances();
+
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully deleted a Maintenance Client";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the maintenance can be deleted
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanDeleteMaintenanceExecute()
+        {
+            if (MaintenanceList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to open the edit maintenance window
+        /// </summary>
+        private ICommand editMaintenance;
+        public ICommand EditMaintenance
+        {
+            get
+            {
+                if (editMaintenance == null)
+                {
+                    editMaintenance = new RelayCommand(param => EditMaintenanceExecute(), param => CanEditMaintenanceExecute());
+                }
+                return editMaintenance;
+            }
+        }
+
+        /// <summary>
+        /// Executes the edit command
+        /// </summary>
+        public void EditMaintenanceExecute()
+        {
+            try
+            {
+                if (Maintenance != null)
+                {
+                    AddMaintenanceWindow addMaintenenece = new AddMaintenanceWindow(Maintenance);
+                    addMaintenenece.ShowDialog();
+
+                    MaintenanceList = maintenanceData.GetAllMaintenances();
+
+                    if (MaintenanceData.isChanged == true)
+                    {
+                        ManagerList = managerData.GetAllManagers().ToList();
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully updated a Maintenance Client";
+                        MaintenanceData.isChanged = false;
+                    }
+                }                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if the report can be edited
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanEditMaintenanceExecute()
+        {
+            if (MaintenanceList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
