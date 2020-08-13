@@ -165,5 +165,90 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             return null;
         }
+
+        /// <summary>
+        /// An entered value cannot be Zero
+        /// </summary>
+        /// <param name="value">value that is entered</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string CannotBeZero(int value)
+        {
+            if (value == 0)
+            {
+                return "Entered Value cannot be Zero";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// An entered value cannot be lower than existing
+        /// </summary>
+        /// <param name="value">value that is entered</param>
+        /// <param name="currentValueID">value id</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string EmergencyVehicleCannotBeLower(int value, int currentValueID)
+        {
+            int currentValue = 0;
+            ClinicData clinicData = new ClinicData();
+
+            if (value == 0)
+            {
+                return "Entered Value cannot be Zero";
+            }
+
+            // Get the current users id
+            for (int i = 0; i < clinicData.GetAllClinics().Count; i++)
+            {
+                if (clinicData.GetAllClinics()[i].ClinicID == currentValueID)
+                {
+                    currentValue = clinicData.GetAllClinics()[i].EmergencyVehicleParkingLoots;
+                    break;
+                }
+            }
+
+            if (value < currentValue)
+            {
+                return "Value cannot be smaller than " + currentValue;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// An entered value cannot be lower than existing
+        /// </summary>
+        /// <param name="value">value that is entered</param>
+        /// <param name="currentValueID">value id</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string InvalidVehicleCannotBeLower(int value, int currentValueID)
+        {
+            int currentValue = 0;
+            ClinicData clinicData = new ClinicData();
+
+            if (value == 0)
+            {
+                return "Entered Value cannot be Zero";
+            }
+
+            // Get the current users id
+            for (int i = 0; i < clinicData.GetAllClinics().Count; i++)
+            {
+                if (clinicData.GetAllClinics()[i].ClinicID == currentValueID)
+                {
+                    currentValue = clinicData.GetAllClinics()[i].InvalidVehicleParkingLoots;
+                    break;
+                }
+            }
+
+            if (value < currentValue)
+            {
+                return "Value cannot be smaller than " + currentValue;
+            }
+
+            return null;
+        }
     }
 }

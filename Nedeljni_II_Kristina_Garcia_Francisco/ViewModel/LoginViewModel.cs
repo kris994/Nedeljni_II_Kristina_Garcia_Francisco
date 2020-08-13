@@ -14,6 +14,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
     {
         Login view;
         UserData userData = new UserData();
+        ClinicData clinicData = new ClinicData();
         FileReadWrite frw = new FileReadWrite();   
 
         #region Constructor
@@ -22,6 +23,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             view = loginView;
             user = new tblUser();
             UserList = userData.GetAllUsers().ToList();
+            ClinicList = clinicData.GetAllClinics().ToList();
             frw.ReadAdminFile();
         }
         #endregion
@@ -75,6 +77,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 userList = value;
                 OnPropertyChanged("UserList");
+            }
+        }
+
+        /// <summary>
+        /// List of all clinics in the application
+        /// </summary>
+        private List<tblClinic> clinicList;
+        public List<tblClinic> ClinicList
+        {
+            get
+            {
+                return clinicList;
+            }
+            set
+            {
+                clinicList = value;
+                OnPropertyChanged("ClinicList");
             }
         }
         #endregion
@@ -135,9 +154,18 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 
                         if (ad.GetAllAdmins().Any(id => id.UserID == UserList[i].UserID) == true)
                         {
-                            AdminWindow adminWindow = new AdminWindow();
-                            view.Close();
-                            adminWindow.Show();
+                            if(ClinicList.Count == 0)
+                            {
+                                AddClinicWindow clinicWindow = new AddClinicWindow();
+                                view.Close();
+                                clinicWindow.Show();
+                            }
+                            else
+                            {
+                                AdminWindow adminWindow = new AdminWindow();
+                                view.Close();
+                                adminWindow.Show();
+                            }
                         }
                         break;
                     }

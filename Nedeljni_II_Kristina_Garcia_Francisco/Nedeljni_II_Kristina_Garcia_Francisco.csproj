@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="DataAccess\AdminData.cs" />
+    <Compile Include="DataAccess\ClinicData.cs" />
     <Compile Include="DataAccess\DoctorData.cs" />
     <Compile Include="DataAccess\MaintenanceData.cs" />
     <Compile Include="DataAccess\ManagerData.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Helper\RadioButtonConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
     <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\Clinic.cs" />
     <Compile Include="Model\ClinicDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,13 +137,20 @@
     </Compile>
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SuperAdminViewModel.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
       <DependentUpon>AddAdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddClinicWindow.xaml.cs">
+      <DependentUpon>AddClinicWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditClinicWindow.xaml.cs">
+      <DependentUpon>EditClinicWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -214,7 +223,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddClinicWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditClinicWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
