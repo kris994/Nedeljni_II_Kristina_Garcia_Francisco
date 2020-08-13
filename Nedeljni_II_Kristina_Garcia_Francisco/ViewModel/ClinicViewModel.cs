@@ -20,6 +20,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         EditClinicWindow editClinic;
         ClinicData clinicData = new ClinicData();
         ManagerData managerData = new ManagerData();
+        MaintenanceData maintenanceData = new MaintenanceData();
 
         #region Constructor
         /// <summary>
@@ -31,6 +32,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             clinic = new tblClinic ();
             addClinic = addClinicWindowOpen;
             ClinicList = clinicData.GetAllClinics().ToList();
+            MaintenanceList = maintenanceData.GetAllMaintenances();
         }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             adminWidnow = adminWindowOpen;
             ClinicList = clinicData.GetAllClinics().ToList();
             ManagerList = managerData.GetAllManagers().ToList();
+            MaintenanceList = maintenanceData.GetAllMaintenances();
 
             if (isNewClinic == true)
             {
@@ -96,6 +99,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 managerList = value;
                 OnPropertyChanged("ManagerList");
+            }
+        }
+
+        /// <summary>
+        /// List of maintenance
+        /// </summary>
+        private Queue<vwClinicMaintenance> maintenanceList;
+        public Queue<vwClinicMaintenance> MaintenanceList
+        {
+            get
+            {
+                return maintenanceList;
+            }
+            set
+            {
+                maintenanceList = value;
+                OnPropertyChanged("MaintenanceList");
             }
         }
 
@@ -361,6 +381,64 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <returns>true</returns>
         private bool CanCancelExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Command that tries to add a new maintenance
+        /// </summary>
+        private ICommand addNewMaintenance;
+        public ICommand AddNewMaintenance
+        {
+            get
+            {
+                if (addNewMaintenance == null)
+                {
+                    addNewMaintenance = new RelayCommand(param => AddNewMaintenanceExecute(), param => CanAddNewMaintenanceExecute());
+                }
+                return addNewMaintenance;
+            }
+        }
+
+        /// <summary>
+        /// Executes the add Maintenance command
+        /// </summary>
+        private void AddNewMaintenanceExecute()
+        {
+            try
+            {
+                AddMaintenanceWindow addMaintenance = new AddMaintenanceWindow();
+                addMaintenance.ShowDialog();
+                if ((addMaintenance.DataContext as AddMaintenanceViewModel).IsUpdateMaintenance == true)
+                {
+                    MaintenanceList = maintenanceData.GetAllMaintenances();
+
+                    if (MaintenanceList.Count < 4)
+                    {
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully created a new Maintenance";
+                    }
+                    else
+                    {
+                        maintenanceData.QueueSize(MaintenanceList, 3);
+                        MaintenanceList.Dequeue();                    
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully created a new Maintenance and deleted old. (Exceeded max number of 3)";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new maintenance
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanAddNewMaintenanceExecute()
         {
             return true;
         }
