@@ -163,7 +163,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <summary>
         /// Checks if credentials were updated
         /// </summary>
-        public static bool isUpdateCredentials = false;
+        private static bool isUpdateCredentials = false;
         #endregion
 
         #region Validations
@@ -422,7 +422,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         {
             try
             {
-                Login login = new Login();
                 superAdminView.Close();
             }
             catch (Exception ex)

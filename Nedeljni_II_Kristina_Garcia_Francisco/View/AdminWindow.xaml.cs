@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Nedeljni_II_Kristina_Garcia_Francisco.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.View
 {
@@ -22,6 +11,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
         public AdminWindow()
         {
             InitializeComponent();
+            this.DataContext = new ClinicViewModel(this);
+        }
+
+        void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
         }
     }
 }

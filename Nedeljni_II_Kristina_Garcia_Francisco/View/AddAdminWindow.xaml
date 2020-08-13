@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Model" 
         mc:Ignorable="d"
-        Title="Add Admin" Height="370" Width="350" Background="#5BCED0">
+        Title="Add Admin" Height="370" Width="350" Background="White">
     <Window.Resources>
         <c:RadioButtonConverter x:Key="radioButtonConverter" />
         <c:DateConverter x:Key="dateConverter" />
