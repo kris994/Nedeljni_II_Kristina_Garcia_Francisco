@@ -1,0 +1,48 @@
+﻿<Window x:Class="Nedeljni_II_Kristina_Garcia_Francisco.View.SuperAdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco"
+        xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
+        xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.ViewModel" 
+        mc:Ignorable="d" Closing="DataWindow_Closing"
+        Title="Users" Height="auto" MaxHeight="450" Width="auto" MaxWidth="1200">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <Button Width="80" Height="20" Name="btnLogoff" Content="Log Off"
+                    Command="{Binding Logoff, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            <Button Width="80" Height="20" Name="btnAddAdmin" Content="Add Admin"
+                    Command="{Binding AddNewAdmin, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            <Button Width="120" Height="20" Name="btnChangeCredentials" Content="Change Credentials"
+                    Command="{Binding ChangeCredentials, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+        </StackPanel>
+        <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
+        <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+        <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
+            <DataGrid Name="DataGridAdmin" ItemsSource="{Binding AdminList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Admin, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
+                      FontWeight="Bold" Margin="20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Identification" Binding="{Binding IdentificationCard}" Width="0.125*"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.11*"/>
+                    <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Width="0.125*"/>
+                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
