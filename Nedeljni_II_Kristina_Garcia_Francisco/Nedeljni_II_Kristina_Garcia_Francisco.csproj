@@ -80,6 +80,7 @@
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
+    <Compile Include="Helper\YesNoConverter.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Clinic.cs" />
     <Compile Include="Model\ClinicDB.Context.cs">
@@ -99,6 +100,7 @@
     </Compile>
     <Compile Include="Model\LoggedInUser.cs" />
     <Compile Include="Model\LogManager.cs" />
+    <Compile Include="Model\Maintenance.cs" />
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\tblClinic.cs">
       <DependentUpon>ClinicDB.tt</DependentUpon>
@@ -137,6 +139,7 @@
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddAdminViewModel.cs" />
+    <Compile Include="ViewModel\AddMaintenanceViewModel.cs" />
     <Compile Include="ViewModel\AddManagerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClinicViewModel.cs" />
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="View\AddClinicWindow.xaml.cs">
       <DependentUpon>AddClinicWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddMaintenanceWindow.xaml.cs">
+      <DependentUpon>AddMaintenanceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddManagerWindow.xaml.cs">
       <DependentUpon>AddManagerWindow.xaml</DependentUpon>
@@ -159,6 +165,9 @@
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MaintenanceWindow.xaml.cs">
+      <DependentUpon>MaintenanceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
@@ -235,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddMaintenanceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MaintenanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
