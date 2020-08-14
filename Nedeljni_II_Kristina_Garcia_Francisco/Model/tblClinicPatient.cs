@@ -15,7 +15,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
     public partial class tblClinicPatient
     {
         public int PatientID { get; set; }
-        public int HealthCareNumber { get; set; }
+        public string HealthCareNumber { get; set; }
         public System.DateTime ExperationDate { get; set; }
         public string UniqueNumber { get; set; }
         public int UserID { get; set; }

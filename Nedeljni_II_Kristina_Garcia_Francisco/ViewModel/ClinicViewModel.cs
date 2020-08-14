@@ -20,6 +20,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         ManagerData managerData = new ManagerData();
         AdminData adminData = new AdminData();
         DoctorData docData = new DoctorData();
+        PatientData patData = new PatientData();
         MaintenanceData maintenanceData = new MaintenanceData();
 
         #region Constructor
@@ -47,6 +48,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             MaintenanceList = maintenanceData.GetAllMaintenances();
             AdminList = adminData.GetAllAdmins().ToList();
             DoctorList = docData.GetAllDoctors().ToList();
+            PatientList = patData.GetAllPatients().ToList();
 
             if (isNewClinic == true)
             {
@@ -152,6 +154,41 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 doctorList = value;
                 OnPropertyChanged("DoctorList");
+            }
+        }
+
+
+        /// <summary>
+        /// List of patient
+        /// </summary>
+        private List<vwClinicPatient> patientList;
+        public List<vwClinicPatient> PatientList
+        {
+            get
+            {
+                return patientList;
+            }
+            set
+            {
+                patientList = value;
+                OnPropertyChanged("PatientList");
+            }
+        }
+
+        /// <summary>
+        /// Specific Patient
+        /// </summary>
+        private vwClinicPatient patient;
+        public vwClinicPatient Patient
+        {
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                patient = value;
+                OnPropertyChanged("Patient");
             }
         }
 
@@ -558,7 +595,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         maintenanceData.QueueSize(MaintenanceList, 3);
                         MaintenanceList.Dequeue();                    
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully created a new Maintenance Client and deleted old. (Exceeded max number of 3)";
+                        InfoLabel = "Successfully created a new Maintenance and deleted old. (Exceeded max number of 3)";
                     }
                 }
             }
@@ -599,7 +636,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         public void DeleteMaintenanceExecute()
         {
             // Checks if the user really wants to delete the user
-            var result = MessageBox.Show("Are you sure you want to delete the maintenance client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to delete the maintenance?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -612,7 +649,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         MaintenanceList = maintenanceData.GetAllMaintenances();
 
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully deleted a Maintenance Client";
+                        InfoLabel = "Successfully deleted a Maintenance";
                     }
                 }
                 catch (Exception ex)
@@ -673,7 +710,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     if (MaintenanceData.isChanged == true)
                     {
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully updated a Maintenance Client";
+                        InfoLabel = "Successfully updated a Maintenance";
                         MaintenanceData.isChanged = false;
                     }
 
@@ -771,7 +808,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         public void DeleteManagerExecute()
         {
             // Checks if the user really wants to delete the user
-            var result = MessageBox.Show("Are you sure you want to delete the manager client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to delete the manager?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -784,7 +821,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         ManagerList = managerData.GetAllManagers();
 
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully deleted a Manager Client";
+                        InfoLabel = "Successfully deleted a Manager";
                     }
                 }
                 catch (Exception ex)
@@ -845,7 +882,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     if (ManagerData.isChanged == true)
                     {
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully updated a Manager Client";
+                        InfoLabel = "Successfully updated a Manager";
                         MaintenanceData.isChanged = false;
                     }
 
@@ -903,7 +940,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 {
                     DoctorList = docData.GetAllDoctors().ToList();
                     InfoLabelBG = "#28a745";
-                    InfoLabel = "Successfully created a new Doctor Client";
+                    InfoLabel = "Successfully created a new Doctor";
                 }
             }
             catch (Exception ex)
@@ -943,7 +980,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         public void DeleteDoctorExecute()
         {
             // Checks if the user really wants to delete the user
-            var result = MessageBox.Show("Are you sure you want to delete the doctor client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to delete the doctor?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -956,7 +993,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         DoctorList = docData.GetAllDoctors().ToList();
 
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully deleted a Doctor Client";
+                        InfoLabel = "Successfully deleted a Doctor";
                     }
                 }
                 catch (Exception ex)
@@ -1017,7 +1054,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     if (DoctorData.isChanged == true)
                     {
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully updated a Doctor Client";
+                        InfoLabel = "Successfully updated a Doctor";
                         MaintenanceData.isChanged = false;
                     }
 
@@ -1035,6 +1072,178 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <returns>true if possible</returns>
         public bool CanEditDoctorExecute()
+        {
+            if (DoctorList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to add a new Patient
+        /// </summary>
+        private ICommand addNewPatient;
+        public ICommand AddNewPatient
+        {
+            get
+            {
+                if (addNewPatient == null)
+                {
+                    addNewPatient = new RelayCommand(param => AddNewPatientExecute(), param => CanAddNewPatientExecute());
+                }
+                return addNewPatient;
+            }
+        }
+
+        /// <summary>
+        /// Executes the add Patient command
+        /// </summary>
+        private void AddNewPatientExecute()
+        {
+            try
+            {
+                AddPatientWindow addPatient = new AddPatientWindow();
+                addPatient.ShowDialog();
+                if ((addPatient.DataContext as AddPatientViewModel).IsUpdatePatient == true)
+                {
+                    DoctorList = docData.GetAllDoctors().ToList();
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully created a new Patient";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new patient
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanAddNewPatientExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Command that tries to delete the Patient
+        /// </summary>
+        private ICommand deletePatient;
+        public ICommand DeletePatient
+        {
+            get
+            {
+                if (deletePatient == null)
+                {
+                    deletePatient = new RelayCommand(param => DeletePatientExecute(), param => CanDeletePatientExecute());
+                }
+                return deletePatient;
+            }
+        }
+
+        /// <summary>
+        /// Executes the delete command
+        /// </summary>
+        public void DeletePatientExecute()
+        {
+            // Checks if the user really wants to delete the user
+            var result = MessageBox.Show("Are you sure you want to delete the patient?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (Patient != null)
+                    {
+                        int userID = Patient.UserID;
+                        patData.DeletePatient(userID);
+                        PatientList = patData.GetAllPatients().ToList();
+
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully deleted a Patient";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the patient can be deleted
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanDeletePatientExecute()
+        {
+            if (PatientList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to open the edit patient window
+        /// </summary>
+        private ICommand editPatient;
+        public ICommand EditPatient
+        {
+            get
+            {
+                if (editPatient == null)
+                {
+                    editPatient = new RelayCommand(param => EditPatientExecute(), param => CanEditPatientExecute());
+                }
+                return editPatient;
+            }
+        }
+
+        /// <summary>
+        /// Executes the edit command
+        /// </summary>
+        public void EditPatientExecute()
+        {
+            try
+            {
+                if (Patient != null)
+                {
+                    AddPatientWindow adPatient = new AddPatientWindow(Patient);
+                    adPatient.ShowDialog();
+
+                    if (PatientData.isChanged == true)
+                    {
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully updated a Patient";
+                        PatientData.isChanged = false;
+                    }
+
+                    PatientList = patData.GetAllPatients().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if the patient can be edited
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanEditPatientExecute()
         {
             if (DoctorList == null)
             {

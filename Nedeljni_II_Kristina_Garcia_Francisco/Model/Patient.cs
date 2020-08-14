@@ -3,20 +3,9 @@ using System.ComponentModel;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 {
-    public partial class vwClinicDoctor : IDataErrorInfo
+    public partial class vwClinicPatient : IDataErrorInfo
     {
         Validations validation = new Validations();
-
-        /// <summary>
-        /// Returns full doctor name
-        /// </summary>
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
 
         /// <summary>
         /// Total amount of propertis we are checking
@@ -26,10 +15,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "IdentificationCard",
             "Username",
             "UserPassword",
-            "UniqueNumber",
-            "BankAccount",
             "Gender",
-            "WorkingShift"
+            "HealthCareNumber"
         };
 
         /// <summary>
@@ -86,16 +73,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
                         result = this.validation.PasswordValidation(UserPassword);
                         break;
 
-                    case "UniqueNumber":
-                        result = this.validation.DoctorNumberChecker(UniqueNumber, UserID);
+                    case "Gender":
+                        result = this.validation.CannotBeEmpty(Gender);
                         break;
 
-                    case "BankAccount":
-                        result = this.validation.BankAccountChecker(BankAccount, UserID);
-                        break;                   
-
-                    case "WorkingShift":
-                        result = this.validation.CannotBeEmpty(WorkingShift);
+                    case "HealthCareNumber":
+                        result = this.validation.HealthCareNumberChecker(HealthCareNumber, UserID);
                         break;
 
                     default:
@@ -108,3 +91,4 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         }
     }
 }
+

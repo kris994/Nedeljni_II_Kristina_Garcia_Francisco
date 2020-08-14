@@ -132,5 +132,35 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
+
+        /// <summary>
+        /// Deletes Patient user
+        /// </summary>
+        /// <param name="userID">the Patient that is being deleted</param>
+        public void DeletePatient(int userID)
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    for (int i = 0; i < GetAllPatients().Count; i++)
+                    {
+                        if (GetAllPatients().ToList()[i].UserID == userID)
+                        {
+                            tblClinicPatient pat = (from r in context.tblClinicPatients where r.UserID == userID select r).First();
+                            context.tblClinicPatients.Remove(pat);
+                            context.SaveChanges();
+                            break;
+                        }
+                    }
+
+                    userData.DeleteUser(userID);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
     }
 }

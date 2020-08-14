@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.View"
         mc:Ignorable="d"
-        Title="Login" Height="350.186" Width="300" FontSize="14" Background="#5BCED0">
+        Title="Login" Height="370" Width="300" FontSize="14" Background="#5BCED0">
     <Border Background="#2e3137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
             <Label Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center"/>
@@ -31,6 +31,9 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <TextBlock>                                
+                <Hyperlink Command="{Binding AddNewPatient, UpdateSourceTrigger=PropertyChanged}" Foreground="White">Register as an Patient</Hyperlink>
+            </TextBlock>
             <Label  HorizontalAlignment="Center" Content="{Binding InfoLabel, Mode=OneWay}" Foreground="Red"/>
         </StackPanel>
     </Border>

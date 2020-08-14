@@ -3,8 +3,10 @@ using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_II_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using Nedeljni_II_Kristina_Garcia_Francisco.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -15,6 +17,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         Login view;
         UserData userData = new UserData();
         ClinicData clinicData = new ClinicData();
+        PatientData patientData = new PatientData();
         FileReadWrite frw = new FileReadWrite();   
 
         #region Constructor
@@ -24,6 +27,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             user = new tblUser();
             UserList = userData.GetAllUsers().ToList();
             ClinicList = clinicData.GetAllClinics().ToList();
+            PatientList = patientData.GetAllPatients().ToList();
             frw.ReadAdminFile();
         }
         #endregion
@@ -81,6 +85,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// List of all patient in the application
+        /// </summary>
+        private List<vwClinicPatient> patientList;
+        public List<vwClinicPatient> PatientList
+        {
+            get
+            {
+                return patientList;
+            }
+            set
+            {
+                patientList = value;
+                OnPropertyChanged("PatientList");
+            }
+        }
+
+        /// <summary>
         /// List of all clinics in the application
         /// </summary>
         private List<tblClinic> clinicList;
@@ -99,6 +120,53 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         #endregion
 
         #region Commands
+        /// <summary>
+        /// Command that tries to add a new patient
+        /// </summary>
+        private ICommand addNewPatient;
+        public ICommand AddNewPatient
+        {
+            get
+            {
+                if (addNewPatient == null)
+                {
+                    addNewPatient = new RelayCommand(param => AddNewPatientExecute(), param => CanAddNewPatientExecute());
+                }
+                return addNewPatient;
+            }
+        }
+
+        /// <summary>
+        /// Executes the add Patient command
+        /// </summary>
+        private void AddNewPatientExecute()
+        {
+            try
+            {
+                AddPatientWindow addPatient = new AddPatientWindow();
+                addPatient.ShowDialog();
+                if ((addPatient.DataContext as AddPatientViewModel).IsUpdatePatient == true)
+                {
+                    PatientList = patientData.GetAllPatients().ToList();
+                    UserList = userData.GetAllUsers().ToList();
+                    InfoLabel = "Created a patient";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new patient
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanAddNewPatientExecute()
+        {
+            return true;
+        }
+
         /// <summary>
         /// Command used to log te user into the application
         /// </summary>
@@ -187,6 +255,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                             DoctorWindow docWindow = new DoctorWindow();
                             view.Close();
                             docWindow.Show();
+                        }
+                        else if (patientData.GetAllPatients().Any(id => id.Username == UserList[i].Username) == true)
+                        {
+                            PatientWindow patWindow = new PatientWindow();
+                            view.Close();
+                            patWindow.Show();
                         }
                         break;
                     }

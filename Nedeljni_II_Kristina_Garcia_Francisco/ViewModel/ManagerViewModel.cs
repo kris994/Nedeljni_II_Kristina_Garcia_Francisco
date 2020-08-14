@@ -146,7 +146,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 {
                     DoctorList = docData.GetAllDoctors().ToList();
                     InfoLabelBG = "#28a745";
-                    InfoLabel = "Successfully created a new Doctor Client";
+                    InfoLabel = "Successfully created a new Doctor";
                 }
             }
             catch (Exception ex)
@@ -195,7 +195,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     if (DoctorData.isChanged == true)
                     {
                         InfoLabelBG = "#28a745";
-                        InfoLabel = "Successfully updated a Doctor Client";
+                        InfoLabel = "Successfully updated a Doctor";
                         MaintenanceData.isChanged = false;
                     }
 

@@ -11,6 +11,7 @@
     <Window.Resources>
         <c:YesNoConverter x:Key="YesNoConverter" />
         <c:ManagerNameConverter x:Key="ManagerNameConverter" />
+        <c:DoctorNameConverter x:Key="DoctorNameConverter" />
     </Window.Resources>
     <Grid Margin="0">
         <Grid.RowDefinitions>
@@ -33,6 +34,8 @@
                     Command="{Binding AddNewMaintenance, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
             <Button Width="80" Height="20" Name="btnAddNewDoctor" Content="Add Doctor"
                     Command="{Binding AddNewDoctor, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            <Button Width="80" Height="20" Name="btnAddNewPatient" Content="Add Patient"
+                    Command="{Binding AddNewPatient, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
         </StackPanel>
         <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
         <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
@@ -143,6 +146,43 @@
                             <DataTemplate>
                                 <Button Name="btnEditUser" Content="Edit"
                                 Command="{Binding DataContext.EditDoctor, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
+            <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
+                      FontWeight="Bold" Margin="20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
+                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
+                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
+                    <DataGridTextColumn Header="Healthcare" Binding="{Binding HealthCareNumber}" Width="0.12*"/>
+                    <DataGridTextColumn Header="Experation" Binding="{Binding ExperationDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.1*"/>
+                    <DataGridTextColumn Header="Doctor" Binding="{Binding UniqueNumber, Converter={StaticResource ResourceKey=DoctorNameConverter}}" Width="0.12*"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnDeleteUser" Content="Delete" 
+                                Command="{Binding DataContext.DeletePatient, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                                        Margin="4" FontWeight="Bold"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnEditUser" Content="Edit"
+                                Command="{Binding DataContext.EditPatient, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

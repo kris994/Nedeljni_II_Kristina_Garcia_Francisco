@@ -212,6 +212,51 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         }
 
         /// <summary>
+        /// Checks if the health care unique number exists
+        /// </summary>
+        /// <param name="number">the health care Number we are checking</param>
+        /// <param name="id">for the specific user</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string HealthCareNumberChecker(string number, int id)
+        {
+            PatientData patData = new PatientData();
+
+            List<vwClinicPatient> allPatients = patData.GetAllPatients();
+            string currentHealthID = "";
+
+            if (number == null)
+            {
+                return "Healthcare number cannot be empty.";
+            }
+
+            if (number.Length != 6)
+            {
+                return "Healthcare number has to be 6 characters long.";
+            }
+
+            // Get the current users id
+            for (int i = 0; i < allPatients.Count; i++)
+            {
+                if (allPatients[i].UserID == id)
+                {
+                    currentHealthID = allPatients[i].HealthCareNumber;
+                    break;
+                }
+            }
+
+            // Check if the id already exists, but it is not the current user id
+            for (int i = 0; i < allPatients.Count; i++)
+            {
+                if ((allPatients[i].HealthCareNumber == number && currentHealthID != number))
+                {
+                    return "This Healthcare number already exists!";
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Checks if the bank account already exists
         /// </summary>
         /// <param name="bankAccount">the Bank Number we are checking</param>
