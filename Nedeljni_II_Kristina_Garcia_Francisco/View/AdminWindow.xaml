@@ -7,15 +7,19 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.ViewModel" 
         mc:Ignorable="d" Closing="DataWindow_Closing"
-        Title="Admin" Height="auto" MaxHeight="450" Width="auto" MaxWidth="1200">
+        Title="Admin" Height="auto" MaxHeight="800" Width="auto" MaxWidth="1200">
     <Window.Resources>
         <c:YesNoConverter x:Key="YesNoConverter" />
         <c:ManagerNameConverter x:Key="ManagerNameConverter" />
         <c:DoctorNameConverter x:Key="DoctorNameConverter" />
     </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
     <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -153,7 +157,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
+        <Grid Grid.Column="1" Grid.Row="6" Height="auto" Width="auto">
             <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
@@ -191,4 +195,5 @@
             </DataGrid>
         </Grid>
     </Grid>
+    </ScrollViewer>
 </Window>

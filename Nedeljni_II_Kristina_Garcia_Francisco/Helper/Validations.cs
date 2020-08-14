@@ -319,6 +319,33 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         }
 
         /// <summary>
+        /// An entered value cannot be Unselected
+        /// </summary>
+        /// <param name="value">value that is selected</param>
+        /// <param name="id">for the specific user</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string CannotBeUnselected(bool value1, bool value2, int id)
+        {
+            MaintenanceData mainData = new MaintenanceData();
+            List<vwClinicMaintenance> allMaintenanaces = mainData.GetAllMaintenances().ToList();
+
+            for (int i = 0; i < allMaintenanaces.Count; i++)
+            {
+                if (allMaintenanaces[i].MaintenanceID == id)
+                {
+                    value2 = allMaintenanaces[i].DisabledAccessabilityResponsibility;
+                }
+            }
+
+            if (value1 == false && value2 == false)
+            {
+                return "Need to select a value";
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// An entered value cannot be lower than existing
         /// </summary>
         /// <param name="value">value that is entered</param>

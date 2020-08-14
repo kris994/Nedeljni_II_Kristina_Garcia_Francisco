@@ -73,6 +73,7 @@
     <Compile Include="DataAccess\ClinicData.cs" />
     <Compile Include="DataAccess\DoctorData.cs" />
     <Compile Include="DataAccess\MaintenanceData.cs" />
+    <Compile Include="DataAccess\MaintenanceReportData.cs" />
     <Compile Include="DataAccess\ManagerData.cs" />
     <Compile Include="DataAccess\PatientData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Model\LoggedInUser.cs" />
     <Compile Include="Model\LogManager.cs" />
     <Compile Include="Model\Maintenance.cs" />
+    <Compile Include="Model\MaintenanceReport.cs" />
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\tblClinic.cs">
@@ -144,12 +146,14 @@
     </Compile>
     <Compile Include="ViewModel\AddAdminViewModel.cs" />
     <Compile Include="ViewModel\AddDoctorViewModel.cs" />
+    <Compile Include="ViewModel\AddMaintenanceReportViewModel.cs" />
     <Compile Include="ViewModel\AddMaintenanceViewModel.cs" />
     <Compile Include="ViewModel\AddManagerViewModel.cs" />
     <Compile Include="ViewModel\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MaintenanceViewModel.cs" />
     <Compile Include="ViewModel\ManagerViewModel.cs" />
     <Compile Include="ViewModel\SuperAdminViewModel.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
@@ -160,6 +164,9 @@
     </Compile>
     <Compile Include="View\AddDoctorWindow.xaml.cs">
       <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddMaintenanceReportWindow.xaml.cs">
+      <DependentUpon>AddMaintenanceReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddMaintenanceWindow.xaml.cs">
       <DependentUpon>AddMaintenanceWindow.xaml</DependentUpon>
@@ -264,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddDoctorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddMaintenanceReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

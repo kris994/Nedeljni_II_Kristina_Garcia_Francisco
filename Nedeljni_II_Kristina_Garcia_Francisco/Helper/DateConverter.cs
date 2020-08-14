@@ -19,15 +19,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((DateTime)value == default(DateTime))
-            {
+
                 value = DateTimeOffset.Now;
                 return value;
-            }
-            else
-            {
-                return value;
-            }
+
         }
 
         /// <summary>

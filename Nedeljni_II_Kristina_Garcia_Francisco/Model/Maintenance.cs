@@ -15,7 +15,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "IdentificationCard",
             "Username",
             "UserPassword",
-            "Gender"
+            "Gender",
+            "ClinicExtentionAllowed",
+            "DisabledAccessabilityResponsibility"
         };
 
         /// <summary>
@@ -74,6 +76,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "Gender":
                         result = this.validation.CannotBeEmpty(Gender);
+                        break;
+
+                    case "ClinicExtentionAllowed":
+                        result = this.validation.CannotBeUnselected(ClinicExtentionAllowed, DisabledAccessabilityResponsibility, UserID);
+                        break;
+
+                    case "DisabledAccessabilityResponsibility":
+                        result = this.validation.CannotBeUnselected(ClinicExtentionAllowed, DisabledAccessabilityResponsibility, UserID);
                         break;
 
                     default:
