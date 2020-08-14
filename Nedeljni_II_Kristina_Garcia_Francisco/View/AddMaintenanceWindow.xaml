@@ -11,7 +11,7 @@
     <Window.Resources>
         <c:RadioButtonConverter x:Key="radioButtonConverter" />
         <c:DateConverter x:Key="dateConverter" />
-        <vm:vwClinicAdministrator x:Key="data"/>
+        <vm:vwClinicMaintenance x:Key="data"/>
 
         <!--The tool tip for the TextBox to display the validation error message.-->
         <Style x:Key="textBoxInError" TargetType="TextBox">

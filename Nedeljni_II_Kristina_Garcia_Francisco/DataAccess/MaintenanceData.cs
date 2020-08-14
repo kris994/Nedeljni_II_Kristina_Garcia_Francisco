@@ -135,7 +135,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
-                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Maintenance Client"));
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Maintenance"));
                 logger.Start();
                 return null;
             }

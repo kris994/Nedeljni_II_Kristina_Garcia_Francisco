@@ -176,7 +176,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
-                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Manager Client"));
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Manager"));
                 logger.Start();
                 return null;
             }

@@ -121,7 +121,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
-                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Admin Client"));
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Admin"));
                 logger.Start();
                 return null;
             }
@@ -160,7 +160,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
-                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Admin Client"));
+                Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to delete Admin"));
                 logger.Start();
             }
         }

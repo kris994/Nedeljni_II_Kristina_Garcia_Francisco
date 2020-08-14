@@ -23,7 +23,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         public string Citizenship { get; set; }
         public string Username { get; set; }
         public string UserPassword { get; set; }
-        public int HealthCareNumber { get; set; }
+        public string HealthCareNumber { get; set; }
         public System.DateTime ExperationDate { get; set; }
         public string UniqueNumber { get; set; }
         public int PatientID { get; set; }
