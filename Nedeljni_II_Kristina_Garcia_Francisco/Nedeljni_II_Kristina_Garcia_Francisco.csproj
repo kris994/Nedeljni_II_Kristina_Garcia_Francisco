@@ -77,6 +77,7 @@
     <Compile Include="DataAccess\PatientData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
     <Compile Include="Helper\DateConverter.cs" />
+    <Compile Include="Helper\ManagerNameConverter.cs" />
     <Compile Include="Helper\PasswordHasher.cs" />
     <Compile Include="Helper\RadioButtonConverter.cs" />
     <Compile Include="Helper\Validations.cs" />
@@ -98,6 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\LoggedInUser.cs" />
     <Compile Include="Model\LogManager.cs" />
     <Compile Include="Model\Maintenance.cs" />
@@ -139,17 +141,22 @@
       <DependentUpon>ClinicDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddAdminViewModel.cs" />
+    <Compile Include="ViewModel\AddDoctorViewModel.cs" />
     <Compile Include="ViewModel\AddMaintenanceViewModel.cs" />
     <Compile Include="ViewModel\AddManagerViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ManagerViewModel.cs" />
     <Compile Include="ViewModel\SuperAdminViewModel.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
       <DependentUpon>AddAdminWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddClinicWindow.xaml.cs">
       <DependentUpon>AddClinicWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddDoctorWindow.xaml.cs">
+      <DependentUpon>AddDoctorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AddMaintenanceWindow.xaml.cs">
       <DependentUpon>AddMaintenanceWindow.xaml</DependentUpon>
@@ -159,6 +166,9 @@
     </Compile>
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorWindow.xaml.cs">
+      <DependentUpon>DoctorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditClinicWindow.xaml.cs">
       <DependentUpon>EditClinicWindow.xaml</DependentUpon>
@@ -244,6 +254,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddDoctorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddMaintenanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

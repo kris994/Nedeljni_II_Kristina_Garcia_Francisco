@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 {
-    public partial class vwClinicAdministrator : IDataErrorInfo
+    public partial class vwClinicDoctor : IDataErrorInfo
     {
         Validations validation = new Validations();
 
@@ -15,7 +15,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "IdentificationCard",
             "Username",
             "UserPassword",
-            "Gender"
+            "UniqueNumber",
+            "BankAccount",
+            "Gender",
+            "WorkingShift"
         };
 
         /// <summary>
@@ -72,8 +75,16 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
                         result = this.validation.PasswordValidation(UserPassword);
                         break;
 
-                    case "Gender":
-                        result = this.validation.CannotBeEmpty(Gender);
+                    case "UniqueNumber":
+                        result = this.validation.DoctorNumberChecker(UniqueNumber, UserID);
+                        break;
+
+                    case "BankAccount":
+                        result = this.validation.BankAccountChecker(BankAccount, UserID);
+                        break;                   
+
+                    case "WorkingShift":
+                        result = this.validation.CannotBeEmpty(WorkingShift);
                         break;
 
                     default:

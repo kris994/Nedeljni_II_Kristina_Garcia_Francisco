@@ -13,6 +13,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class DoctorData
     {
         UserData userData = new UserData();
+        /// <summary>
+        /// Check if data is changed
+        /// </summary>
+        public static bool isChanged = false;
 
         /// <summary>
         /// Get all data about doctors from the database
@@ -35,7 +39,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
-
 
         /// <summary>
         /// Creates or edits an doctor
@@ -121,6 +124,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, Unique Number: {doctorToEdit.UniqueNumber} " +
                             $", Bank Account: {doctorToEdit.BankAccount}, Department: {doctorToEdit.Department}, Working Shift: {doctorToEdit.WorkingShift}, Receiving Patient: {doctorToEdit.ReceivingPatient}"));
                         logger.Start();
+
+                        isChanged = true;
+
                         return doctor;
                     }
                 }
@@ -131,6 +137,36 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 Thread logger = new Thread(() => LogManager.Instance.WriteLog("Failed to update or create Doctor Client"));
                 logger.Start();
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Deletes Doctor user
+        /// </summary>
+        /// <param name="userID">the Doctor that is being deleted</param>
+        public void DeleteDoctor(int userID)
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    for (int i = 0; i < GetAllDoctors().Count; i++)
+                    {
+                        if (GetAllDoctors().ToList()[i].UserID == userID)
+                        {
+                            tblClinicDoctor doc = (from r in context.tblClinicDoctors where r.UserID == userID select r).First();
+                            context.tblClinicDoctors.Remove(doc);
+                            context.SaveChanges();
+                            break;
+                        }
+                    }
+
+                    userData.DeleteUser(userID);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
     }

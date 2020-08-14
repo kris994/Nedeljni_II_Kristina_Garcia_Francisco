@@ -13,6 +13,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class ManagerData
     {
         UserData userData = new UserData();
+        DoctorData docData = new DoctorData();
+        /// <summary>
+        /// Check if data is changed
+        /// </summary>
+        public static bool isChanged = false;
 
         /// <summary>
         /// Get all data about managers from the database
@@ -36,6 +41,50 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             }
         }
 
+        /// <summary>
+        /// Get all data about managers that did not reach the maximum capacity
+        /// </summary>
+        /// <returns>The list of all managers</returns>
+        public List<vwClinicManager> GetAllAvailableManagers()
+        {
+            List<vwClinicManager> list = new List<vwClinicManager>();
+            for (int i = 0; i < GetAllManagers().Count; i++)
+            {
+                if (IsMaxDoctors(GetAllManagers()[i].MaxNumberOfDoctors, GetAllManagers()[i].ManagerID) == false)
+                {
+                    list.Add(GetAllManagers()[i]);
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Checks if the manager reached the max doctor capacity
+        /// </summary>
+        /// <param name="maxDoctors">maximum amount of doctors</param>
+        /// <param name="managerID">doctors with that manager</param>
+        /// <returns>true if the capacity was reached</returns>
+        public bool IsMaxDoctors(int? maxDoctors, int managerID)
+        {
+            int counter = 0;
+            for (int i = 0; i < docData.GetAllDoctors().Count; i++)
+            {
+                if (docData.GetAllDoctors()[i].ManagerID == managerID)
+                {
+                    counter++;
+                }
+            }
+
+            if (counter >= maxDoctors)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// Creates or edits an manager
@@ -118,6 +167,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             $", Max Number of Doctors: {managerToEdit.MaxNumberOfDoctors}, Min Number of Rooms: {managerToEdit.MinNumberOfRooms}, Omission Number: {managerToEdit.OmissionNumber}"));
                         logger.Start();
 
+                        isChanged = true;
+
                         return manager;
                     }
                 }
@@ -129,6 +180,36 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 logger.Start();
                 return null;
             }
-        }       
+        }
+
+        /// <summary>
+        /// Deletes manager user
+        /// </summary>
+        /// <param name="userID">the manager that is being deleted</param>
+        public void DeleteManager(int userID)
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    for (int i = 0; i < GetAllManagers().Count; i++)
+                    {
+                        if (GetAllManagers().ToList()[i].UserID == userID)
+                        {
+                            tblClinicManager man = (from r in context.tblClinicManagers where r.UserID == userID select r).First();
+                            context.tblClinicManagers.Remove(man);
+                            context.SaveChanges();
+                            break;
+                        }
+                    }
+
+                    userData.DeleteUser(userID);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
     }
 }

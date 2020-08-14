@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.ViewModel" 
         mc:Ignorable="d" Closing="DataWindow_Closing"
-        Title="Users" Height="auto" MaxHeight="450" Width="auto" MaxWidth="1200">
+        Title="Super Admin" Height="auto" MaxHeight="450" Width="auto" MaxWidth="1200">
     <Window.Resources>
     </Window.Resources>
     <Grid Margin="0">

@@ -33,12 +33,12 @@
             <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="DoctorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UniqueNumber" Type="int" Nullable="false" />
-          <Property Name="BankAccount" Type="int" Nullable="false" />
+          <Property Name="UniqueNumber" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="BankAccount" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Department" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="WorkingShift" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="ReceivingPatient" Type="bit" Nullable="false" />
-          <Property Name="ManagerID" Type="int" Nullable="false" />
+          <Property Name="ManagerID" Type="int" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblClinicMaintenance">
@@ -68,7 +68,7 @@
           <Property Name="PatientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HealthCareNumber" Type="int" Nullable="false" />
           <Property Name="ExperationDate" Type="date" Nullable="false" />
-          <Property Name="UniqueNumber" Type="int" Nullable="false" />
+          <Property Name="UniqueNumber" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUser">
@@ -129,7 +129,6 @@ warning 6002: The table/view 'ClinicDB.dbo.vwClinicDoctor' does not have a prima
             <PropertyRef Name="Department" />
             <PropertyRef Name="WorkingShift" />
             <PropertyRef Name="ReceivingPatient" />
-            <PropertyRef Name="ManagerID" />
             <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -141,12 +140,12 @@ warning 6002: The table/view 'ClinicDB.dbo.vwClinicDoctor' does not have a prima
           <Property Name="Citizenship" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="UserPassword" Type="char" MaxLength="1000" Nullable="false" />
-          <Property Name="UniqueNumber" Type="int" Nullable="false" />
-          <Property Name="BankAccount" Type="int" Nullable="false" />
+          <Property Name="UniqueNumber" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="BankAccount" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Department" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="WorkingShift" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="ReceivingPatient" Type="bit" Nullable="false" />
-          <Property Name="ManagerID" Type="int" Nullable="false" />
+          <Property Name="ManagerID" Type="int" />
           <Property Name="DoctorID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -240,11 +239,11 @@ warning 6002: The table/view 'ClinicDB.dbo.vwClinicPatient' does not have a prim
           <Property Name="UserPassword" Type="char" MaxLength="1000" Nullable="false" />
           <Property Name="HealthCareNumber" Type="int" Nullable="false" />
           <Property Name="ExperationDate" Type="date" Nullable="false" />
-          <Property Name="UniqueNumber" Type="int" Nullable="false" />
+          <Property Name="UniqueNumber" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="PatientID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblClinic__Manag__32EB7E57">
-          <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="1" />
+        <Association Name="FK__tblClinic__Manag__5B795DF5">
+          <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="0..1" />
           <End Role="tblClinicDoctor" Type="Self.tblClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblClinicManager">
@@ -256,9 +255,9 @@ warning 6002: The table/view 'ClinicDB.dbo.vwClinicPatient' does not have a prim
           </ReferentialConstraint>
         </Association>
         <!--Errors Found During Generation:
-warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK__tblClinic__Uniqu__37B03374" />-->
-        <Association Name="FK__tblClinic__UserI__2779CBAB">
+warning 6035: The relationship 'FK__tblClinic__Uniqu__603E1312' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__tblClinic__Uniqu__603E1312" />-->
+        <Association Name="FK__tblClinic__UserI__5007AB49">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicAdministrator" Type="Self.tblClinicAdministrator" Multiplicity="*" />
           <ReferentialConstraint>
@@ -270,7 +269,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__2A563856">
+        <Association Name="FK__tblClinic__UserI__52E417F4">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicMaintenance" Type="Self.tblClinicMaintenance" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,7 +281,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__2E26C93A">
+        <Association Name="FK__tblClinic__UserI__56B4A8D8">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -294,7 +293,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__33DFA290">
+        <Association Name="FK__tblClinic__UserI__5C6D822E">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicDoctor" Type="Self.tblClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -306,7 +305,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__38A457AD">
+        <Association Name="FK__tblClinic__UserI__6132374B">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicPatient" Type="Self.tblClinicPatient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -411,27 +410,27 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
     [vwClinicPatient].[PatientID] AS [PatientID]
     FROM [dbo].[vwClinicPatient] AS [vwClinicPatient]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblClinic__Manag__32EB7E57" Association="Self.FK__tblClinic__Manag__32EB7E57">
+          <AssociationSet Name="FK__tblClinic__Manag__5B795DF5" Association="Self.FK__tblClinic__Manag__5B795DF5">
             <End Role="tblClinicManager" EntitySet="tblClinicManager" />
             <End Role="tblClinicDoctor" EntitySet="tblClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__2779CBAB" Association="Self.FK__tblClinic__UserI__2779CBAB">
+          <AssociationSet Name="FK__tblClinic__UserI__5007AB49" Association="Self.FK__tblClinic__UserI__5007AB49">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblClinicAdministrator" EntitySet="tblClinicAdministrator" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__2A563856" Association="Self.FK__tblClinic__UserI__2A563856">
+          <AssociationSet Name="FK__tblClinic__UserI__52E417F4" Association="Self.FK__tblClinic__UserI__52E417F4">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblClinicMaintenance" EntitySet="tblClinicMaintenance" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__2E26C93A" Association="Self.FK__tblClinic__UserI__2E26C93A">
+          <AssociationSet Name="FK__tblClinic__UserI__56B4A8D8" Association="Self.FK__tblClinic__UserI__56B4A8D8">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblClinicManager" EntitySet="tblClinicManager" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__33DFA290" Association="Self.FK__tblClinic__UserI__33DFA290">
+          <AssociationSet Name="FK__tblClinic__UserI__5C6D822E" Association="Self.FK__tblClinic__UserI__5C6D822E">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblClinicDoctor" EntitySet="tblClinicDoctor" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__38A457AD" Association="Self.FK__tblClinic__UserI__38A457AD">
+          <AssociationSet Name="FK__tblClinic__UserI__6132374B" Association="Self.FK__tblClinic__UserI__6132374B">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblClinicPatient" EntitySet="tblClinicPatient" />
           </AssociationSet>
@@ -463,22 +462,22 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           </Key>
           <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__2779CBAB" FromRole="tblClinicAdministrator" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__5007AB49" FromRole="tblClinicAdministrator" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblClinicDoctor">
           <Key>
             <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="DoctorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
-          <Property Name="BankAccount" Type="Int32" Nullable="false" />
+          <Property Name="UniqueNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BankAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Department" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="WorkingShift" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ReceivingPatient" Type="Boolean" Nullable="false" />
-          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerID" Type="Int32" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblClinicManager" Relationship="Self.FK__tblClinic__Manag__32EB7E57" FromRole="tblClinicDoctor" ToRole="tblClinicManager" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__33DFA290" FromRole="tblClinicDoctor" ToRole="tblUser" />
+          <NavigationProperty Name="tblClinicManager" Relationship="Self.FK__tblClinic__Manag__5B795DF5" FromRole="tblClinicDoctor" ToRole="tblClinicManager" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__5C6D822E" FromRole="tblClinicDoctor" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblClinicMaintenance">
           <Key>
@@ -488,7 +487,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="ClinicExtentionAllowed" Type="Boolean" Nullable="false" />
           <Property Name="DisabledAccessabilityResponsibility" Type="Boolean" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__2A563856" FromRole="tblClinicMaintenance" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__52E417F4" FromRole="tblClinicMaintenance" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblClinicManager">
           <Key>
@@ -500,8 +499,8 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="MinNumberOfRooms" Type="Int32" />
           <Property Name="OmissionNumber" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblClinicDoctors" Relationship="Self.FK__tblClinic__Manag__32EB7E57" FromRole="tblClinicManager" ToRole="tblClinicDoctor" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__2E26C93A" FromRole="tblClinicManager" ToRole="tblUser" />
+          <NavigationProperty Name="tblClinicDoctors" Relationship="Self.FK__tblClinic__Manag__5B795DF5" FromRole="tblClinicManager" ToRole="tblClinicDoctor" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__56B4A8D8" FromRole="tblClinicManager" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblClinicPatient">
           <Key>
@@ -510,9 +509,9 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="PatientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HealthCareNumber" Type="Int32" Nullable="false" />
           <Property Name="ExperationDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
+          <Property Name="UniqueNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__38A457AD" FromRole="tblClinicPatient" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblClinic__UserI__6132374B" FromRole="tblClinicPatient" ToRole="tblUser" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -527,11 +526,11 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="Citizenship" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPassword" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblClinicAdministrators" Relationship="Self.FK__tblClinic__UserI__2779CBAB" FromRole="tblUser" ToRole="tblClinicAdministrator" />
-          <NavigationProperty Name="tblClinicDoctors" Relationship="Self.FK__tblClinic__UserI__33DFA290" FromRole="tblUser" ToRole="tblClinicDoctor" />
-          <NavigationProperty Name="tblClinicMaintenances" Relationship="Self.FK__tblClinic__UserI__2A563856" FromRole="tblUser" ToRole="tblClinicMaintenance" />
-          <NavigationProperty Name="tblClinicManagers" Relationship="Self.FK__tblClinic__UserI__2E26C93A" FromRole="tblUser" ToRole="tblClinicManager" />
-          <NavigationProperty Name="tblClinicPatients" Relationship="Self.FK__tblClinic__UserI__38A457AD" FromRole="tblUser" ToRole="tblClinicPatient" />
+          <NavigationProperty Name="tblClinicAdministrators" Relationship="Self.FK__tblClinic__UserI__5007AB49" FromRole="tblUser" ToRole="tblClinicAdministrator" />
+          <NavigationProperty Name="tblClinicDoctors" Relationship="Self.FK__tblClinic__UserI__5C6D822E" FromRole="tblUser" ToRole="tblClinicDoctor" />
+          <NavigationProperty Name="tblClinicMaintenances" Relationship="Self.FK__tblClinic__UserI__52E417F4" FromRole="tblUser" ToRole="tblClinicMaintenance" />
+          <NavigationProperty Name="tblClinicManagers" Relationship="Self.FK__tblClinic__UserI__56B4A8D8" FromRole="tblUser" ToRole="tblClinicManager" />
+          <NavigationProperty Name="tblClinicPatients" Relationship="Self.FK__tblClinic__UserI__6132374B" FromRole="tblUser" ToRole="tblClinicPatient" />
         </EntityType>
         <EntityType Name="vwClinicAdministrator">
           <Key>
@@ -573,7 +572,6 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             <PropertyRef Name="Department" />
             <PropertyRef Name="WorkingShift" />
             <PropertyRef Name="ReceivingPatient" />
-            <PropertyRef Name="ManagerID" />
             <PropertyRef Name="DoctorID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" />
@@ -585,12 +583,12 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="Citizenship" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPassword" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
-          <Property Name="BankAccount" Type="Int32" Nullable="false" />
+          <Property Name="UniqueNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BankAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Department" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="WorkingShift" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ReceivingPatient" Type="Boolean" Nullable="false" />
-          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerID" Type="Int32" />
           <Property Name="DoctorID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="vwClinicMaintenance">
@@ -678,10 +676,10 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <Property Name="UserPassword" Type="String" MaxLength="1000" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="HealthCareNumber" Type="Int32" Nullable="false" />
           <Property Name="ExperationDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UniqueNumber" Type="Int32" Nullable="false" />
+          <Property Name="UniqueNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PatientID" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblClinic__UserI__2779CBAB">
+        <Association Name="FK__tblClinic__UserI__5007AB49">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicAdministrator" Type="Self.tblClinicAdministrator" Multiplicity="*" />
           <ReferentialConstraint>
@@ -693,8 +691,8 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__Manag__32EB7E57">
-          <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="1" />
+        <Association Name="FK__tblClinic__Manag__5B795DF5">
+          <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="0..1" />
           <End Role="tblClinicDoctor" Type="Self.tblClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblClinicManager">
@@ -705,7 +703,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__33DFA290">
+        <Association Name="FK__tblClinic__UserI__5C6D822E">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicDoctor" Type="Self.tblClinicDoctor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -717,7 +715,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__2A563856">
+        <Association Name="FK__tblClinic__UserI__52E417F4">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicMaintenance" Type="Self.tblClinicMaintenance" Multiplicity="*" />
           <ReferentialConstraint>
@@ -729,7 +727,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__2E26C93A">
+        <Association Name="FK__tblClinic__UserI__56B4A8D8">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicManager" Type="Self.tblClinicManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -741,7 +739,7 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblClinic__UserI__38A457AD">
+        <Association Name="FK__tblClinic__UserI__6132374B">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblClinicPatient" Type="Self.tblClinicPatient" Multiplicity="*" />
           <ReferentialConstraint>
@@ -766,27 +764,27 @@ warning 6035: The relationship 'FK__tblClinic__Uniqu__37B03374' has columns that
           <EntitySet Name="vwClinicMaintenances" EntityType="Self.vwClinicMaintenance" />
           <EntitySet Name="vwClinicManagers" EntityType="Self.vwClinicManager" />
           <EntitySet Name="vwClinicPatients" EntityType="Self.vwClinicPatient" />
-          <AssociationSet Name="FK__tblClinic__UserI__2779CBAB" Association="Self.FK__tblClinic__UserI__2779CBAB">
+          <AssociationSet Name="FK__tblClinic__UserI__5007AB49" Association="Self.FK__tblClinic__UserI__5007AB49">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblClinicAdministrator" EntitySet="tblClinicAdministrators" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__Manag__32EB7E57" Association="Self.FK__tblClinic__Manag__32EB7E57">
+          <AssociationSet Name="FK__tblClinic__Manag__5B795DF5" Association="Self.FK__tblClinic__Manag__5B795DF5">
             <End Role="tblClinicManager" EntitySet="tblClinicManagers" />
             <End Role="tblClinicDoctor" EntitySet="tblClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__33DFA290" Association="Self.FK__tblClinic__UserI__33DFA290">
+          <AssociationSet Name="FK__tblClinic__UserI__5C6D822E" Association="Self.FK__tblClinic__UserI__5C6D822E">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblClinicDoctor" EntitySet="tblClinicDoctors" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__2A563856" Association="Self.FK__tblClinic__UserI__2A563856">
+          <AssociationSet Name="FK__tblClinic__UserI__52E417F4" Association="Self.FK__tblClinic__UserI__52E417F4">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblClinicMaintenance" EntitySet="tblClinicMaintenances" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__2E26C93A" Association="Self.FK__tblClinic__UserI__2E26C93A">
+          <AssociationSet Name="FK__tblClinic__UserI__56B4A8D8" Association="Self.FK__tblClinic__UserI__56B4A8D8">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblClinicManager" EntitySet="tblClinicManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblClinic__UserI__38A457AD" Association="Self.FK__tblClinic__UserI__38A457AD">
+          <AssociationSet Name="FK__tblClinic__UserI__6132374B" Association="Self.FK__tblClinic__UserI__6132374B">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblClinicPatient" EntitySet="tblClinicPatients" />
           </AssociationSet>

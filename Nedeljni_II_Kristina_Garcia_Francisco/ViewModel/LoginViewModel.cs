@@ -151,6 +151,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         AdminData ad = new AdminData();
                         ManagerData md = new ManagerData();
                         MaintenanceData maind = new MaintenanceData();
+                        DoctorData docd = new DoctorData();
                         InfoLabel = "Logged in";
                         found = true;
 
@@ -180,6 +181,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                             MaintenanceWindow mainWindow = new MaintenanceWindow();
                             view.Close();
                             mainWindow.Show();
+                        }
+                        else if (docd.GetAllDoctors().Any(id => id.Username == UserList[i].Username) == true)
+                        {
+                            DoctorWindow docWindow = new DoctorWindow();
+                            view.Close();
+                            docWindow.Show();
                         }
                         break;
                     }

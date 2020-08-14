@@ -107,7 +107,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         userToEdit.DateOfBirth = user.DateOfBirth;
                         userToEdit.Citizenship = user.Citizenship;
                         userToEdit.Username = user.Username;
-                        userToEdit.UserPassword = PasswordHasher.Hash(user.UserPassword);
+
+                        // Save only if password changed
+                        if (userToEdit.UserPassword != user.UserPassword)
+                        {
+                            userToEdit.UserPassword = PasswordHasher.Hash(user.UserPassword);
+                        }                                             
 
                         userToEdit.UserID = user.UserID;
                         context.SaveChanges();

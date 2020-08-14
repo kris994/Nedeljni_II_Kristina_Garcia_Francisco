@@ -7,24 +7,24 @@ using System.Windows.Input;
 namespace Nedeljni_II_Kristina_Garcia_Francisco.View
 {
     /// <summary>
-    /// Interaction logic for AddAdmin.xaml
+    /// Interaction logic for AddDoctorWindow.xaml
     /// </summary>
-    public partial class AddAdminWindow : Window
+    public partial class AddDoctorWindow : Window
     {
-        public AddAdminWindow()
+        public AddDoctorWindow()
         {
             InitializeComponent();
-            this.DataContext = new AddAdminViewModel(this);
+            this.DataContext = new AddDoctorViewModel(this);
         }
 
         /// <summary>
-        /// Window constructor for editing admin
+        /// Window constructor for editing doctor
         /// </summary>
-        /// <param name="adminEdit">admin that is bing edited</param>
-        public AddAdminWindow(vwClinicAdministrator adminEdit)
+        /// <param name="doctorEdit">doctor that is bing edited</param>
+        public AddDoctorWindow(vwClinicDoctor doctorEdit)
         {
             InitializeComponent();
-            this.DataContext = new AddAdminViewModel(this, adminEdit);
+            this.DataContext = new AddDoctorViewModel(this, doctorEdit);
         }
 
         /// <summary>

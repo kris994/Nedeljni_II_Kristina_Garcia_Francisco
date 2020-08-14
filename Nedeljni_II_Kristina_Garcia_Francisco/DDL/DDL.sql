@@ -72,12 +72,12 @@ CREATE TABLE tblClinicManager (
 USE ClinicDB
 CREATE TABLE tblClinicDoctor (
 	DoctorID INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
-	UniqueNumber INT UNIQUE						NOT NULL,
-	BankAccount INT	UNIQUE						NOT NULL,
+	UniqueNumber VARCHAR (9) UNIQUE				NOT NULL,
+	BankAccount VARCHAR (20) UNIQUE				NOT NULL,
 	Department VARCHAR (40)						NOT NULL,
 	WorkingShift VARCHAR (40)					NOT NULL,
 	ReceivingPatient BIT						NOT NULL,
-	ManagerID INT FOREIGN KEY REFERENCES tblClinicManager(ManagerID) NOT NULL,
+	ManagerID INT FOREIGN KEY REFERENCES tblClinicManager(ManagerID),
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID) NOT NULL,
 );
 
@@ -86,7 +86,7 @@ CREATE TABLE tblClinicPatient (
 	PatientID INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
 	HealthCareNumber INT UNIQUE					NOT NULL,
 	ExperationDate DATE							NOT NULL,
-	UniqueNumber INT FOREIGN KEY REFERENCES tblClinicDoctor(UniqueNumber) NOT NULL,
+	UniqueNumber VARCHAR(9) FOREIGN KEY REFERENCES tblClinicDoctor(UniqueNumber) NOT NULL,
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID) NOT NULL,
 );
 
