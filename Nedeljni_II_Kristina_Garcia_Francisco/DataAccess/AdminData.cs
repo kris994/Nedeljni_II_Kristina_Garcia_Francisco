@@ -13,6 +13,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class AdminData
     {
         UserData userData = new UserData();
+        /// <summary>
+        /// Check if data is changed
+        /// </summary>
+        public static bool isChanged = false;
 
         /// <summary>
         /// Get all data about admins from the database
@@ -107,6 +111,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             LogManager.Instance.WriteLog($"Edited Admin {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}"));
                         logger.Start();
+
+                        isChanged = true;
 
                         return admin;
                     }

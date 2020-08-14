@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Model" 
         mc:Ignorable="d"
-        Title="Add Admin" Height="200" Width="450" Background="White">
+        Title="Edit Clinic" Height="200" Width="450" Background="White">
     <Window.Resources>
         <vm:tblClinic x:Key="data"/>
 

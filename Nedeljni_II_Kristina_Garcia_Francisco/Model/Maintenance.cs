@@ -14,7 +14,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         {
             "IdentificationCard",
             "Username",
-            "UserPassword"
+            "UserPassword",
+            "Gender"
         };
 
         /// <summary>
@@ -69,6 +70,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "UserPassword":
                         result = this.validation.PasswordValidation(UserPassword);
+                        break;
+
+                    case "Gender":
+                        result = this.validation.CannotBeEmpty(Gender);
                         break;
 
                     default:

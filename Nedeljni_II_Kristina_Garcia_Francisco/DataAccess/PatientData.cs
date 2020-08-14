@@ -13,6 +13,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class PatientData
     {
         UserData userData = new UserData();
+        /// <summary>
+        /// Check if data is changed
+        /// </summary>
+        public static bool isChanged = false;
 
         /// <summary>
         /// Get all data about patients from the database
@@ -115,6 +119,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, HealthCare Number: {patientToEdit.HealthCareNumber} " +
                             $", Experation Date: {patientToEdit.ExperationDate}"));
                         logger.Start();
+
+                        isChanged = true;
+
                         return patient;
                     }
                 }

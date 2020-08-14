@@ -167,6 +167,96 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         }
 
         /// <summary>
+        /// Checks if the doctor nuique number exists
+        /// </summary>
+        /// <param name="doctorNumber">the doctor Number we are checking</param>
+        /// <param name="id">for the specific user</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string DoctorNumberChecker(string doctorNumber, int id)
+        {
+            DoctorData docData = new DoctorData();
+
+            List<vwClinicDoctor> AllDoctors = docData.GetAllDoctors();
+            string currentDoctorID = "";
+
+            if (doctorNumber == null)
+            {
+                return "Doctor unique number cannot be empty.";
+            }
+
+            if (doctorNumber.Length != 9)
+            {
+                return "Doctor unique number has to be 9 characters long.";
+            }
+
+            // Get the current users id
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if (AllDoctors[i].UserID == id)
+                {
+                    currentDoctorID = AllDoctors[i].UniqueNumber;
+                    break;
+                }
+            }
+
+            // Check if the id already exists, but it is not the current user id
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if ((AllDoctors[i].UniqueNumber == doctorNumber && currentDoctorID != doctorNumber))
+                {
+                    return "This Doctor unique number already exists!";
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Checks if the bank account already exists
+        /// </summary>
+        /// <param name="bankAccount">the Bank Number we are checking</param>
+        /// <param name="id">for the specific user</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string BankAccountChecker(string bankNumber, int id)
+        {
+            DoctorData docData = new DoctorData();
+
+            List<vwClinicDoctor> AllDoctors = docData.GetAllDoctors();
+            string currentDoctorBank = "";
+
+            if (bankNumber == null)
+            {
+                return "Bank account number cannot be empty.";
+            }
+
+            if (bankNumber.Length < 4)
+            {
+                return "Bank account number has to be longer than 4 characters.";
+            }
+
+            // Get the current users id
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if (AllDoctors[i].UserID == id)
+                {
+                    currentDoctorBank = AllDoctors[i].BankAccount;
+                    break;
+                }
+            }
+
+            // Check if the id already exists, but it is not the current user id
+            for (int i = 0; i < AllDoctors.Count; i++)
+            {
+                if ((AllDoctors[i].BankAccount == bankNumber && currentDoctorBank != bankNumber))
+                {
+                    return "This Bank account number already exists!";
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// An entered value cannot be Zero
         /// </summary>
         /// <param name="value">value that is entered</param>
@@ -249,6 +339,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// The input cannot be empty
+        /// </summary>
+        /// <param name="name">name of the input</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string CannotBeEmpty(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return "Cannot be empty";
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

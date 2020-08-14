@@ -15,12 +15,12 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
     public partial class tblClinicDoctor
     {
         public int DoctorID { get; set; }
-        public int UniqueNumber { get; set; }
-        public int BankAccount { get; set; }
+        public string UniqueNumber { get; set; }
+        public string BankAccount { get; set; }
         public string Department { get; set; }
         public string WorkingShift { get; set; }
         public bool ReceivingPatient { get; set; }
-        public int ManagerID { get; set; }
+        public Nullable<int> ManagerID { get; set; }
         public int UserID { get; set; }
     
         public virtual tblClinicManager tblClinicManager { get; set; }

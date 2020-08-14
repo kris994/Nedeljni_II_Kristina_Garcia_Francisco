@@ -8,13 +8,25 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         Validations validation = new Validations();
 
         /// <summary>
+        /// Returns full manager name
+        /// </summary>
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        /// <summary>
         /// Total amount of propertis we are checking
         /// </summary>
         static readonly string[] ValidatedProperties =
         {
             "IdentificationCard",
             "Username",
-            "UserPassword"
+            "UserPassword",
+            "Gender"
         };
 
         /// <summary>
@@ -71,6 +83,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
                         result = this.validation.PasswordValidation(UserPassword);
                         break;
 
+                    case "Gender":
+                        result = this.validation.CannotBeEmpty(Gender);
+                        break;
+
                     default:
                         result = null;
                         break;
@@ -79,5 +95,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
                 return result;
             }
         }
+
+
     }
 }

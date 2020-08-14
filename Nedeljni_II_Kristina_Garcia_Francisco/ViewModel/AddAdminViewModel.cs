@@ -26,7 +26,19 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             admin = new vwClinicAdministrator();
             addAdmin = addAdminWindowOpen;
             AdminList = adminData.GetAllAdmins().ToList();
-        }    
+        }
+
+        /// <summary>
+        /// Constructor with edit admin window opening
+        /// </summary>
+        /// <param name="addAdminWindowOpen">opens the edit admin window</param>
+        /// <param name=adminEdit">gets the admin info that is being edited</param>
+        public AddAdminViewModel(AddAdminWindow addAdminWindowOpen, vwClinicAdministrator adminEdit)
+        {
+            admin = adminEdit;
+            addAdmin = addAdminWindowOpen;
+            AdminList = adminData.GetAllAdmins().ToList();
+        }
         #endregion
 
         #region Property

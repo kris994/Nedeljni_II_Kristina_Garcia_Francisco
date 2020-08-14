@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -20,6 +18,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         EditClinicWindow editClinic;
         ClinicData clinicData = new ClinicData();
         ManagerData managerData = new ManagerData();
+        AdminData adminData = new AdminData();
+        DoctorData docData = new DoctorData();
         MaintenanceData maintenanceData = new MaintenanceData();
 
         #region Constructor
@@ -45,6 +45,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             ClinicList = clinicData.GetAllClinics().ToList();
             ManagerList = managerData.GetAllManagers().ToList();
             MaintenanceList = maintenanceData.GetAllMaintenances();
+            AdminList = adminData.GetAllAdmins().ToList();
+            DoctorList = docData.GetAllDoctors().ToList();
 
             if (isNewClinic == true)
             {
@@ -86,6 +88,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// List of admins
+        /// </summary>
+        private List<vwClinicAdministrator> adminList;
+        public List<vwClinicAdministrator> AdminList
+        {
+            get
+            {
+                return adminList;
+            }
+            set
+            {
+                adminList = value;
+                OnPropertyChanged("AdminList");
+            }
+        }
+
+        /// <summary>
         /// List of managers
         /// </summary>
         private List<vwClinicManager> managerList;
@@ -120,6 +139,40 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// List of doctor
+        /// </summary>
+        private List<vwClinicDoctor> doctorList;
+        public List<vwClinicDoctor> DoctorList
+        {
+            get
+            {
+                return doctorList;
+            }
+            set
+            {
+                doctorList = value;
+                OnPropertyChanged("DoctorList");
+            }
+        }
+
+        /// <summary>
+        /// Specific Doctor
+        /// </summary>
+        private vwClinicDoctor doctor;
+        public vwClinicDoctor Doctor
+        {
+            get
+            {
+                return doctor;
+            }
+            set
+            {
+                doctor = value;
+                OnPropertyChanged("Doctor");
+            }
+        }
+
+        /// <summary>
         /// Specific Clinic
         /// </summary>
         private tblClinic clinic;
@@ -150,6 +203,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 maintenance = value;
                 OnPropertyChanged("Maintenance");
+            }
+        }
+
+        /// <summary>
+        /// Specific manager
+        /// </summary>
+        private vwClinicManager manager;
+        public vwClinicManager Manager
+        {
+            get
+            {
+                return manager;
+            }
+            set
+            {
+                manager = value;
+                OnPropertyChanged("Manager");
             }
         }
 
@@ -403,6 +473,53 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// Command that edits admin
+        /// </summary>
+        private ICommand editAdmin;
+        public ICommand EditAdmin
+        {
+            get
+            {
+                if (editAdmin == null)
+                {
+                    editAdmin = new RelayCommand(param => EditAdminExecute(), param => CanEditEditAdminExecute());
+                }
+                return editAdmin;
+            }
+        }
+
+        /// <summary>
+        /// Executes the edit admin command
+        /// </summary>
+        private void EditAdminExecute()
+        {
+            try
+            {
+                AddAdminWindow addAdmin = new AddAdminWindow(AdminList[0]);
+                addAdmin.ShowDialog();
+                if (AdminData.isChanged == true)
+                {
+                    AdminList = adminData.GetAllAdmins().ToList();
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully updated the Admin";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new admin
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanEditEditAdminExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
         /// Command that tries to add a new maintenance
         /// </summary>
         private ICommand addNewMaintenance;
@@ -553,15 +670,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     AddMaintenanceWindow addMaintenenece = new AddMaintenanceWindow(Maintenance);
                     addMaintenenece.ShowDialog();
 
-                    MaintenanceList = maintenanceData.GetAllMaintenances();
-
                     if (MaintenanceData.isChanged == true)
                     {
-                        ManagerList = managerData.GetAllManagers().ToList();
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully updated a Maintenance Client";
                         MaintenanceData.isChanged = false;
                     }
+
+                    MaintenanceList = maintenanceData.GetAllMaintenances();
                 }                
             }
             catch (Exception ex)
@@ -571,7 +687,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Checks if the report can be edited
+        /// Checks if the maintenance can be edited
         /// </summary>
         /// <returns>true if possible</returns>
         public bool CanEditMaintenanceExecute()
@@ -631,6 +747,303 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         private bool CanAddNewManagerExecute()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Command that tries to delete the Manager
+        /// </summary>
+        private ICommand deleteManager;
+        public ICommand DeleteManager
+        {
+            get
+            {
+                if (deleteManager == null)
+                {
+                    deleteManager = new RelayCommand(param => DeleteManagerExecute(), param => CanDeleteManagerExecute());
+                }
+                return deleteManager;
+            }
+        }
+
+        /// <summary>
+        /// Executes the delete command
+        /// </summary>
+        public void DeleteManagerExecute()
+        {
+            // Checks if the user really wants to delete the user
+            var result = MessageBox.Show("Are you sure you want to delete the manager client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (Manager != null)
+                    {
+                        int userID = Manager.UserID;
+                        managerData.DeleteManager(userID);
+                        ManagerList = managerData.GetAllManagers();
+
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully deleted a Manager Client";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the manager can be deleted
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanDeleteManagerExecute()
+        {
+            if (ManagerList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to open the edit manager window
+        /// </summary>
+        private ICommand editManager;
+        public ICommand EditManager
+        {
+            get
+            {
+                if (editManager == null)
+                {
+                    editManager = new RelayCommand(param => EditManagerExecute(), param => CanEditManagerExecute());
+                }
+                return editManager;
+            }
+        }
+
+        /// <summary>
+        /// Executes the edit command
+        /// </summary>
+        public void EditManagerExecute()
+        {
+            try
+            {
+                if (Manager != null)
+                {
+                    AddManagerWindow addManager = new AddManagerWindow(Manager);
+                    addManager.ShowDialog();
+
+                    if (ManagerData.isChanged == true)
+                    {
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully updated a Manager Client";
+                        MaintenanceData.isChanged = false;
+                    }
+
+                    ManagerList = managerData.GetAllManagers().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if the manager can be edited
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanEditManagerExecute()
+        {
+            if (MaintenanceList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to add a new doctor
+        /// </summary>
+        private ICommand addNewDoctor;
+        public ICommand AddNewDoctor
+        {
+            get
+            {
+                if (addNewDoctor == null)
+                {
+                    addNewDoctor = new RelayCommand(param => AddNewDoctorExecute(), param => CanAddNewDoctorExecute());
+                }
+                return addNewDoctor;
+            }
+        }
+
+        /// <summary>
+        /// Executes the add Doctor command
+        /// </summary>
+        private void AddNewDoctorExecute()
+        {
+            try
+            {
+                AddDoctorWindow addDoctor = new AddDoctorWindow();
+                addDoctor.ShowDialog();
+                if ((addDoctor.DataContext as AddDoctorViewModel).IsUpdateDoctor == true)
+                {
+                    DoctorList = docData.GetAllDoctors().ToList();
+                    InfoLabelBG = "#28a745";
+                    InfoLabel = "Successfully created a new Doctor Client";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to add the new doctor
+        /// </summary>
+        /// <returns>true</returns>
+        private bool CanAddNewDoctorExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Command that tries to delete the Doctor
+        /// </summary>
+        private ICommand deleteDoctor;
+        public ICommand DeleteDoctor
+        {
+            get
+            {
+                if (deleteDoctor == null)
+                {
+                    deleteDoctor = new RelayCommand(param => DeleteDoctorExecute(), param => CanDeleteDoctorExecute());
+                }
+                return deleteDoctor;
+            }
+        }
+
+        /// <summary>
+        /// Executes the delete command
+        /// </summary>
+        public void DeleteDoctorExecute()
+        {
+            // Checks if the user really wants to delete the user
+            var result = MessageBox.Show("Are you sure you want to delete the doctor client?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    if (Doctor != null)
+                    {
+                        int userID = Doctor.UserID;
+                        docData.DeleteDoctor(userID);
+                        DoctorList = docData.GetAllDoctors().ToList();
+
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully deleted a Doctor Client";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the doctor can be deleted
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanDeleteDoctorExecute()
+        {
+            if (DoctorList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Command that tries to open the edit doctor window
+        /// </summary>
+        private ICommand editDoctor;
+        public ICommand EditDoctor
+        {
+            get
+            {
+                if (editDoctor == null)
+                {
+                    editDoctor = new RelayCommand(param => EditDoctorExecute(), param => CanEditDoctorExecute());
+                }
+                return editDoctor;
+            }
+        }
+
+        /// <summary>
+        /// Executes the edit command
+        /// </summary>
+        public void EditDoctorExecute()
+        {
+            try
+            {
+                if (Doctor != null)
+                {
+                    AddDoctorWindow addDoctor = new AddDoctorWindow(Doctor);
+                    addDoctor.ShowDialog();
+
+                    if (DoctorData.isChanged == true)
+                    {
+                        InfoLabelBG = "#28a745";
+                        InfoLabel = "Successfully updated a Doctor Client";
+                        MaintenanceData.isChanged = false;
+                    }
+
+                    DoctorList = docData.GetAllDoctors().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if the doctor can be edited
+        /// </summary>
+        /// <returns>true if possible</returns>
+        public bool CanEditDoctorExecute()
+        {
+            if (DoctorList == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
