@@ -84,9 +84,9 @@ CREATE TABLE tblClinicDoctor (
 USE ClinicDB
 CREATE TABLE tblClinicPatient (
 	PatientID INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
-	HealthCareNumber INT UNIQUE					NOT NULL,
+	HealthCareNumber VARCHAR (6) UNIQUE			NOT NULL,
 	ExperationDate DATE							NOT NULL,
-	UniqueNumber VARCHAR(9) FOREIGN KEY REFERENCES tblClinicDoctor(UniqueNumber) NOT NULL,
+	UniqueNumber VARCHAR(9) FOREIGN KEY REFERENCES tblClinicDoctor(UniqueNumber),
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID) NOT NULL,
 );
 

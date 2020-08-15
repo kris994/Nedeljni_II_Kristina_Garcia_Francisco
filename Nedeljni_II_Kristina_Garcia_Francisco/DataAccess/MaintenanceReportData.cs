@@ -1,9 +1,7 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess

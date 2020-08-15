@@ -1,5 +1,6 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -428,6 +429,21 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             {
                 return null;
             }
+        }
+
+        /// <summary>  
+        /// For calculating age  
+        /// </summary>  
+        /// <param name="dateOfBirth">Date of birth</param>  
+        /// <returns>age</returns>  
+        public int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+
+            return age;
         }
     }
 }

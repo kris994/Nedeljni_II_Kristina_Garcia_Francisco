@@ -7,9 +7,9 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Model" 
         mc:Ignorable="d"
-        Title="Report" Height="180" Width="300" Background="White">
+        Title="Report" Height="200" Width="300" Background="White">
     <Window.Resources>
-        <c:DateConverter x:Key="dateConverter" />
+        <c:ReportDateConverter x:Key="ReportDateConverter" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
 
         <DatePicker Grid.Column="3" Grid.Row="1" Name="txtDate" Height="25" Width="150"
                  SelectedDate="{Binding MaintenanceReport.Date, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, 
-                Converter={StaticResource ResourceKey=dateConverter}}">
+                Converter={StaticResource ResourceKey=ReportDateConverter}}">
             <DatePicker.Resources>
                 <Style TargetType="{x:Type DatePickerTextBox}">
                     <Setter Property="Control.Template">
@@ -53,6 +53,7 @@
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
+        <Label  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Foreground="Red" Padding="0,0,0,0" VerticalAlignment="Stretch" FontSize="9" Content="{Binding InfoLabel, Mode=OneWay}"/>
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtTotalHours" Height="20" Width="150"
                  Text="{Binding MaintenanceReport.TotalHours, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  PreviewTextInput="NumberValidationTextBox"/>
