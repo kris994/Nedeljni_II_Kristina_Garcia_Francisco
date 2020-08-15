@@ -84,7 +84,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
             GetAllReports().Add(report);
 
-            Thread logger = new Thread(() => LogManager.Instance.WriteLog($"Crated a new report {date}, {report.TotalHours}, {report.ShortDescription}"));
+            string addReport = $"Crated a new report {date}, {report.TotalHours}, {report.ShortDescription}";
+            Thread logger = new Thread(() => LogManager.Instance.WriteLog(addReport));
             logger.Start();
 
             return report;

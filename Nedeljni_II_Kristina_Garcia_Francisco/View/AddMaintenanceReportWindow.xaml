@@ -26,9 +26,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="6"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="6"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
@@ -57,6 +57,7 @@
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtTotalHours" Height="20" Width="150"
                  Text="{Binding MaintenanceReport.TotalHours, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                  PreviewTextInput="NumberValidationTextBox"/>
+        <Label  Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left" Foreground="Red" Padding="0,0,0,0" VerticalAlignment="Stretch" FontSize="9" Content="{Binding ShortDescriptionLabel, Mode=OneWay}"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtShortDescription" Height="20" Width="150"
                  Text="{Binding MaintenanceReport.ShortDescription, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 

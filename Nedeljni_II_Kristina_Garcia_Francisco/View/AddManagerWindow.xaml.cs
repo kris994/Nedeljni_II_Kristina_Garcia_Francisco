@@ -11,6 +11,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AddManagerWindow : Window
     {
+        /// <summary>
+        /// Add manager window
+        /// </summary>
         public AddManagerWindow()
         {
             InitializeComponent();

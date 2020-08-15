@@ -12,6 +12,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
      /// </summary>
     class PatientData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
         /// <summary>
         /// Check if data is changed
@@ -79,10 +82,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         patient.PatientID = newPatient.PatientID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Patient {patient.FirstName} {patient.LastName}, Identification Card: {patient.IdentificationCard}, " +
+                        string addPat = $"Created Patient {patient.FirstName} {patient.LastName}, Identification Card: {patient.IdentificationCard}, " +
                             $"Gender: {patient.Gender}, Date of Birth: {patient.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {patient.Citizenship}, HealthCare Number: {patient.HealthCareNumber} " +
-                            $", Experation Date: {patient.ExperationDate}"));
+                            $", Experation Date: {patient.ExperationDate}";
+                        Thread logger = new Thread(() =>
+                            LogManager.Instance.WriteLog(addPat));
                         logger.Start();
 
                         return patient;
@@ -113,10 +117,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Updated Patient {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                        string updatePat = $"Updated Patient {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, HealthCare Number: {patientToEdit.HealthCareNumber} " +
-                            $", Experation Date: {patientToEdit.ExperationDate}"));
+                            $", Experation Date: {patientToEdit.ExperationDate}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updatePat));
                         logger.Start();
 
                         isChanged = true;
@@ -147,6 +151,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         if (GetAllPatients().ToList()[i].UserID == userID)
                         {
                             tblClinicPatient pat = (from r in context.tblClinicPatients where r.UserID == userID select r).First();
+
+                            string patDel = $"Deleted Patient {GetAllPatients()[i].FirstName} {GetAllPatients()[i].LastName}, " +
+                                $"Identification Card: {GetAllPatients()[i].IdentificationCard}, " +
+                                $"Gender: {GetAllPatients()[i].Gender}, Date of Birth: {GetAllPatients()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllPatients()[i].Citizenship}";
+                            Thread logger = new Thread(() => LogManager.Instance.WriteLog(patDel));
+                            logger.Start();
+
                             context.tblClinicPatients.Remove(pat);
                             context.SaveChanges();
                             break;

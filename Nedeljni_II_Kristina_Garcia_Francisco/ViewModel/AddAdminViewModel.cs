@@ -11,9 +11,18 @@ using System.Windows;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Add Admin View Model
+    /// </summary>
     class AddAdminViewModel : BaseViewModel
     {
+        /// <summary>
+        /// AddAdmin Window
+        /// </summary>
         AddAdminWindow addAdmin;
+        /// <summary>
+        /// Admin Data
+        /// </summary>
         AdminData adminData = new AdminData();
 
         #region Constructor
@@ -32,7 +41,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Constructor with edit admin window opening
         /// </summary>
         /// <param name="addAdminWindowOpen">opens the edit admin window</param>
-        /// <param name=adminEdit">gets the admin info that is being edited</param>
+        /// <param name="adminEdit">gets the admin info that is being edited</param>
         public AddAdminViewModel(AddAdminWindow addAdminWindowOpen, vwClinicAdministrator adminEdit)
         {
             admin = adminEdit;
@@ -115,7 +124,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveAdminExecute()
         {
-            var result = MessageBox.Show("Are you sure you want to create this admin?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to save this admin?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -149,7 +158,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
     
         /// <summary>
-        /// Command that closes the add worker or edit worker window
+        /// Command that closes the window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel

@@ -10,6 +10,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AddMaintenanceReportWindow : Window
     {
+        /// <summary>
+        /// Add maintenance report window
+        /// </summary>
         public AddMaintenanceReportWindow()
         {
             InitializeComponent();

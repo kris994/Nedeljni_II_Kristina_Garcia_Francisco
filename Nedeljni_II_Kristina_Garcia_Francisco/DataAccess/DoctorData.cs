@@ -12,7 +12,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class DoctorData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
+        /// <summary>
+        /// Data from the patient
+        /// </summary>
         PatientData patData = new PatientData();
 
         /// <summary>
@@ -41,7 +47,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
-
 
         /// <summary>
         /// Get all data about patients from logged in doctors from the database
@@ -105,10 +110,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         doctor.DoctorID = newDoctor.DoctorID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Doctor {doctor.FirstName} {doctor.LastName}, Identification Card: {doctor.IdentificationCard}, " +
+                        string addDoc = $"Created Doctor {doctor.FirstName} {doctor.LastName}, Identification Card: {doctor.IdentificationCard}, " +
                             $"Gender: {doctor.Gender}, Date of Birth: {doctor.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {doctor.Citizenship}, Unique Number: {doctor.UniqueNumber} " +
-                            $", Bank Account: {doctor.BankAccount}, Department: {doctor.Department}, Working Shift: {doctor.WorkingShift}, Receiving Patient: {doctor.ReceivingPatient}"));
+                            $", Bank Account: {doctor.BankAccount}, Department: {doctor.Department}, Working Shift: {doctor.WorkingShift}, Receiving Patient: {doctor.ReceivingPatient}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(addDoc));
                         logger.Start();
 
                         return doctor;
@@ -142,10 +147,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Updated Doctor {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                        string updateDoc = $"Updated Doctor {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, Unique Number: {doctorToEdit.UniqueNumber} " +
-                            $", Bank Account: {doctorToEdit.BankAccount}, Department: {doctorToEdit.Department}, Working Shift: {doctorToEdit.WorkingShift}, Receiving Patient: {doctorToEdit.ReceivingPatient}"));
+                            $", Bank Account: {doctorToEdit.BankAccount}, Department: {doctorToEdit.Department}, Working Shift: {doctorToEdit.WorkingShift}, Receiving Patient: {doctorToEdit.ReceivingPatient}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateDoc));
                         logger.Start();
 
                         isChanged = true;
@@ -177,6 +182,29 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     {
                         if (GetAllDoctors().ToList()[i].UserID == userID)
                         {
+                            for (int j = 0; j < patData.GetAllPatients().Count; j++)
+                            {
+                                // Remove uniqueNumber from patients whose doctor we are deleting
+                                if (patData.GetAllPatients()[j].UniqueNumber == GetAllDoctors().ToList()[i].UniqueNumber)
+                                {
+                                    int patID = patData.GetAllPatients()[j].PatientID;
+                                    tblClinicPatient patToEdit = (from ss in context.tblClinicPatients where ss.PatientID == patID select ss).First();
+                                    patToEdit.UniqueNumber = null;
+
+                                    string updatePat = $"Updated patient {patData.GetAllPatients()[j].FirstName} {patData.GetAllPatients()[j].LastName}, " +
+                                        $"to not include a doctor due to deleting him.";
+                                    Thread loggerDoc = new Thread(() => LogManager.Instance.WriteLog(updatePat));
+                                    loggerDoc.Start();
+
+                                    context.SaveChanges();
+                                }
+                            }
+
+                            string doctorDel = $"Deleted Doctor {GetAllDoctors()[i].FirstName} {GetAllDoctors()[i].LastName}, Identification Card: {GetAllDoctors()[i].IdentificationCard}, " +
+                                $"Gender: {GetAllDoctors()[i].Gender}, Date of Birth: {GetAllDoctors()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllDoctors()[i].Citizenship}";
+                            Thread logger = new Thread(() => LogManager.Instance.WriteLog(doctorDel));
+                            logger.Start();
+
                             tblClinicDoctor doc = (from r in context.tblClinicDoctors where r.UserID == userID select r).First();
                             context.tblClinicDoctors.Remove(doc);
                             context.SaveChanges();

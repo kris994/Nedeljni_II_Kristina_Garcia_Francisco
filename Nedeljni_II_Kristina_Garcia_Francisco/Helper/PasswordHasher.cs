@@ -3,6 +3,9 @@ using System.Security.Cryptography;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 {
+    /// <summary>
+    /// Hashes user passwords before saving them to the database
+    /// </summary>
     class PasswordHasher
     {
         /// <summary>

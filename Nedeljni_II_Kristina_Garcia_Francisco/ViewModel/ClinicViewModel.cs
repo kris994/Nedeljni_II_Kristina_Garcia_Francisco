@@ -11,23 +11,55 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Holds all the information needed to check on users in the clinic
+    /// </summary>
     class ClinicViewModel : BaseViewModel
     {
+        #region Access Data and Window
+        /// <summary>
+        /// Window for adding clinc
+        /// </summary>
         AddClinicWindow addClinic;
+        /// <summary>
+        /// Admin window
+        /// </summary>
         AdminWindow adminWidnow;
+        /// <summary>
+        /// Window for editing the clinic
+        /// </summary>
         EditClinicWindow editClinic;
+        /// <summary>
+        /// Clinic Data
+        /// </summary>
         ClinicData clinicData = new ClinicData();
+        /// <summary>
+        /// Manager Data
+        /// </summary>
         ManagerData managerData = new ManagerData();
+        /// <summary>
+        /// Admin Data
+        /// </summary>
         AdminData adminData = new AdminData();
+        /// <summary>
+        /// Doctor data
+        /// </summary>
         DoctorData docData = new DoctorData();
+        /// <summary>
+        /// Patient data
+        /// </summary>
         PatientData patData = new PatientData();
+        /// <summary>
+        /// Maintenance data
+        /// </summary>
         MaintenanceData maintenanceData = new MaintenanceData();
+        #endregion
 
         #region Constructor
         /// <summary>
         /// Constructor with the add clinic info window opening
         /// </summary>
-        /// <param name="AddClinicWindow">opends the add clinic window</param>
+        /// <param name="addClinicWindowOpen">opends the add clinic window</param>
         public ClinicViewModel(AddClinicWindow addClinicWindowOpen)
         {
             clinic = new tblClinic ();
@@ -373,7 +405,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveClinicExecute()
         {
-            var result = MessageBox.Show("Are you sure you want to create this clinic?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to save this clinic?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -467,7 +499,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Command that closes the add worker or edit worker window
+        /// Command that closes the window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel
@@ -819,6 +851,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         int userID = Manager.UserID;
                         managerData.DeleteManager(userID);
                         ManagerList = managerData.GetAllManagers();
+                        DoctorList = docData.GetAllDoctors().ToList();
 
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully deleted a Manager";
@@ -887,6 +920,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     }
 
                     ManagerList = managerData.GetAllManagers().ToList();
+                    DoctorList = docData.GetAllDoctors().ToList();
                 }
             }
             catch (Exception ex)
@@ -991,6 +1025,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         int userID = Doctor.UserID;
                         docData.DeleteDoctor(userID);
                         DoctorList = docData.GetAllDoctors().ToList();
+                        PatientList = patData.GetAllPatients().ToList();
 
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully deleted a Doctor";
@@ -1059,6 +1094,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     }
 
                     DoctorList = docData.GetAllDoctors().ToList();
+                    PatientList = patData.GetAllPatients().ToList();
                 }
             }
             catch (Exception ex)
@@ -1110,7 +1146,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 addPatient.ShowDialog();
                 if ((addPatient.DataContext as AddPatientViewModel).IsUpdatePatient == true)
                 {
-                    DoctorList = docData.GetAllDoctors().ToList();
+                    PatientList = patData.GetAllPatients().ToList();
                     InfoLabelBG = "#28a745";
                     InfoLabel = "Successfully created a new Patient";
                 }

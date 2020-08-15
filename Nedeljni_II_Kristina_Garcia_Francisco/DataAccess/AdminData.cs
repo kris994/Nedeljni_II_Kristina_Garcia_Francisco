@@ -12,6 +12,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class AdminData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
         /// <summary>
         /// Check if data is changed
@@ -39,7 +42,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
-
 
         /// <summary>
         /// Creates or edits an admin
@@ -77,9 +79,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         admin.AdminID = newAdmin.AdminID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Admin {admin.FirstName} {admin.LastName}, Identification Card: {admin.IdentificationCard}, " +
-                            $"Gender: {admin.Gender}, Date of Birth: {admin.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {admin.Citizenship}"));
+                        string addAdmin = $"Created Admin {admin.FirstName} {admin.LastName}, Identification Card: {admin.IdentificationCard}, " +
+                            $"Gender: {admin.Gender}, Date of Birth: {admin.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {admin.Citizenship}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(addAdmin));
                         logger.Start();
 
                         return admin;
@@ -107,9 +109,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Edited Admin {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
-                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}"));
+                        string updateAdmin = $"Edited Admin {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                            $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateAdmin));
                         logger.Start();
 
                         isChanged = true;
@@ -143,10 +145,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         {
                             tblClinicAdministrator admin = (from r in context.tblClinicAdministrators where r.UserID == userID select r).First();
 
-
-                            Thread logger = new Thread(() =>
-                                LogManager.Instance.WriteLog($"Deleted Admin {GetAllAdmins()[i].FirstName} {GetAllAdmins()[i].LastName}, Identification Card: {GetAllAdmins()[i].IdentificationCard}, " +
-                                $"Gender: {GetAllAdmins()[i].Gender}, Date of Birth: {GetAllAdmins()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllAdmins()[i].Citizenship}"));
+                            string adminDel = $"Deleted Admin {GetAllAdmins()[i].FirstName} {GetAllAdmins()[i].LastName}, Identification Card: {GetAllAdmins()[i].IdentificationCard}, " +
+                                $"Gender: {GetAllAdmins()[i].Gender}, Date of Birth: {GetAllAdmins()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllAdmins()[i].Citizenship}";
+                            Thread logger = new Thread(() => LogManager.Instance.WriteLog(adminDel));
                             logger.Start();
 
                             context.tblClinicAdministrators.Remove(admin);

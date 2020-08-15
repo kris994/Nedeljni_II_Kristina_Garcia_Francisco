@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 {
+    /// <summary>
+    /// Maintenance validations
+    /// </summary>
     public partial class vwClinicMaintenance : IDataErrorInfo
     {
         Validations validation = new Validations();

@@ -3,10 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.View"
+        xmlns:local="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco"
+        xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
+        xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.ViewModel" 
         mc:Ignorable="d" Closing="DataWindow_Closing"
-        Title="Doctor" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Doctor" Height="auto" MaxHeight="800" Width="auto" MaxWidth="1200">
+    <Window.Resources>
+        <c:DoctorNameConverter x:Key="DoctorNameConverter" />
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Button Width="80" Height="20" Name="btnLogoff" Content="Log Off"
+                    Command="{Binding Logoff, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            </StackPanel>
+            <Rectangle Grid.Row="3" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
+            <Label  Grid.Column="1" Grid.Row="3" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+            <Grid Grid.Column="1" Grid.Row="4" Height="auto" Width="auto">
+                <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding DoctorPatientList, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
+                      FontWeight="Bold" Margin="20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
+                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
+                        <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Healthcare" Binding="{Binding HealthCareNumber}" Width="0.12*"/>
+                        <DataGridTextColumn Header="Experation" Binding="{Binding ExperationDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Doctor" Binding="{Binding UniqueNumber, Converter={StaticResource ResourceKey=DoctorNameConverter}}" Width="0.12*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

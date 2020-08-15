@@ -11,16 +11,25 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Adds or Edits Maintenance
+    /// </summary>
     class AddMaintenanceViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Add Maintenance Window
+        /// </summary>
         AddMaintenanceWindow addMaintenance;
+        /// <summary>
+        /// Maintenance Data
+        /// </summary>
         MaintenanceData maintenanceData = new MaintenanceData();
 
         #region Construcotr
         /// <summary>
         /// Constructor with the add maintenance info window opening
         /// </summary>
-        /// <param name="addMaintananceOpen">opends the add maintenance window</param>
+        /// <param name="addMaintenanceOpen">opends the add maintenance window</param>
         public AddMaintenanceViewModel(AddMaintenanceWindow addMaintenanceOpen)
         {
             maintenance = new vwClinicMaintenance();
@@ -115,21 +124,30 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveMaintenanceExecute()
         {
-            try
-            {
-                maintenanceData.AddMaintenance(Maintenance);
-                IsUpdateMaintenance = true;              
+            var result = MessageBox.Show("Are you sure you want to save this maintenance?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                addMaintenance.Close();
-            }
-            catch (Exception ex)
+            if (result == MessageBoxResult.Yes)
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                try
+                {
+                    maintenanceData.AddMaintenance(Maintenance);
+                    IsUpdateMaintenance = true;
+
+                    addMaintenance.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                }
+            }
+            else
+            {
+                return;
             }
         }
 
         /// <summary>
-        /// Checks if its possible to save the manager
+        /// Checks if its possible to save the maintenance
         /// </summary>
         protected bool CanSaveMaintenanceExecute
         {

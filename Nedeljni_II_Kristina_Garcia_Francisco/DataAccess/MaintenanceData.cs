@@ -12,6 +12,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class MaintenanceData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
         /// <summary>
         /// Check if data is changed
@@ -88,10 +91,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         maintenance.MaintenanceID = newMaintenance.MaintenanceID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Maintenance {maintenance.FirstName} {maintenance.LastName}, Identification Card: {maintenance.IdentificationCard}, " +
+                        string addMain = $"Created Maintenance {maintenance.FirstName} {maintenance.LastName}, Identification Card: {maintenance.IdentificationCard}, " +
                             $"Gender: {maintenance.Gender}, Date of Birth: {maintenance.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {maintenance.Citizenship}" +
-                            $", Clinic Extention Allowed: {maintenance.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenance.DisabledAccessabilityResponsibility}"));
+                            $", Clinic Extention Allowed: {maintenance.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenance.DisabledAccessabilityResponsibility}"
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(addMain));
                         logger.Start();
 
                         return maintenance;
@@ -120,10 +123,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Updated Maintenance {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                        string updateMain = $"Updated Maintenance {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}" +
-                            $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}"));
+                            $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}"
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateMain));
                         logger.Start();
 
                         isChanged = true;
@@ -156,6 +159,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         if (GetAllMaintenances().ToList()[i].UserID == userID)
                         {
                             tblClinicMaintenance main = (from r in context.tblClinicMaintenances where r.UserID == userID select r).First();
+
+                            string mainDel = $"Deleted Maintenance {GetAllMaintenances().ToList()[i].FirstName} {GetAllMaintenances().ToList()[i].LastName}, " +
+                                $"Identification Card: {GetAllMaintenances().ToList()[i].IdentificationCard}, " +
+                                $"Gender: {GetAllMaintenances().ToList()[i].Gender}, Date of Birth: {GetAllMaintenances().ToList()[i].DateOfBirth.ToString("dd.MM.yyyy")}, " +
+                                $"Citizenship: {GetAllMaintenances().ToList()[i].Citizenship}";
+                            Thread logger = new Thread(() => LogManager.Instance.WriteLog(mainDel));
+                            logger.Start();
+
                             context.tblClinicMaintenances.Remove(main);
                             context.SaveChanges();
                             break;

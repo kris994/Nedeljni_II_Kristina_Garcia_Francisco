@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
+﻿namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 {
+    /// <summary>
+    /// Maintenance report class
+    /// </summary>
     class MaintenanceReport
     {
         public int TotalHours { get; set; }

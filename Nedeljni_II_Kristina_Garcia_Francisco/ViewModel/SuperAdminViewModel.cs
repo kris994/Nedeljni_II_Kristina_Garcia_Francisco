@@ -19,16 +19,28 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
     /// </summary>
     class SuperAdminViewModel : BaseViewModel, IDataErrorInfo
     {
+        /// <summary>
+        /// Admin data
+        /// </summary>
         AdminData adminData = new AdminData();
+        /// <summary>
+        /// Saves or loads data from the admin file
+        /// </summary>
         FileReadWrite frw = new FileReadWrite();
+        /// <summary>
+        /// Super admin window
+        /// </summary>
         SuperAdminWindow superAdminView;
+        /// <summary>
+        /// Window for changing super admin credentials
+        /// </summary>
         SuperAdminCredentialsChange credentialsChange;
 
         #region Constructor
         /// <summary>
         /// Constructor with super admin param
         /// </summary>
-        /// <param name="SuperAdminWindow">opens the admin window</param>
+        /// <param name="adminOpen">opens the admin window</param>
         public SuperAdminViewModel(SuperAdminWindow adminOpen)
         {
             superAdminView = adminOpen;
@@ -48,7 +60,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <summary>
         /// Constructor with credentials change param
         /// </summary>
-        /// <param name="SuperAdminCredentialsChange">opens the credentials change window</param>
+        /// <param name="creentialsOpen">opens the credentials change window</param>
         public SuperAdminViewModel(SuperAdminCredentialsChange creentialsOpen)
         {
             credentialsChange = creentialsOpen;
@@ -360,7 +372,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Command that closes the add worker or edit worker window
+        /// Command that closes the window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel

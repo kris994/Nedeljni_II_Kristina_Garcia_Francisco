@@ -8,6 +8,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class ReportStatisticsWindow : Window
     {
+        /// <summary>
+        /// Report statistics window
+        /// </summary>
         public ReportStatisticsWindow()
         {
             InitializeComponent();

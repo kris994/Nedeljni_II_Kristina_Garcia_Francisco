@@ -11,10 +11,22 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Add Doctor View Model
+    /// </summary>
     class AddDoctorViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Add Doctor Window
+        /// </summary>
         AddDoctorWindow addDoctor;
+        /// <summary>
+        /// Doctor Data
+        /// </summary>
         DoctorData doctorData = new DoctorData();
+        /// <summary>
+        /// Manager Data
+        /// </summary>
         ManagerData managerData = new ManagerData();
 
         #region Constructor
@@ -34,7 +46,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Constructor with edit doctor window opening
         /// </summary>
         /// <param name="addDoctorWindowOpen">opens the edit doctor window</param>
-        /// <param name=doctorEdit">gets the doctor info that is being edited</param>
+        /// <param name="doctorEdit">gets the doctor info that is being edited</param>
         public AddDoctorViewModel(AddDoctorWindow addDoctorWindowOpen, vwClinicDoctor doctorEdit)
         {
             doctor = doctorEdit;
@@ -153,7 +165,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveDoctorExecute()
         {
-            var result = MessageBox.Show("Are you sure you want to create this doctor?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to save this doctor?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
