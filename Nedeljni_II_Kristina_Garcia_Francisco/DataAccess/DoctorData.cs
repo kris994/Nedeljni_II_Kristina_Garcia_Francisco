@@ -13,6 +13,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     class DoctorData
     {
         UserData userData = new UserData();
+        PatientData patData = new PatientData();
+
         /// <summary>
         /// Check if data is changed
         /// </summary>
@@ -38,6 +40,27 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return null;
             }
+        }
+
+
+        /// <summary>
+        /// Get all data about patients from logged in doctors from the database
+        /// </summary>
+        /// <param name="userID">id of the logged in doctor</param>
+        /// <returns>The list of all doctors</returns>
+        public List<vwClinicPatient> GetAllPatientsFromDoctors(int userID)
+        {
+            vwClinicDoctor doctor = GetAllDoctors().Where(doc => doc.UserID == userID).FirstOrDefault();
+
+            List<vwClinicPatient> list = new List<vwClinicPatient>();
+            for (int i = 0; i < patData.GetAllPatients().Count; i++)
+            {
+                if (patData.GetAllPatients()[i].UniqueNumber == doctor.UniqueNumber)
+                {
+                    list.Add(patData.GetAllPatients()[i]);
+                }
+            }
+            return list;
         }
 
         /// <summary>
@@ -168,6 +191,26 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
             }
+        }
+
+        /// <summary>
+        /// Checks how many doctors are currently available
+        /// </summary>
+        /// <param name="doc">list of doctors</param>
+        /// <returns>the amount of doctors that are available</returns>
+        public int AvailableDoctors(List<vwClinicDoctor> doc)
+        {
+            int count = 0;
+
+            for (int i = 0; i < doc.Count; i++)
+            {
+                if (doc[i].ReceivingPatient == true)
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
     }
 }

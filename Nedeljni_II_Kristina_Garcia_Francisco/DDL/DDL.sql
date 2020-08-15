@@ -63,8 +63,8 @@ USE ClinicDB
 CREATE TABLE tblClinicManager (
 	ManagerID INT IDENTITY(1,1) PRIMARY KEY		NOT NULL,
 	FloorNumber INT								NOT NULL,
-	MaxNumberOfDoctors INT,
-	MinNumberOfRooms INT,
+	MaxNumberOfDoctors INT						NOT NULL,
+	MinNumberOfRooms INT						NOT NULL,
 	OmissionNumber INT DEFAULT 0				NOT NULL,
 	UserID INT FOREIGN KEY REFERENCES tblUser(UserID) NOT NULL,
 );

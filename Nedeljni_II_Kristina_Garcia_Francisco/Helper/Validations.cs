@@ -431,6 +431,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             }
         }
 
+        /// <summary>
+        /// The omission restriction limiting certain values
+        /// </summary>
+        /// <param name="value">value of the input</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string OmissionRestriction(int value, int omission)
+        {
+            if ((value != 0) && omission >= 5)
+            {
+                return "Omission is greater than 5, cannot accept greater value than 0";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /// <summary>  
         /// For calculating age  
         /// </summary>  
