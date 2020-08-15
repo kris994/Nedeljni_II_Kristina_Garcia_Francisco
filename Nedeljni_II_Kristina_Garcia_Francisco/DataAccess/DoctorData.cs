@@ -12,7 +12,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class DoctorData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
+        /// <summary>
+        /// Data from the patient
+        /// </summary>
         PatientData patData = new PatientData();
 
         /// <summary>
@@ -41,7 +47,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
-
 
         /// <summary>
         /// Get all data about patients from logged in doctors from the database

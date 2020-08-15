@@ -6,16 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Adds or Edits a manager
+    /// </summary>
     class AddManagerViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Add Manager window
+        /// </summary>
         AddManagerWindow addManager;
+        /// <summary>
+        /// Manager data
+        /// </summary>
         ManagerData managerData = new ManagerData();
 
         #region Construcotr
@@ -117,16 +124,25 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveManagerExecute()
         {
-            try
-            {
-                managerData.AddManager(Manager);
-                IsUpdateManager = true;
+            var result = MessageBox.Show("Are you sure you want to save this manager?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                addManager.Close();
-            }
-            catch (Exception ex)
+            if (result == MessageBoxResult.Yes)
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                try
+                {
+                    managerData.AddManager(Manager);
+                    IsUpdateManager = true;
+
+                    addManager.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                }
+            }
+            else
+            {
+                return;
             }
         }
 
@@ -142,7 +158,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Command that closes the add worker or edit worker window
+        /// Command that closes the window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel

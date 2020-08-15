@@ -8,12 +8,20 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class PatientWindow : Window
     {
+        /// <summary>
+        /// Patient window
+        /// </summary>
         public PatientWindow()
         {
             InitializeComponent();
             this.DataContext = new PatientViewModel(this);
         }
 
+        /// <summary>
+        /// Closes the Window and opens the Login window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void DataWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Login login = new Login();

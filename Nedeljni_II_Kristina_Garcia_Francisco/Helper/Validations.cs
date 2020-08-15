@@ -260,7 +260,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// <summary>
         /// Checks if the bank account already exists
         /// </summary>
-        /// <param name="bankAccount">the Bank Number we are checking</param>
+        /// <param name="bankNumber">the Bank Number we are checking</param>
         /// <param name="id">for the specific user</param>
         /// <returns>null if the input is correct or string error message if its wrong</returns>
         public string BankAccountChecker(string bankNumber, int id)
@@ -322,7 +322,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// <summary>
         /// An entered value cannot be Unselected
         /// </summary>
-        /// <param name="value">value that is selected</param>
+        /// <param name="value1">value 1 that is selected</param>
+        ///  <param name="value2">value 2 that is selected</param>
         /// <param name="id">for the specific user</param>
         /// <returns>null if the input is correct or string error message if its wrong</returns>
         public string CannotBeUnselected(bool value1, bool value2, int id)
@@ -435,6 +436,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// The omission restriction limiting certain values
         /// </summary>
         /// <param name="value">value of the input</param>
+        /// <param name="omission">omission limit</param>
         /// <returns>null if the input is correct or string error message if its wrong</returns>
         public string OmissionRestriction(int value, int omission)
         {

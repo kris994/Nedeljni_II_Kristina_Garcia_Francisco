@@ -12,6 +12,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class AdminData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
         /// <summary>
         /// Check if data is changed
@@ -39,7 +42,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 return null;
             }
         }
-
 
         /// <summary>
         /// Creates or edits an admin

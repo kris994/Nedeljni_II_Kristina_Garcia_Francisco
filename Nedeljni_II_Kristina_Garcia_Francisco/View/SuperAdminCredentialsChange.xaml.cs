@@ -8,6 +8,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class SuperAdminCredentialsChange : Window
     {
+        /// <summary>
+        /// Super admin credentials window
+        /// </summary>
         public SuperAdminCredentialsChange()
         {
             InitializeComponent();

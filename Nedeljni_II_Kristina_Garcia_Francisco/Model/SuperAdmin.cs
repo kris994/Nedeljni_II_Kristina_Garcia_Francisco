@@ -5,20 +5,20 @@
     /// </summary>
     public static class SuperAdmin
     {
+        private static string superAdminUsername;
         /// <summary>
         /// Super Admin Username
         /// </summary>
-        private static string superAdminUsername;
         public static string SuperAdminUsername
         {
             get { return superAdminUsername; }
             set { superAdminUsername = value; }
         }
 
+        private static string superAdminPassword;
         /// <summary>
         /// Super Admin Password
         /// </summary>
-        private static string superAdminPassword;
         public static string SuperAdminPassword
         {
             get { return superAdminPassword; }

@@ -12,15 +12,37 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Login
+    /// </summary>
     class LoginViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Login view
+        /// </summary>
         Login view;
+        /// <summary>
+        /// User data
+        /// </summary>
         UserData userData = new UserData();
+        /// <summary>
+        /// Clinic data
+        /// </summary>
         ClinicData clinicData = new ClinicData();
+        /// <summary>
+        /// Patient data
+        /// </summary>
         PatientData patientData = new PatientData();
+        /// <summary>
+        /// Saving and loading from file
+        /// </summary>
         FileReadWrite frw = new FileReadWrite();
 
         #region Constructor
+        /// <summary>
+        /// Login view model constructor
+        /// </summary>
+        /// <param name="loginView">The window that is being opened</param>
         public LoginViewModel(Login loginView)
         {
             view = loginView;

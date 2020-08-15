@@ -11,6 +11,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class EditClinicWindow : Window
     {
+        /// <summary>
+        /// Edit clinic window
+        /// </summary>
+        /// <param name="clinicEdit"></param>
         public EditClinicWindow(tblClinic clinicEdit)
         {
             InitializeComponent();

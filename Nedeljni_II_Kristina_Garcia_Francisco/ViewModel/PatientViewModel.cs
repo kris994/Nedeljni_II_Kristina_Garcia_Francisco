@@ -3,26 +3,39 @@ using Nedeljni_II_Kristina_Garcia_Francisco.DataAccess;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
 using Nedeljni_II_Kristina_Garcia_Francisco.View;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Patient view model
+    /// </summary>
     class PatientViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Doctor data
+        /// </summary>
         DoctorData docData = new DoctorData();
+        /// <summary>
+        /// Manager data
+        /// </summary>
         ManagerData managerData = new ManagerData();
+        /// <summary>
+        /// Patient window
+        /// </summary>
         PatientWindow patientWindow;
+
+        #region Variables
         /// <summary>
         /// Background worker
         /// </summary>
         private readonly BackgroundWorker bgWorker = new BackgroundWorker();
+        /// <summary>
+        /// Check if background worker is running
+        /// </summary>
         private bool _isRunning = false;
         /// <summary>
         /// Checks if th patient could be sick
@@ -48,6 +61,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Checks if a doctor is unavilable
         /// </summary>
         private bool unavailable = false;
+        #endregion
 
         #region Constructor
         /// <summary>
@@ -181,6 +195,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
         #endregion
 
+        /// <summary>
+        /// Checks if any doctor can accept patients
+        /// </summary>
         public void AvaiableDoctorsAround()
         {
             if (docData.AvailableDoctors(docData.GetAllDoctors()) > 0)

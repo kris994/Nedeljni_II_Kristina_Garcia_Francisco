@@ -10,10 +10,22 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Manager view model
+    /// </summary>
     class ManagerViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Doctor data
+        /// </summary>
         DoctorData docData = new DoctorData();
+        /// <summary>
+        /// Manager data
+        /// </summary>
         ManagerData managerData = new ManagerData();
+        /// <summary>
+        /// Manager window
+        /// </summary>
         ManagerWindow managerWindow;
 
         #region Constructor

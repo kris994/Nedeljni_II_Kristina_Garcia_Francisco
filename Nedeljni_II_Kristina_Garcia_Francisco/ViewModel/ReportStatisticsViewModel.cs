@@ -7,11 +7,26 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Reports the clinic statistics
+    /// </summary>
     class ReportStatisticsViewModel : BaseViewModel
     {
+        /// <summary>
+        /// User data
+        /// </summary>
         UserData userData = new UserData();
+        /// <summary>
+        /// Patient data
+        /// </summary>
         PatientData patData = new PatientData();
+        /// <summary>
+        /// Health exam statistics
+        /// </summary>
         HealthExam he = new HealthExam();
+        /// <summary>
+        /// Report statistics window
+        /// </summary>
         ReportStatisticsWindow reportWindow;
 
         #region Constructor

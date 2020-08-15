@@ -10,6 +10,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AddClinicWindow : Window
     {
+        /// <summary>
+        /// AddClinic Window
+        /// </summary>
         public AddClinicWindow()
         {
             InitializeComponent();

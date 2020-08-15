@@ -12,7 +12,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
     /// </summary>
     class ManagerData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
+        /// <summary>
+        /// Data from the doctor
+        /// </summary>
         DoctorData docData = new DoctorData();
         /// <summary>
         /// Check if data is changed

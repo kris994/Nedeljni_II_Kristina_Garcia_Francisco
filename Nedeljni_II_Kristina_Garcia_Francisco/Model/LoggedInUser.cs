@@ -5,10 +5,10 @@
     /// </summary>
     public static class LoggedInUser
     {
-        /// <summary>
-        /// Current User
-        /// </summary>
         private static tblUser currentUser;
+        /// <summary>
+        /// Current user
+        /// </summary>
         public static tblUser CurrentUser
         {
             get { return currentUser; }

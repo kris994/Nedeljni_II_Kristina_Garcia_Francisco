@@ -10,17 +10,29 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Maintenance window
+    /// </summary>
     class MaintenanceViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Maintenance data
+        /// </summary>
         MaintenanceData mainData = new MaintenanceData();
+        /// <summary>
+        /// Maintenance report data
+        /// </summary>
         MaintenanceReportData reportData = new MaintenanceReportData();
+        /// <summary>
+        /// Maintenance window
+        /// </summary>
         MaintenanceWindow maintenanaceWindow;
 
         #region Constructor
         /// <summary>
         /// Constructor with the maintenanace info window opening
         /// </summary>
-        /// <param name="maintenanacerWindowOpen">opends the maintenanace window</param>
+        /// <param name="maintenanaceWindowOpen">opends the maintenanace window</param>
         public MaintenanceViewModel(MaintenanceWindow maintenanaceWindowOpen)
         {
             maintenanaceWindow = maintenanaceWindowOpen;

@@ -11,10 +11,22 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Adds or edits a patient
+    /// </summary>
     class AddPatientViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Add patient window
+        /// </summary>
         AddPatientWindow addPatient;
+        /// <summary>
+        /// Patient data
+        /// </summary>
         PatientData patientData = new PatientData();
+        /// <summary>
+        /// Doctor data
+        /// </summary>
         DoctorData doctorData = new DoctorData();
 
         #region Constructor
@@ -34,7 +46,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Constructor with edit patient window opening
         /// </summary>
         /// <param name="addPatientWindowOpen">opens the edit patient window</param>
-        /// <param name=patientEdit">gets the patient info that is being edited</param>
+        /// <param name="patientEdit">gets the patient info that is being edited</param>
         public AddPatientViewModel(AddPatientWindow addPatientWindowOpen, vwClinicPatient patientEdit)
         {
             patient = patientEdit;
@@ -114,7 +126,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Checks if its possible to execute the add and edit patient commands
+        /// Checks if the patient data was changed
         /// </summary>
         private bool isUpdatePatient;
         public bool IsUpdatePatient
@@ -152,7 +164,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SavePatientExecute()
         {
-            var result = MessageBox.Show("Are you sure you want to create this patient?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show("Are you sure you want to save this patient?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -191,7 +203,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Command that closes the add patient or edit doctor window
+        /// Command that closes the window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel

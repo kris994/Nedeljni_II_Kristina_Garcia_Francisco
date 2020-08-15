@@ -12,6 +12,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
      /// </summary>
     class PatientData
     {
+        /// <summary>
+        /// Data from the user
+        /// </summary>
         UserData userData = new UserData();
         /// <summary>
         /// Check if data is changed

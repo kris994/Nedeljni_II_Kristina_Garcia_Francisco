@@ -10,9 +10,18 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Doctow View
+    /// </summary>
     class DoctorViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Doctor data
+        /// </summary>
         DoctorData docData = new DoctorData();
+        /// <summary>
+        /// Doctor window
+        /// </summary>
         DoctorWindow docWindow;
 
         #region Constructor

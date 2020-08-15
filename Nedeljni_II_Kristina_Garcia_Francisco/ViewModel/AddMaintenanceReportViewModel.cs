@@ -11,10 +11,22 @@ using System.Windows.Input;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
+    /// <summary>
+    /// Adds a Maintenance Report
+    /// </summary>
     class AddMaintenanceReportViewModel : BaseViewModel
     {
+        /// <summary>
+        /// AddMaintenanceReport Window
+        /// </summary>
         AddMaintenanceReportWindow addReport;
+        /// <summary>
+        /// Maintenance report data
+        /// </summary>
         MaintenanceReportData reportData = new MaintenanceReportData();
+        /// <summary>
+        /// Maintenance user Data
+        /// </summary>
         MaintenanceData mainData = new MaintenanceData();
 
         #region Constructor
@@ -156,17 +168,26 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void SaveMaintenanceReportExecute()
         {
-            try
-            {
-                MaintenanceReport.UserID = LoggedInUser.CurrentUser.UserID;
-                reportData.AddReportMaintenance(MaintenanceReport);
-                IsUpdateMaintenanceReport = true;
+            var result = MessageBox.Show("Are you sure you want to save this maintenance report?\nThis action cannot be reverted.", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                addReport.Close();
-            }
-            catch (Exception ex)
+            if (result == MessageBoxResult.Yes)
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                try
+                {
+                    MaintenanceReport.UserID = LoggedInUser.CurrentUser.UserID;
+                    reportData.AddReportMaintenance(MaintenanceReport);
+                    IsUpdateMaintenanceReport = true;
+
+                    addReport.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                }
+            }
+            else
+            {
+                return;
             }
         }
 

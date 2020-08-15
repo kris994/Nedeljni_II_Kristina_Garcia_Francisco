@@ -7,7 +7,7 @@
         xmlns:c="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.Helper"
         xmlns:vm="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.ViewModel" 
         mc:Ignorable="d" Closing="DataWindow_Closing"
-        Title="Admin" Height="auto" MaxHeight="800" Width="auto" MaxWidth="1200">
+        Title="Admin" Height="auto" MaxHeight="1000" Width="auto" MaxWidth="1200">
     <Window.Resources>
         <c:YesNoConverter x:Key="YesNoConverter" />
         <c:ManagerNameConverter x:Key="ManagerNameConverter" />
@@ -17,6 +17,9 @@
         <Grid Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -48,12 +51,17 @@
             </StackPanel>
             <Rectangle Grid.Row="3" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
             <Label  Grid.Column="1" Grid.Row="3" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
-            <Grid Grid.Column="1" Grid.Row="4" Height="auto" Width="auto">
+            <Grid Grid.Column="1" Grid.Row="4" Margin="20,20,20,0">
+                <Border BorderBrush="#5BCED0" HorizontalAlignment="Stretch" Width="auto" CornerRadius="5,5,0,0" Background="White" BorderThickness="2">
+                    <Label x:Name="ManagerLabel" Content="Manager" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
                 <DataGrid Name="DataGridManager" ItemsSource="{Binding ManagerList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Manager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
-                      FontWeight="Bold" Margin="20">
+                      FontWeight="Bold" Margin="20,0,20,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
@@ -86,12 +94,17 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
+            <Grid Grid.Column="1" Grid.Row="6" Margin="20,20,20,0">
+                <Border BorderBrush="#5BCED0" HorizontalAlignment="Stretch" Width="auto" CornerRadius="5,5,0,0" Background="White" BorderThickness="2">
+                    <Label x:Name="MaintenanceLabel" Content="Maintenance" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="7" Height="auto" Width="auto">
                 <DataGrid Name="DataGridMaintenance" ItemsSource="{Binding MaintenanceList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Maintenance, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
-                      FontWeight="Bold" Margin="20">
+                      FontWeight="Bold" Margin="20,0,20,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
@@ -122,12 +135,17 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="6" Height="auto" Width="auto">
+            <Grid Grid.Column="1" Grid.Row="8" Margin="20,20,20,0">
+                <Border BorderBrush="#5BCED0" HorizontalAlignment="Stretch" Width="auto" CornerRadius="5,5,0,0" Background="White" BorderThickness="2">
+                    <Label x:Name="DoctorLabel" Content="Doctor" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="9" Height="auto" Width="auto">
                 <DataGrid Name="DataGridDoctor" ItemsSource="{Binding DoctorList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Doctor, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
-                      FontWeight="Bold" Margin="20">
+                      FontWeight="Bold" Margin="20,0,20,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
@@ -162,12 +180,17 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="7" Height="auto" Width="auto">
+            <Grid Grid.Column="1" Grid.Row="10" Margin="20,20,20,0">
+                <Border BorderBrush="#5BCED0" HorizontalAlignment="Stretch" Width="auto" CornerRadius="5,5,0,0" Background="White" BorderThickness="2">
+                    <Label x:Name="PatientLabel" Content="Patient" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="11" Height="auto" Width="auto">
                 <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
-                      FontWeight="Bold" Margin="20">
+                      FontWeight="Bold" Margin="20,0,20,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>

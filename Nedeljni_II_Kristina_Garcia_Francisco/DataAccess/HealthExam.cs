@@ -1,11 +1,13 @@
 ﻿using Nedeljni_II_Kristina_Garcia_Francisco.Helper;
 using Nedeljni_II_Kristina_Garcia_Francisco.Model;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 {
+    /// <summary>
+    /// Health exam reports
+    /// </summary>
     class HealthExam
     {
         /// <summary>
