@@ -133,10 +133,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         manager.ManagerID = newManager.ManagerID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Manager {manager.FirstName} {manager.LastName}, Identification Card: {manager.IdentificationCard}, " +
+                        string addMan = $"Created Manager {manager.FirstName} {manager.LastName}, Identification Card: {manager.IdentificationCard}, " +
                             $"Gender: {manager.Gender}, Date of Birth: {manager.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {manager.Citizenship}, Floor Number: {manager.FloorNumber} " +
-                            $", Max Number of Doctors: {manager.MaxNumberOfDoctors}, Min Number of Rooms: {manager.MinNumberOfRooms}, Omission Number: {manager.OmissionNumber}"));
+                            $", Max Number of Doctors: {manager.MaxNumberOfDoctors}, Min Number of Rooms: {manager.MinNumberOfRooms}, Omission Number: {manager.OmissionNumber}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(addMan));
                         logger.Start();
 
                         return manager;
@@ -168,10 +168,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Updated Manager {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
+                        string updateMan = $"Updated Manager {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}, Floor Number: {managerToEdit.FloorNumber} " +
-                            $", Max Number of Doctors: {managerToEdit.MaxNumberOfDoctors}, Min Number of Rooms: {managerToEdit.MinNumberOfRooms}, Omission Number: {managerToEdit.OmissionNumber}"));
+                            $", Max Number of Doctors: {managerToEdit.MaxNumberOfDoctors}, Min Number of Rooms: {managerToEdit.MinNumberOfRooms}, Omission Number: {managerToEdit.OmissionNumber}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateMan));
                         logger.Start();
 
                         isChanged = true;
@@ -203,9 +203,33 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     {
                         if (GetAllManagers().ToList()[i].UserID == userID)
                         {
+                            for (int j = 0; j < docData.GetAllDoctors().Count; j++)
+                            {
+                                // Remove id from doctors whose manager we are deleting
+                                if (docData.GetAllDoctors()[j].ManagerID == GetAllManagers().ToList()[i].ManagerID)
+                                {
+                                    int docID = docData.GetAllDoctors()[j].DoctorID;
+                                    tblClinicDoctor docToEdit = (from ss in context.tblClinicDoctors where ss.DoctorID == docID select ss).First();
+                                    docToEdit.ManagerID = null;
+
+                                    string updateDoc = $"Updated doctor {docData.GetAllDoctors()[j].FirstName} {docData.GetAllDoctors()[j].LastName}, " +
+                                        $"to not include a manager due to deleting him.";
+                                    Thread loggerDoc = new Thread(() => LogManager.Instance.WriteLog(updateDoc));
+                                    loggerDoc.Start();
+
+                                    context.SaveChanges();
+                                }
+                            }
+
+                            string managerDel = $"Deleted Manager {GetAllManagers()[i].FirstName} {GetAllManagers()[i].LastName}, Identification Card: {GetAllManagers()[i].IdentificationCard}, " +
+                                 $"Gender: {GetAllManagers()[i].Gender}, Date of Birth: {GetAllManagers()[i].DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {GetAllManagers()[i].Citizenship}";
+                            Thread logger = new Thread(() => LogManager.Instance.WriteLog(managerDel));
+                            logger.Start();
+
                             tblClinicManager man = (from r in context.tblClinicManagers where r.UserID == userID select r).First();
                             context.tblClinicManagers.Remove(man);
                             context.SaveChanges();
+
                             break;
                         }
                     }

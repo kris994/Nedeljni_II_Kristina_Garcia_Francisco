@@ -65,9 +65,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                         context.SaveChanges();
                         clinic.ClinicID = newClinic.ClinicID;
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Created Clinic {clinic.ClinicName}, Creation Date {clinic.CreatingDate}, Owner: {clinic.ClinicOwner}, " +
-                            $"Address: {clinic.ClinicAddress}"));
+                        string addClinic = $"Created Clinic {clinic.ClinicName}, Creation Date {clinic.CreatingDate.ToString("dd.MM.yyyy")}, Owner: {clinic.ClinicOwner}, " +
+                            $"Address: {clinic.ClinicAddress}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(addClinic));
                         logger.Start();
 
                         return clinic;
@@ -88,9 +88,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         context.SaveChanges();
 
-                        Thread logger = new Thread(() =>
-                            LogManager.Instance.WriteLog($"Updated Clinic {clinicToEdit.ClinicName}, Owner: {clinicToEdit.ClinicOwner}, " +
-                            $"Emergency Vehicle Parking Loots: {clinicToEdit.EmergencyVehicleParkingLoots}, Invalid Vehicle Parking Loots: {clinicToEdit.InvalidVehicleParkingLoots}"));
+                        string updateClinic = $"Updated Clinic {clinicToEdit.ClinicName}, Owner: {clinicToEdit.ClinicOwner}, " +
+                            $"Emergency Vehicle Parking Loots: {clinicToEdit.EmergencyVehicleParkingLoots}, Invalid Vehicle Parking Loots: {clinicToEdit.InvalidVehicleParkingLoots}";
+                        Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateClinic));
                         logger.Start();
 
                         return clinic;

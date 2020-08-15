@@ -144,6 +144,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 OnPropertyChanged("InfoLabel");
             }
         }
+
+        /// <summary>
+        /// ShortDescription label
+        /// </summary>
+        private string shortDescriptionLabel;
+        public string ShortDescriptionLabel
+        {
+            get
+            {
+                return shortDescriptionLabel;
+            }
+            set
+            {
+                shortDescriptionLabel = value;
+                OnPropertyChanged("ShortDescriptionLabel");
+            }
+        }
         #endregion
 
         #region Commands
@@ -201,8 +218,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 InfoLabel = "Hours has to be 1...24";
                 return false;
             }
+            else if (MaintenanceReport.ShortDescription != null && MaintenanceReport.ShortDescription.Contains("|"))
+            {
+                ShortDescriptionLabel = "Description cannot contain | symbol";
+                return false;
+            }
             else
             {
+                ShortDescriptionLabel = "";
                 InfoLabel = "";
                 return true;
             }        

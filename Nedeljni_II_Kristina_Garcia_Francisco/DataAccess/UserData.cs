@@ -181,7 +181,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     count++;
                 }
 
-                return count - patData.CountPatients();
+                // total users - all patients - the admin
+                return count - patData.CountPatients() - 1;
             }
             catch (Exception ex)
             {

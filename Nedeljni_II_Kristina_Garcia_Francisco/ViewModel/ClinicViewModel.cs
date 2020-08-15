@@ -851,6 +851,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         int userID = Manager.UserID;
                         managerData.DeleteManager(userID);
                         ManagerList = managerData.GetAllManagers();
+                        DoctorList = docData.GetAllDoctors().ToList();
 
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully deleted a Manager";
@@ -919,6 +920,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     }
 
                     ManagerList = managerData.GetAllManagers().ToList();
+                    DoctorList = docData.GetAllDoctors().ToList();
                 }
             }
             catch (Exception ex)
@@ -1023,6 +1025,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         int userID = Doctor.UserID;
                         docData.DeleteDoctor(userID);
                         DoctorList = docData.GetAllDoctors().ToList();
+                        PatientList = patData.GetAllPatients().ToList();
 
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully deleted a Doctor";
@@ -1091,6 +1094,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     }
 
                     DoctorList = docData.GetAllDoctors().ToList();
+                    PatientList = patData.GetAllPatients().ToList();
                 }
             }
             catch (Exception ex)
@@ -1142,7 +1146,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 addPatient.ShowDialog();
                 if ((addPatient.DataContext as AddPatientViewModel).IsUpdatePatient == true)
                 {
-                    DoctorList = docData.GetAllDoctors().ToList();
+                    PatientList = patData.GetAllPatients().ToList();
                     InfoLabelBG = "#28a745";
                     InfoLabel = "Successfully created a new Patient";
                 }

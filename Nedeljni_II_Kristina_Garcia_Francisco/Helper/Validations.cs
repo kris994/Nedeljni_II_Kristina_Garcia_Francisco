@@ -185,9 +185,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
                 return "Doctor unique number cannot be empty.";
             }
 
-            if (doctorNumber.Length != 9)
+            if (doctorNumber.Length != 5)
             {
-                return "Doctor unique number has to be 9 characters long.";
+                return "Doctor unique number has to be 5 characters long.";
             }
 
             // Get the current users id
