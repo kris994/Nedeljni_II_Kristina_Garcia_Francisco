@@ -1256,6 +1256,46 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
+        /// Statistic Report Button
+        /// </summary>
+        private ICommand statisticReportOpen;
+        public ICommand StatisticReportOpen
+        {
+            get
+            {
+                if (statisticReportOpen == null)
+                {
+                    statisticReportOpen = new RelayCommand(param => StatisticReportOpenExecute(), param => CanStatisticReportOpenExecute());
+                }
+                return statisticReportOpen;
+            }
+        }
+
+        /// <summary>
+        /// Tries to open the report
+        /// </summary>
+        private void StatisticReportOpenExecute()
+        {
+            try
+            {
+                ReportStatisticsWindow statisticReportWindow = new ReportStatisticsWindow();
+                statisticReportWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Checks if its possible to open the statistic report
+        /// </summary>
+        protected bool CanStatisticReportOpenExecute()
+        {
+            return true;
+        }
+
+        /// <summary>
         /// Command that logs off the user
         /// </summary>
         private ICommand logoff;

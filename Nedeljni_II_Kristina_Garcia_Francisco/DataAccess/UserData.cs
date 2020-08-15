@@ -158,5 +158,36 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                 Debug.WriteLine("Exception" + ex.Message.ToString());
             }
         }
+
+        /// <summary>
+        /// Get employees count from the database
+        /// </summary>
+        /// <returns>Total amount of employees</returns>
+        public int CountEmployees()
+        {
+            PatientData patData = new PatientData();
+
+            int count = 0;
+            try
+            {
+                List<tblUser> list = new List<tblUser>();
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    list = (from x in context.tblUsers select x).ToList();
+                }
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    count++;
+                }
+
+                return count - patData.CountPatients();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return 0;
+            }
+        }
     }
 }
