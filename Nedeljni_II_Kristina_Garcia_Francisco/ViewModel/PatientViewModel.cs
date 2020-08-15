@@ -16,6 +16,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 {
     class PatientViewModel : BaseViewModel
     {
+        DoctorData docData = new DoctorData();
+        ManagerData managerData = new ManagerData();
         PatientWindow patientWindow;
         /// <summary>
         /// Background worker
@@ -38,7 +40,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// Random Exam Time
         /// </summary>
         private int rngExamTime = 0;
-        ///
+        /// <summary>
+        /// Checks if there are avilable doctors
+        /// </summary>
+        private bool hasDoctors = false;
+        /// <summary>
+        /// Checks if a doctor is unavilable
+        /// </summary>
+        private bool unavailable = false;
 
         #region Constructor
         /// <summary>
@@ -55,6 +64,13 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             bgWorker.RunWorkerCompleted += WorkerOnRunWorkerCompleted;
             IsSickLabel = "Check for Symptoms";
             ProgressBarVisibility = Visibility.Collapsed;
+            AvaiableDoctorsAround();
+
+            if (docData.GetAllDoctors().Count == 0)
+            {
+                InfoLabel = "Currently no registered doctors in the Clinic";
+                InfoLabelBG = "#17a2b8";
+            }
         }
         #endregion
 
@@ -164,6 +180,18 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             }
         }
         #endregion
+
+        public void AvaiableDoctorsAround()
+        {
+            if (docData.AvailableDoctors(docData.GetAllDoctors()) > 0)
+            {
+                hasDoctors = true;
+            }
+            else
+            {
+                hasDoctors = false;
+            }
+        }
 
         #region Background worker
         /// <summary>
@@ -337,7 +365,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <returns>return true if it has the needed requirements to execute</returns>
         private bool CanRequestExecute()
         {
-            return true;
+            if (docData.GetAllDoctors().Count == 0 || unavailable == true)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>
@@ -345,13 +380,20 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private void RequestExecute()
         {
-            if (!bgWorker.IsBusy)
+            if (!bgWorker.IsBusy && hasDoctors == true)
             {
                 // This method will start the execution asynchronously in the background
                 bgWorker.RunWorkerAsync();
                 _isRunning = true;
                 InfoLabelBG = "#17a2b8";
                 InfoLabel = "Checking for virus symptoms";
+            }
+            else if (hasDoctors == false)
+            {
+                managerData.AddOmission();
+                InfoLabelBG = "#17a2b8";
+                InfoLabel = "Currently no Doctors that can attend";
+                unavailable = true;
             }
             else
             {

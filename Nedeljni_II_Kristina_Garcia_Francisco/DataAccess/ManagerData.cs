@@ -50,7 +50,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             List<vwClinicManager> list = new List<vwClinicManager>();
             for (int i = 0; i < GetAllManagers().Count; i++)
             {
-                if (IsMaxDoctors(GetAllManagers()[i].MaxNumberOfDoctors, GetAllManagers()[i].ManagerID) == false)
+                if (IsMaxDoctors(GetAllManagers()[i].MaxNumberOfDoctors, GetAllManagers()[i].ManagerID) == false &&
+                    GetAllManagers()[i].OmissionNumber < 5)
                 {
                     list.Add(GetAllManagers()[i]);
                 }
@@ -204,6 +205,57 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
                     }
 
                     userData.DeleteUser(userID);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Adds omission to managers
+        /// </summary>
+        public void AddOmission()
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    for (int i = 0; i < GetAllManagers().Count; i++)
+                    {
+                        // If manager got 4 omissions prior increase
+                        if (GetAllManagers()[i].OmissionNumber >= 4)
+                        {
+                            int manID = GetAllManagers()[i].ManagerID;
+
+                            tblClinicManager managerToEdit = (from ss in context.tblClinicManagers where ss.ManagerID == manID select ss).First();
+                            managerToEdit.MaxNumberOfDoctors = 0;
+                            managerToEdit.MinNumberOfRooms = 0;
+                            managerToEdit.OmissionNumber = GetAllManagers()[i].OmissionNumber + 1;
+                            context.SaveChanges();
+
+                            // Remove manager from doctors if omission is 5 or above
+                            for (int j = 0; j < docData.GetAllDoctors().Count; j++)
+                            {
+                                if (docData.GetAllDoctors()[j].ManagerID == GetAllManagers()[i].ManagerID)
+                                {
+                                    int docID = docData.GetAllDoctors()[j].DoctorID;
+                                    tblClinicDoctor docToEdit = (from ss in context.tblClinicDoctors where ss.DoctorID == docID select ss).First();
+                                    docToEdit.ManagerID = null;
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+                        // Manager got less than 4 omissions prior increase
+                        else
+                        {
+                            int manID = GetAllManagers()[i].ManagerID;
+                            tblClinicManager managerToEdit = (from ss in context.tblClinicManagers where ss.ManagerID == manID select ss).First();
+                            managerToEdit.OmissionNumber = GetAllManagers()[i].OmissionNumber + 1;
+                            context.SaveChanges();
+                        }
+                    }
                 }
             }
             catch (Exception ex)

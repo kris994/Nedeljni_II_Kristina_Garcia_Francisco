@@ -26,7 +26,9 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "IdentificationCard",
             "Username",
             "UserPassword",
-            "Gender"
+            "Gender",
+            "MaxNumberOfDoctors",
+            "MinNumberOfRooms"
         };
 
         /// <summary>
@@ -85,6 +87,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "Gender":
                         result = this.validation.CannotBeEmpty(Gender);
+                        break;
+
+                    case "MinNumberOfRooms":
+                        result = this.validation.OmissionRestriction(MinNumberOfRooms, OmissionNumber);
+                        break;
+
+                    case "MaxNumberOfDoctors":
+                        result = this.validation.OmissionRestriction(MaxNumberOfDoctors, OmissionNumber);
                         break;
 
                     default:

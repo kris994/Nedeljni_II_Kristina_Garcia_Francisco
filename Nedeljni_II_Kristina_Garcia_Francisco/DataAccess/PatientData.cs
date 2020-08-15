@@ -40,7 +40,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
             }
         }
 
-
         /// <summary>
         /// Creates or edits an patient
         /// </summary>

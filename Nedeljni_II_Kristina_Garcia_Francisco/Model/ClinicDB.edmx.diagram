@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93cec083d8594bfead02ecd97076fdfb" Name="Diagram1">
+      <Diagram DiagramId="0cc03a4c7af94f9d9f615867bbcaab39" Name="Diagram1">
         <EntityTypeShape EntityType="ClinicDBModel.tblClinic" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicDBModel.tblClinicAdministrator" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicDBModel.tblClinicDoctor" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
@@ -17,12 +17,12 @@
         <EntityTypeShape EntityType="ClinicDBModel.vwClinicMaintenance" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicDBModel.vwClinicManager" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicDBModel.vwClinicPatient" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__6E8C3269" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__Manag__79FDE515" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__7AF2094E" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__71689F14" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__75392FF8" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__7FB6BE6B" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__47C76B03" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__Manag__53391DAF" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__542D41E8" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__4AA3D7AE" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__4E746892" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicDBModel.FK__tblClinic__UserI__58F1F705" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

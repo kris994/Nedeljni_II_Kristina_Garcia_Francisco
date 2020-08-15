@@ -24,8 +24,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
         public string Username { get; set; }
         public string UserPassword { get; set; }
         public int FloorNumber { get; set; }
-        public Nullable<int> MaxNumberOfDoctors { get; set; }
-        public Nullable<int> MinNumberOfRooms { get; set; }
+        public int MaxNumberOfDoctors { get; set; }
+        public int MinNumberOfRooms { get; set; }
         public int OmissionNumber { get; set; }
         public int ManagerID { get; set; }
     }
