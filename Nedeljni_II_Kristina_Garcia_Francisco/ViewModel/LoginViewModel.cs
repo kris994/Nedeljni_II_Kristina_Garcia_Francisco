@@ -18,7 +18,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         UserData userData = new UserData();
         ClinicData clinicData = new ClinicData();
         PatientData patientData = new PatientData();
-        FileReadWrite frw = new FileReadWrite();   
+        FileReadWrite frw = new FileReadWrite();
 
         #region Constructor
         public LoginViewModel(Login loginView)
@@ -29,6 +29,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             ClinicList = clinicData.GetAllClinics().ToList();
             PatientList = patientData.GetAllPatients().ToList();
             frw.ReadAdminFile();
+            if (ClinicList.Count == 0)
+            {
+                InfoLabel = "Clinic in construction";
+            }
         }
         #endregion
 
@@ -164,7 +168,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <returns>true</returns>
         private bool CanAddNewPatientExecute()
         {
-            return true;
+            if(ClinicList.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         /// <summary>

@@ -158,6 +158,7 @@
     <Compile Include="ViewModel\MaintenanceViewModel.cs" />
     <Compile Include="ViewModel\ManagerViewModel.cs" />
     <Compile Include="ViewModel\PatientViewModel.cs" />
+    <Compile Include="ViewModel\ReportStatisticsViewModel.cs" />
     <Compile Include="ViewModel\SuperAdminViewModel.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
       <DependentUpon>AddAdminWindow.xaml</DependentUpon>
@@ -200,6 +201,9 @@
     </Compile>
     <Compile Include="View\PatientWindow.xaml.cs">
       <DependentUpon>PatientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportStatisticsWindow.xaml.cs">
+      <DependentUpon>ReportStatisticsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SuperAdminCredentialsChange.xaml.cs">
       <DependentUpon>SuperAdminCredentialsChange.xaml</DependentUpon>
@@ -318,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportStatisticsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,13 +27,18 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         private bool possibleVirus = false;
         /// <summary>
-        /// Numbper of requests
+        /// Number of requests
         /// </summary>
         private int reaquestAmount = 0;
         /// <summary>
         /// Checks if th patient is sick
         /// </summary>
         private int counter = 0;
+        /// <summary>
+        /// Random Exam Time
+        /// </summary>
+        private int rngExamTime = 0;
+        ///
 
         #region Constructor
         /// <summary>
@@ -179,6 +184,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// <param name="e">do work event</param>
         private void WorkerOnDoWork(object sender, DoWorkEventArgs e)
         {
+            ProgressBarVisibility = Visibility.Visible;
             Random rng = new Random();
             counter = 0;
             // Restart progress
@@ -208,32 +214,31 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 }
                 else
                 {
-                    possibleVirus = false;
-                    reaquestAmount = 0;
+                    possibleVirus = false;                 
                 }
             }
             else if (reaquestAmount == 2)
             {
                 // Random time between 1 and 7
-                int value = rng.Next(1, 8);
+                rngExamTime = rng.Next(1, 8);
 
-                for (int i = 1; i <= value+1; i++)
+                for (int i = 1; i <= rngExamTime + 1; i++)
                 {
                     Thread.Sleep(1000);
                     // Calling ReportProgress() method raises ProgressChanged event
                     // To this method pass the percentage of processing that is complete
                     counter++;
-                    if (i == value)
+                    if (i == rngExamTime)
                     {
                         // 100% if all seconds passed                   
                         bgWorker.ReportProgress(100);
                     }
                     else
                     {
-                        bgWorker.ReportProgress(100 / value * i);
+                        bgWorker.ReportProgress(100 / rngExamTime * i);
                     }
 
-                    if (counter == value)
+                    if (counter == rngExamTime)
                     {
                         break;
                     }
@@ -262,7 +267,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 ExamInfoLabel = e.Error.Message;
                 _isRunning = false;
             }
-            else if (counter == 5)
+            else if (counter == 5 && rngExamTime == 0)
             {
                 _isRunning = false;
 
@@ -288,15 +293,18 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                         _isRunning = true;
                     }
                 }
-                else
+                else if (possibleVirus == false)
                 {
+                    reaquestAmount = 0;
                     IsSickLabel = "Check for Symptoms";
                     InfoLabelBG = "#28a745";
                     InfoLabel = "Finished patients exam request, patient is healthy";
                 }
             }
-            else
+            else if (rngExamTime > 0)
             {
+                reaquestAmount = 0;
+                rngExamTime = 0;             
                 InfoLabelBG = "#28a745";
                 InfoLabel = "Finished patients physical examination";
                 IsSickLabel = "Check for Symptoms";
@@ -339,7 +347,6 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         {
             if (!bgWorker.IsBusy)
             {
-                ProgressBarVisibility = Visibility.Visible;
                 // This method will start the execution asynchronously in the background
                 bgWorker.RunWorkerAsync();
                 _isRunning = true;

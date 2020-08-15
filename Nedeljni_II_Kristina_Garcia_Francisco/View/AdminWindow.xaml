@@ -14,186 +14,191 @@
         <c:DoctorNameConverter x:Key="DoctorNameConverter" />
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-    <Grid Margin="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-            <Button Width="80" Height="20" Name="btnLogoff" Content="Log Off"
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Button Width="80" Height="20" Name="btnLogoff" Content="Log Off"
                     Command="{Binding Logoff, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="100" Height="20" Name="btnEditExistingClinic" Content="Update Clinic"
-                    Command="{Binding EditExistingClinic, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="100" Height="20" Name="btnEditAdmin" Content="Update Profile"
+                <Button Width="100" Height="20" Name="btnStatisticReportOpen" Content="Statistic Report"
+                    Command="{Binding StatisticReportOpen, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+                <Button Width="100" Height="20" Name="btnEditAdmin" Content="Update Profile"
                     Command="{Binding EditAdmin, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="100" Height="20" Name="btnAddNewManager" Content="Add Manager"
+                <Button Width="100" Height="20" Name="btnEditExistingClinic" Content="Update Clinic"
+                    Command="{Binding EditExistingClinic, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Margin="104,0,0,0" Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                <Button Width="100" Height="20" Name="btnAddNewManager" Content="Add Manager"
                     Command="{Binding AddNewManager, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="120" Height="20" Name="btnAddNewMaintenance" Content="Add Maintenance"
+                <Button Width="120" Height="20" Name="btnAddNewMaintenance" Content="Add Maintenance"
                     Command="{Binding AddNewMaintenance, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="80" Height="20" Name="btnAddNewDoctor" Content="Add Doctor"
+                <Button Width="80" Height="20" Name="btnAddNewDoctor" Content="Add Doctor"
                     Command="{Binding AddNewDoctor, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-            <Button Width="80" Height="20" Name="btnAddNewPatient" Content="Add Patient"
+                <Button Width="80" Height="20" Name="btnAddNewPatient" Content="Add Patient"
                     Command="{Binding AddNewPatient, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
-        </StackPanel>
-        <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
-        <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
-        <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
-            <DataGrid Name="DataGridManager" ItemsSource="{Binding ManagerList, UpdateSourceTrigger=PropertyChanged}"
+            </StackPanel>
+            <Rectangle Grid.Row="3" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
+            <Label  Grid.Column="1" Grid.Row="3" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+            <Grid Grid.Column="1" Grid.Row="4" Height="auto" Width="auto">
+                <DataGrid Name="DataGridManager" ItemsSource="{Binding ManagerList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Manager, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold" Margin="20">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.11*"/>
-                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
-                    <DataGridTextColumn Header="Floor" Binding="{Binding FloorNumber}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Max Doctor" Binding="{Binding MaxNumberOfDoctors}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Min Room" Binding="{Binding MinNumberOfRooms}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Omission" Binding="{Binding OmissionNumber}" Width="0.08*"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnDeleteUser" Content="Delete" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.11*"/>
+                        <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
+                        <DataGridTextColumn Header="Floor" Binding="{Binding FloorNumber}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Max Doctor" Binding="{Binding MaxNumberOfDoctors}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Min Room" Binding="{Binding MinNumberOfRooms}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Omission" Binding="{Binding OmissionNumber}" Width="0.08*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnDeleteUser" Content="Delete" 
                                 Command="{Binding DataContext.DeleteManager, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnEditUser" Content="Edit"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnEditUser" Content="Edit"
                                 Command="{Binding DataContext.EditManager, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="4" Height="auto" Width="auto">
-            <DataGrid Name="DataGridMaintenance" ItemsSource="{Binding MaintenanceList, UpdateSourceTrigger=PropertyChanged}"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
+                <DataGrid Name="DataGridMaintenance" ItemsSource="{Binding MaintenanceList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Maintenance, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold" Margin="20">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.11*"/>
-                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
-                    <DataGridTextColumn Header="Clinic Extention" Binding="{Binding ClinicExtentionAllowed, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Disabled Responsibility" Binding="{Binding DisabledAccessabilityResponsibility, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.12*"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnDeleteUser" Content="Delete" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.1*"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.11*"/>
+                        <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.125*"/>
+                        <DataGridTextColumn Header="Clinic Extention" Binding="{Binding ClinicExtentionAllowed, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Disabled Responsibility" Binding="{Binding DisabledAccessabilityResponsibility, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.12*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnDeleteUser" Content="Delete" 
                                 Command="{Binding DataContext.DeleteMaintenance, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnEditUser" Content="Edit"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnEditUser" Content="Edit"
                                 Command="{Binding DataContext.EditMaintenance, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="5" Height="auto" Width="auto">
-            <DataGrid Name="DataGridDoctor" ItemsSource="{Binding DoctorList, UpdateSourceTrigger=PropertyChanged}"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="6" Height="auto" Width="auto">
+                <DataGrid Name="DataGridDoctor" ItemsSource="{Binding DoctorList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Doctor, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold" Margin="20">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
-                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
-                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Unique Number" Binding="{Binding UniqueNumber}" Width="0.12*"/>
-                    <DataGridTextColumn Header="Bank Account" Binding="{Binding BankAccount}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Department" Binding="{Binding Department}" Width="0.09*"/>
-                    <DataGridTextColumn Header="Working Shift" Binding="{Binding WorkingShift}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Receiving" Binding="{Binding ReceivingPatient, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Manager" Binding="{Binding ManagerID, Converter={StaticResource ResourceKey=ManagerNameConverter}}" Width="0.12*"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnDeleteUser" Content="Delete" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
+                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
+                        <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Unique Number" Binding="{Binding UniqueNumber}" Width="0.12*"/>
+                        <DataGridTextColumn Header="Bank Account" Binding="{Binding BankAccount}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Department" Binding="{Binding Department}" Width="0.09*"/>
+                        <DataGridTextColumn Header="Working Shift" Binding="{Binding WorkingShift}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Receiving" Binding="{Binding ReceivingPatient, Converter={StaticResource ResourceKey=YesNoConverter}}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Manager" Binding="{Binding ManagerID, Converter={StaticResource ResourceKey=ManagerNameConverter}}" Width="0.12*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnDeleteUser" Content="Delete" 
                                 Command="{Binding DataContext.DeleteDoctor, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnEditUser" Content="Edit"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnEditUser" Content="Edit"
                                 Command="{Binding DataContext.EditDoctor, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="6" Height="auto" Width="auto">
-            <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="7" Height="auto" Width="auto">
+                <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold" Margin="20">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
-                    <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
-                    <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
-                    <DataGridTextColumn Header="Healthcare" Binding="{Binding HealthCareNumber}" Width="0.12*"/>
-                    <DataGridTextColumn Header="Experation" Binding="{Binding ExperationDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.1*"/>
-                    <DataGridTextColumn Header="Doctor" Binding="{Binding UniqueNumber, Converter={StaticResource ResourceKey=DoctorNameConverter}}" Width="0.12*"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnDeleteUser" Content="Delete" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="0.08*"/>
+                        <DataGridTextColumn Header="ID" Binding="{Binding IdentificationCard}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="0.06*"/>
+                        <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.10*"/>
+                        <DataGridTextColumn Header="Citizenship" Binding="{Binding Citizenship}" Width="0.08*"/>
+                        <DataGridTextColumn Header="Healthcare" Binding="{Binding HealthCareNumber}" Width="0.12*"/>
+                        <DataGridTextColumn Header="Experation" Binding="{Binding ExperationDate, StringFormat=\{0:dd.MM.yyyy\}}" Width="0.1*"/>
+                        <DataGridTextColumn Header="Doctor" Binding="{Binding UniqueNumber, Converter={StaticResource ResourceKey=DoctorNameConverter}}" Width="0.12*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnDeleteUser" Content="Delete" 
                                 Command="{Binding DataContext.DeletePatient, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnEditUser" Content="Edit"
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="btnEditUser" Content="Edit"
                                 Command="{Binding DataContext.EditPatient, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                                         Margin="4" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
-    </Grid>
     </ScrollViewer>
 </Window>

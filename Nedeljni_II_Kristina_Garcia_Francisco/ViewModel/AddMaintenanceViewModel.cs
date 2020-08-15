@@ -140,7 +140,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         }
 
         /// <summary>
-        /// Command that closes the add worker or edit worker window
+        /// Command that closes window
         /// </summary>
         private ICommand cancel;
         public ICommand Cancel

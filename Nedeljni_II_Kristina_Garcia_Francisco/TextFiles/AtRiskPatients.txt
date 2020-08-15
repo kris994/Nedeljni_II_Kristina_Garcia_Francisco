@@ -1,1 +1,2 @@
-pataaa:pat:60
+pat2:patl2:56
+pat1:patl1:39
