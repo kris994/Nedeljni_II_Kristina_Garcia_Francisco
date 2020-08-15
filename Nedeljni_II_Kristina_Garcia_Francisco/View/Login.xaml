@@ -34,7 +34,7 @@
             <TextBlock>                                
                 <Hyperlink Command="{Binding AddNewPatient, UpdateSourceTrigger=PropertyChanged}" Foreground="White">Register as an Patient</Hyperlink>
             </TextBlock>
-            <Label  HorizontalAlignment="Center" Content="{Binding InfoLabel, Mode=OneWay}" Foreground="Red"/>
+            <Label  HorizontalAlignment="Center" Content="{Binding InfoLabel, Mode=OneWay}" Foreground="White"/>
         </StackPanel>
     </Border>
 </Window>

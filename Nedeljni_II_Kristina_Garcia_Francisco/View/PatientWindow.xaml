@@ -4,9 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nedeljni_II_Kristina_Garcia_Francisco.View"
-        mc:Ignorable="d"
-        Title="PatientWindow" Height="450" Width="800">
-    <Grid>
-        
+        mc:Ignorable="d" Closing="DataWindow_Closing"
+        Title="Patient" Height="300" Width="600">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <Button Width="80" Height="20" Name="btnLogoff" Content="Log Off"
+                    Command="{Binding Logoff, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+            <Button Width="150" Height="20" Name="btnRequest" Content="{Binding IsSickLabel, Mode=OneWay}"
+                    Command="{Binding Request, UpdateSourceTrigger=PropertyChanged}" Margin="20,4,4,4" FontWeight="Bold"/>
+        </StackPanel>
+        <Rectangle Grid.Row="2" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
+        <Label  Grid.Column="1" Grid.Row="2" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
+        <ProgressBar HorizontalAlignment="Center" Height="16" Margin="0,51,0,-26" Grid.Row="4" VerticalAlignment="Top" Width="478"
+                     Value="{Binding CurrentProgress, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding ProgressBarVisibility, Mode=OneWay}"/>
+        <Label Content="{Binding ExamInfoLabel, Mode=OneWay}" HorizontalAlignment="Center" Margin="0,65,0,-61" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-0.149,0.41"/>
+
     </Grid>
 </Window>

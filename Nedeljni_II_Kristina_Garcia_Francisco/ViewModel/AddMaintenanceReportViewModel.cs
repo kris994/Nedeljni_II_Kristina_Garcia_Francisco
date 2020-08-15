@@ -115,6 +115,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 isUpdateMaintenanceReport = value;
             }
         }
+
+        /// <summary>
+        /// Info label
+        /// </summary>
+        private string infoLabel;
+        public string InfoLabel
+        {
+            get
+            {
+                return infoLabel;
+            }
+            set
+            {
+                infoLabel = value;
+                OnPropertyChanged("InfoLabel");
+            }
+        }
         #endregion
 
         #region Commands
@@ -158,12 +175,14 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         protected bool CanSaveMaintenanceReportExecute()
         {
-            if (MaintenanceReport.TotalHours <= 0)
+            if (MaintenanceReport.TotalHours <= 0 || MaintenanceReport.TotalHours > 24)
             {
+                InfoLabel = "Hours has to be 1...24";
                 return false;
             }
             else
             {
+                InfoLabel = "";
                 return true;
             }        
         }

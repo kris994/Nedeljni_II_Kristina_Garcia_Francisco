@@ -72,11 +72,13 @@
     <Compile Include="DataAccess\AdminData.cs" />
     <Compile Include="DataAccess\ClinicData.cs" />
     <Compile Include="DataAccess\DoctorData.cs" />
+    <Compile Include="DataAccess\HealthExam.cs" />
     <Compile Include="DataAccess\MaintenanceData.cs" />
     <Compile Include="DataAccess\MaintenanceReportData.cs" />
     <Compile Include="DataAccess\ManagerData.cs" />
     <Compile Include="DataAccess\PatientData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
+    <Compile Include="Helper\ReportDateConverter.cs" />
     <Compile Include="Helper\DateConverter.cs" />
     <Compile Include="Helper\DoctorNameConverter.cs" />
     <Compile Include="Helper\ManagerNameConverter.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MaintenanceViewModel.cs" />
     <Compile Include="ViewModel\ManagerViewModel.cs" />
+    <Compile Include="ViewModel\PatientViewModel.cs" />
     <Compile Include="ViewModel\SuperAdminViewModel.cs" />
     <Compile Include="View\AddAdminWindow.xaml.cs">
       <DependentUpon>AddAdminWindow.xaml</DependentUpon>
