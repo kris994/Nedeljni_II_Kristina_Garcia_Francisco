@@ -31,8 +31,8 @@
             <Rectangle Grid.Row="3" Fill="{Binding InfoLabelBG, Mode=OneWay}" />
             <Label  Grid.Column="1" Grid.Row="3" Margin="20,4,4,4" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Stretch" Content="{Binding InfoLabel, Mode=OneWay}"/>
             <Grid Grid.Column="1" Grid.Row="4" Height="auto" Width="auto">
-                <DataGrid Name="DataGridPatient" ItemsSource="{Binding PatientList, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding DoctorPatientList, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
+                <DataGrid Name="DataGridPatient" ItemsSource="{Binding DoctorPatientList, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Patient, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False"
                       HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold" Margin="20">

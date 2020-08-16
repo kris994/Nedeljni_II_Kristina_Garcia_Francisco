@@ -93,7 +93,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         string addMain = $"Created Maintenance {maintenance.FirstName} {maintenance.LastName}, Identification Card: {maintenance.IdentificationCard}, " +
                             $"Gender: {maintenance.Gender}, Date of Birth: {maintenance.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {maintenance.Citizenship}" +
-                            $", Clinic Extention Allowed: {maintenance.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenance.DisabledAccessabilityResponsibility}"
+                            $", Clinic Extention Allowed: {maintenance.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenance.DisabledAccessabilityResponsibility}";
                         Thread logger = new Thread(() => LogManager.Instance.WriteLog(addMain));
                         logger.Start();
 
@@ -125,7 +125,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.DataAccess
 
                         string updateMain = $"Updated Maintenance {userToEdit.FirstName} {userToEdit.LastName}, Identification Card: {userToEdit.IdentificationCard}, " +
                             $"Gender: {userToEdit.Gender}, Date of Birth: {userToEdit.DateOfBirth.ToString("dd.MM.yyyy")}, Citizenship: {userToEdit.Citizenship}" +
-                            $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}"
+                            $", Clinic Extention Allowed: {maintenanceToEdit.ClinicExtentionAllowed}, Disabled Accessability Responsibility: {maintenanceToEdit.DisabledAccessabilityResponsibility}";
                         Thread logger = new Thread(() => LogManager.Instance.WriteLog(updateMain));
                         logger.Start();
 

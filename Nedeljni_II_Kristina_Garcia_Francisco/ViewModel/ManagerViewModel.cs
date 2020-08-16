@@ -208,7 +208,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     {
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully updated a Doctor";
-                        MaintenanceData.isChanged = false;
+                        DoctorData.isChanged = false;
                     }
 
                     DoctorList = docData.GetAllDoctors().ToList();

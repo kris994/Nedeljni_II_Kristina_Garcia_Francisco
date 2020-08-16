@@ -147,16 +147,16 @@
                  Style="{StaticResource textBoxInError}"/>
         <TextBox Grid.Column="3" Grid.Row="19" Name="txtFloorNumber" Height="20" Width="150" Style="{StaticResource textBoxInError}"
                  Text="{Binding Manager.FloorNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="21" Name="txtMaxNumberOfDoctors" Height="20" Width="150" Style="{StaticResource textBoxInError}"
                  Text="{Binding Manager.MaxNumberOfDoctors, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="23" Name="txtMinNumberOfRooms" Height="20" Width="150" Style="{StaticResource textBoxInError}"
                  Text="{Binding Manager.MinNumberOfRooms, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="25" Name="txtOmissionNumber" Height="20" Width="150" Style="{StaticResource textBoxInError}"
                  Text="{Binding Manager.OmissionNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
 
         <Button Grid.Column="3" Grid.Row="29" IsDefault="True" Name="btnSave" Content="Save" Height="20" Width="70" HorizontalAlignment="Left"
                 Command="{Binding SaveManager, UpdateSourceTrigger=PropertyChanged}">

@@ -134,6 +134,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             List<tblUser> AllUsers = userData.GetAllUsers();
             string currectIdentificationCard = "";
+            int num = 0;
 
             if (identificationCard == null)
             {
@@ -143,6 +144,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             if (identificationCard.Length != 9)
             {
                 return "Identification Card has to be 9 characters long.";
+            }
+
+            if (!int.TryParse(identificationCard, out num))
+            {
+                return "Identification Card has to be a number";
+            }
+            else if (num < 0)
+            {
+                return "Identification Card has to be a non negative number";
             }
 
             // Get the current users id
@@ -179,6 +189,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             List<vwClinicDoctor> AllDoctors = docData.GetAllDoctors();
             string currentDoctorID = "";
+            int num = 0;
 
             if (doctorNumber == null)
             {
@@ -188,6 +199,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             if (doctorNumber.Length != 5)
             {
                 return "Doctor unique number has to be 5 characters long.";
+            }
+
+            if (!int.TryParse(doctorNumber, out num))
+            {
+                return "Doctor unique number has to be a number";
+            }
+            else if (num < 0)
+            {
+                return "Doctor unique number has to be a non negative number";
             }
 
             // Get the current users id
@@ -224,6 +244,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             List<vwClinicPatient> allPatients = patData.GetAllPatients();
             string currentHealthID = "";
+            int num = 0;
 
             if (number == null)
             {
@@ -233,6 +254,15 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             if (number.Length != 6)
             {
                 return "Healthcare number has to be 6 characters long.";
+            }
+
+            if (!int.TryParse(number, out num))
+            {
+                return "Healthcare has to be a number";
+            }
+            else if (num < 0)
+            {
+                return "Healthcare has to be a non negative number";
             }
 
             // Get the current users id
@@ -269,10 +299,20 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             List<vwClinicDoctor> AllDoctors = docData.GetAllDoctors();
             string currentDoctorBank = "";
+            int number = 0;
 
             if (bankNumber == null)
             {
                 return "Bank account number cannot be empty.";
+            }
+
+            if (!int.TryParse(bankNumber, out number))
+            {
+                return "Bank account has to be a number";
+            }
+            else if (number < 0)
+            {
+                return "Bank account has to be a non negative number";
             }
 
             if (bankNumber.Length < 4)
@@ -392,6 +432,11 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
             int currentValue = 0;
             ClinicData clinicData = new ClinicData();
 
+            if (int.TryParse(value.ToString(), out int number) == false)
+            {
+                return "Entered value has to be a number";
+            }
+
             if (value == 0)
             {
                 return "Entered Value cannot be Zero";
@@ -440,14 +485,17 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
         /// <returns>null if the input is correct or string error message if its wrong</returns>
         public string OmissionRestriction(int value, int omission)
         {
+            if (value < 0)
+            {
+                return "Value cannot be negative";
+            }
+
             if ((value != 0) && omission >= 5)
             {
                 return "Omission is greater than 5, cannot accept greater value than 0";
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>  

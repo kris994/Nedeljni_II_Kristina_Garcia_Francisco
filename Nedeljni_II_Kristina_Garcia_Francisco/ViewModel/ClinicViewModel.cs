@@ -364,10 +364,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 editClinicWindow.ShowDialog();
                 if (isUpdateClinic == true)
                 {
-                    ClinicList = clinicData.GetAllClinics().ToList();
                     InfoLabelBG = "#28a745";
                     InfoLabel = "Successfully updated the Clinic";
                 }
+                ClinicList = clinicData.GetAllClinics().ToList();
             }
             catch (Exception ex)
             {
@@ -568,10 +568,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                 addAdmin.ShowDialog();
                 if (AdminData.isChanged == true)
                 {
-                    AdminList = adminData.GetAllAdmins().ToList();
                     InfoLabelBG = "#28a745";
                     InfoLabel = "Successfully updated the Admin";
                 }
+                AdminList = adminData.GetAllAdmins().ToList();
             }
             catch (Exception ex)
             {
@@ -1090,7 +1090,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
                     {
                         InfoLabelBG = "#28a745";
                         InfoLabel = "Successfully updated a Doctor";
-                        MaintenanceData.isChanged = false;
+                        DoctorData.isChanged = false;
                     }
 
                     DoctorList = docData.GetAllDoctors().ToList();

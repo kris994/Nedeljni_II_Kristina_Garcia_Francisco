@@ -51,10 +51,12 @@
                  Text="{Binding Clinic.ClinicOwner, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtEmergencyVehicleParkingLoots" Height="20" Width="150"
                  Text="{Binding Clinic.EmergencyVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox" Style="{StaticResource textBoxInError}"/>
+                 PreviewTextInput="NumberValidationTextBox" Style="{StaticResource textBoxInError}"
+                 CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtInvalidVehicleParkingLoots" Height="20" Width="150"
                  Text="{Binding Clinic.InvalidVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox" Style="{StaticResource textBoxInError}"/>
+                 PreviewTextInput="NumberValidationTextBox" Style="{StaticResource textBoxInError}" 
+                 CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
 
         <Button Grid.Column="3" Grid.Row="23" IsDefault="True" Name="btnSaveClinicEdit" Content="Save" Height="20" Width="70" HorizontalAlignment="Left"
                 Command="{Binding SaveClinicEdit, UpdateSourceTrigger=PropertyChanged}">

@@ -38,7 +38,7 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
 
         #region Property
         /// <summary>
-        /// List of doctor
+        /// List of doctor patients
         /// </summary>
         private List<vwClinicPatient> doctorPatientList;
         public List<vwClinicPatient> DoctorPatientList
@@ -51,6 +51,23 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.ViewModel
             {
                 doctorPatientList = value;
                 OnPropertyChanged("DoctorPatientList");
+            }
+        }
+
+        /// <summary>
+        /// Specific patient
+        /// </summary>
+        private List<vwClinicPatient> patient;
+        public List<vwClinicPatient> Patient
+        {
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                patient = value;
+                OnPropertyChanged("Patient");
             }
         }
 

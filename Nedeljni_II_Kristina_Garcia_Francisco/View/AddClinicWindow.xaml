@@ -88,18 +88,18 @@
                  Text="{Binding Clinic.ClinicAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
         <TextBox Grid.Column="3" Grid.Row="11" Name="txtClinicFloorNumber" Height="20" Width="150"
                  Text="{Binding Clinic.ClinicFloorNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="13" Name="txtRoomsPerFloor" Height="20" Width="150"
                  Text="{Binding Clinic.RoomsPerFloor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <CheckBox Grid.Column="3" Grid.Row="15" IsChecked="{Binding Clinic.Balcony, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
         <CheckBox Grid.Column="3" Grid.Row="17" IsChecked="{Binding Clinic.Garden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
         <TextBox Grid.Column="3" Grid.Row="19" Name="txtEmergencyVehicleParkingLoots" Height="20" Width="150"
                  Text="{Binding Clinic.EmergencyVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <TextBox Grid.Column="3" Grid.Row="21" Name="txtInvalidVehicleParkingLoots" Height="20" Width="150"
                  Text="{Binding Clinic.InvalidVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
 
         <Button Grid.Column="3" Grid.Row="23" IsDefault="True" Name="btnSave" Content="Save" Height="20" Width="70" HorizontalAlignment="Left"
                 Command="{Binding SaveClinic, UpdateSourceTrigger=PropertyChanged}">
