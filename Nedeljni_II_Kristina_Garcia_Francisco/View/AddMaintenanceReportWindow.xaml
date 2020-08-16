@@ -56,7 +56,7 @@
         <Label  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Foreground="Red" Padding="0,0,0,0" VerticalAlignment="Stretch" FontSize="9" Content="{Binding InfoLabel, Mode=OneWay}"/>
         <TextBox Grid.Column="3" Grid.Row="3" Name="txtTotalHours" Height="20" Width="150"
                  Text="{Binding MaintenanceReport.TotalHours, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                 PreviewTextInput="NumberValidationTextBox"/>
+                 PreviewTextInput="NumberValidationTextBox" CommandManager.PreviewExecuted="textBox_PreviewExecuted" ContextMenu="{x:Null}"/>
         <Label  Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left" Foreground="Red" Padding="0,0,0,0" VerticalAlignment="Stretch" FontSize="9" Content="{Binding ShortDescriptionLabel, Mode=OneWay}"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="txtShortDescription" Height="20" Width="150"
                  Text="{Binding MaintenanceReport.ShortDescription, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>

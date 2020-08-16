@@ -31,7 +31,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "UserPassword",
             "Gender",
             "MaxNumberOfDoctors",
-            "MinNumberOfRooms"
+            "MinNumberOfRooms",
+            "DateOfBirth"
         };
 
         /// <summary>
@@ -98,6 +99,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "MaxNumberOfDoctors":
                         result = this.validation.OmissionRestriction(MaxNumberOfDoctors, OmissionNumber);
+                        break;
+
+                    case "DateOfBirth":
+                        result = this.validation.CheckDate(DateOfBirth);
                         break;
 
                     default:

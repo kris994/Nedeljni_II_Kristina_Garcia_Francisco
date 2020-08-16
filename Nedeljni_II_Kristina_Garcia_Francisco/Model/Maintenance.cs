@@ -20,7 +20,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "UserPassword",
             "Gender",
             "ClinicExtentionAllowed",
-            "DisabledAccessabilityResponsibility"
+            "DisabledAccessabilityResponsibility",
+            "DateOfBirth"
         };
 
         /// <summary>
@@ -87,6 +88,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "DisabledAccessabilityResponsibility":
                         result = this.validation.CannotBeUnselected(ClinicExtentionAllowed, DisabledAccessabilityResponsibility, UserID);
+                        break;
+
+                    case "DateOfBirth":
+                        result = this.validation.CheckDate(DateOfBirth);
                         break;
 
                     default:

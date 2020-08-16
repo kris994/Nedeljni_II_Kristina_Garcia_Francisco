@@ -19,7 +19,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "Username",
             "UserPassword",
             "Gender",
-            "HealthCareNumber"
+            "HealthCareNumber",
+            "DateOfBirth"
         };
 
         /// <summary>
@@ -82,6 +83,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "HealthCareNumber":
                         result = this.validation.HealthCareNumberChecker(HealthCareNumber, UserID);
+                        break;
+
+                    case "DateOfBirth":
+                        result = this.validation.CheckDate(DateOfBirth);
                         break;
 
                     default:

@@ -32,7 +32,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "UniqueNumber",
             "BankAccount",
             "Gender",
-            "WorkingShift"
+            "WorkingShift",
+            "DateOfBirth"
         };
 
         /// <summary>
@@ -99,6 +100,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "WorkingShift":
                         result = this.validation.CannotBeEmpty(WorkingShift);
+                        break;
+
+                    case "DateOfBirth":
+                        result = this.validation.CheckDate(DateOfBirth);
                         break;
 
                     default:

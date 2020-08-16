@@ -18,7 +18,8 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
             "IdentificationCard",
             "Username",
             "UserPassword",
-            "Gender"
+            "Gender",
+            "DateOfBirth"
         };
 
         /// <summary>
@@ -77,6 +78,10 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Model
 
                     case "Gender":
                         result = this.validation.CannotBeEmpty(Gender);
+                        break;
+
+                    case "DateOfBirth":
+                        result = this.validation.CheckDate(DateOfBirth);
                         break;
 
                     default:

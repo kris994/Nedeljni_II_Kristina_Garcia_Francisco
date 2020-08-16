@@ -512,5 +512,20 @@ namespace Nedeljni_II_Kristina_Garcia_Francisco.Helper
 
             return age;
         }
+
+        /// <summary>
+        /// Date cannot be in the future
+        /// </summary>
+        /// <param name="value">value of the input</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string CheckDate(DateTime value)
+        {
+            if (value == default(DateTime) || value > DateTime.Now)
+            {
+                return "Value cannot be later than today";
+            }
+
+            return null;
+        }
     }
 }
